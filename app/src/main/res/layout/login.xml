@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="128dp"
+        />
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textStyle="bold"
+        android:textSize="48sp"
+        />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        />
+    
+    <TextView
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="256dp"
+        android:text="Welcome back! Dive back into the road and community you love."
+        />
+    
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        />
+
+    <EditText
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="email"
+        android:minWidth="256dp"
+        />
+
+    <EditText
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        android:minWidth="256dp"
+        />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        />
+
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/gray"
+        android:minWidth="192dp"
+        android:text="Login"
+        />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        />
+
+    <TextView
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don’t have an account? Sign Up"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
