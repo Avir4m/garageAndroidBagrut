@@ -36,7 +36,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_height="96dp"
         />
 
     <EditText
@@ -46,7 +46,11 @@
         android:hint="username"
         android:minWidth="256dp"
         />
-
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        />
 
     <EditText
         android:layout_gravity="center"
@@ -56,12 +60,22 @@
         android:minWidth="256dp"
         />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        />
+
     <EditText
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="password"
         android:minWidth="256dp"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
         />
 
     <EditText
@@ -74,10 +88,11 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_height="80dp"
         />
 
     <Button
+        android:id="@+id/signupBtn"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,12 +106,17 @@
         android:layout_height="16dp"
         />
 
+
     <TextView
+        android:id="@+id/login_text"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Already have an account? Login"
+        android:textColor="@color/gray"
+        android:clickable="true"
+        android:focusable="true"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

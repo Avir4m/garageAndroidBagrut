@@ -36,7 +36,7 @@
     
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="96dp"
+        android:layout_height="128dp"
         />
 
     <EditText
@@ -45,6 +45,11 @@
         android:layout_height="wrap_content"
         android:hint="email"
         android:minWidth="256dp"
+        />
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16sp"
         />
 
     <EditText
@@ -57,16 +62,17 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_height="128dp"
         />
 
     <Button
+        android:id="@+id/loginBtn"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
         android:minWidth="192dp"
         android:text="Login"
+        android:backgroundTint="@color/gray"
         />
 
     <Space
@@ -75,11 +81,15 @@
         />
 
     <TextView
+        android:id="@+id/signup_text"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don’t have an account? Sign Up"
+        android:textColor="@color/gray"
+        android:clickable="true"
+        android:focusable="true"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

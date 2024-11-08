@@ -2,17 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/mnuUserAdd"
+        android:id="@+id/homeBtn"
+        android:title="Home"
+        android:icon="@drawable/home"
+        />
+    <item
+        android:id="@+id/eventsBtn"
+        android:title="Events"
+        android:icon="@drawable/calander"
+        />
+    <item
+        android:id="@+id/addBtn"
         android:title="Add"
         android:icon="@drawable/add"
         />
     <item
-        android:id="@+id/mnuUserEdit"
-        android:title="Edir"
-        android:icon="@drawable/edit"
-        />
-    <item
-        android:id="@+id/mnuUserGroup"
+        android:id="@+id/userBtn"
         android:title="User"
         android:icon="@drawable/user"
         />

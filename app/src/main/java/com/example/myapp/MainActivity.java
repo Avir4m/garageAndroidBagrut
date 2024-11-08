@@ -7,9 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapp.addCustomer.add_cust;
-import com.example.myapp.allCustomer.all_cust;
-import com.example.myapp.editCustomer.edit_cust;
+import com.example.myapp.add.add;
+import com.example.myapp.home.home;
+import com.example.myapp.user.user;
+import com.example.myapp.events.events;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        loadFragment(new add_cust());
+        loadFragment(new home());
     }
 
     private void loadFragment(Fragment fragment) {
@@ -36,14 +37,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
-        if (item.getItemId() == R.id.mnuUserAdd) {
-            fragment = new add_cust();
+        if (item.getItemId() == R.id.homeBtn) {
+            fragment = new home();
         }
-        if (item.getItemId() == R.id.mnuUserEdit) {
-            fragment = new edit_cust();
+        if (item.getItemId() == R.id.eventsBtn) {
+            fragment = new events();
         }
-        if (item.getItemId() == R.id.mnuUserGroup) {
-            fragment = new all_cust();
+        if (item.getItemId() == R.id.addBtn) {
+            fragment = new add();
+        }
+        if (item.getItemId() == R.id.userBtn) {
+            fragment = new user();
         }
         if (fragment != null) {
             loadFragment(fragment);

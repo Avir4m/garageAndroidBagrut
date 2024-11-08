@@ -13,8 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class WelcomeScreen extends AppCompatActivity implements View.OnClickListener {
 
-    Button signupBtn;
-    Button loginBtn;
+    Button signupBtn, loginBtn, debugBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +24,12 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
         signupBtn = findViewById(R.id.signupBtn);
         loginBtn = findViewById(R.id.loginBtn);
 
+        debugBtn = findViewById(R.id.debugBtn);// Debug only
+
         signupBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
+
+        debugBtn.setOnClickListener(this); // Debug only
     }
 
     @Override
@@ -35,6 +38,10 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(WelcomeScreen.this, signup.class));
         } else if (view == loginBtn) {
             startActivity(new Intent(WelcomeScreen.this, login.class));
+        }
+
+        if (view == debugBtn) { // Debug only
+            startActivity(new Intent(WelcomeScreen.this, MainActivity.class));
         }
     }
 }
