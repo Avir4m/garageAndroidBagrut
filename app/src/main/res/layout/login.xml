@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         />
-    
+
     <TextView
         android:layout_gravity="center"
         android:textAlignment="center"
@@ -40,29 +40,41 @@
         />
 
     <EditText
+        android:id="@+id/emailInput"
         android:layout_gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="email"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:minWidth="256dp"
         />
     
     <Space
         android:layout_width="match_parent"
-        android:layout_height="16sp"
+        android:layout_height="32sp"
         />
 
     <EditText
+        android:id="@+id/passwordInput"
         android:layout_gravity="center"
+        android:padding="10sp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="password"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Password"
+        android:inputType="textPassword"
         android:minWidth="256dp"
         />
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="128dp"
+        android:layout_height="64dp"
         />
 
     <Button
