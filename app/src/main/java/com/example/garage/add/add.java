@@ -1,4 +1,4 @@
-package com.example.myapp.home;
+package com.example.garage.add;
 
 import android.os.Bundle;
 
@@ -8,20 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapp.R;
+import com.example.garage.R;
+
+public class add extends Fragment {
 
 
-public class home extends Fragment {
-
-
-    public home() {
-
+    public add() {
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_add, container, false);
     }
 }

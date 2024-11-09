@@ -1,4 +1,4 @@
-package com.example.myapp;
+package com.example.garage;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -7,10 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapp.add.add;
-import com.example.myapp.home.home;
-import com.example.myapp.user.user;
-import com.example.myapp.events.events;
+import com.example.garage.add.add;
+import com.example.garage.home.home;
+import com.example.garage.user.user;
+import com.example.garage.events.events;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {

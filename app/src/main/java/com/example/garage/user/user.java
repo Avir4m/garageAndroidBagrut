@@ -1,4 +1,4 @@
-package com.example.myapp.user;
+package com.example.garage.user;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapp.R;
+import com.example.garage.R;
 
 public class user extends Fragment {
 
