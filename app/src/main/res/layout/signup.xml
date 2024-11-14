@@ -36,10 +36,27 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="96dp"
+        android:layout_height="72dp"
         />
 
+    <EditText
+        android:id="@+id/displayNameInput"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Display Name"
+        android:inputType="textEmailAddress"
+        android:minWidth="256dp"
+        />
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        />
 
     <EditText
         android:id="@+id/emailInput"
@@ -95,7 +112,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="96dp"
+        android:layout_height="72dp"
         />
 
     <Button

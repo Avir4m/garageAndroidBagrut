@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class signup extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +32,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
 
     TextView loginTextView;
     Button signUpButton;
-    EditText emailEditText, passwordEditText, confirmPasswordEditText;
+    EditText displayNameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
 
         loginTextView = findViewById(R.id.login_text);
         signUpButton = findViewById(R.id.signupBtn);
+        displayNameEditText = findViewById(R.id.displayNameInput);
         emailEditText = findViewById(R.id.emailInput);
         passwordEditText = findViewById(R.id.passwordInput);
         confirmPasswordEditText = findViewById(R.id.confirmPasswordInput);
@@ -67,11 +70,16 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == signUpButton) {
-            String email, password, confirmPassword;
+            String displayName, email, password, confirmPassword;
+            displayName = displayNameEditText.getText().toString();
             email = emailEditText.getText().toString();
             password = passwordEditText.getText().toString();
             confirmPassword = confirmPasswordEditText.getText().toString();
 
+            if (TextUtils.isEmpty(displayName)) {
+                Toast.makeText(signup.this, "Enter a name", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(signup.this, "Enter email.", Toast.LENGTH_SHORT).show();
@@ -93,11 +101,21 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Account Created.", Toast.LENGTH_SHORT).show();
-
+                                FirebaseUser user = auth.getCurrentUser();
+                                if (user != null) {
+                                    UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setDisplayName(displayName).build();
+                                    user.updateProfile(profileUpdate)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Toast.makeText(getApplicationContext(), "Account created successfully.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                }
                             } else {
                                 Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
-
                             }
                         }
                     });
