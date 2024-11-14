@@ -13,16 +13,16 @@
         android:theme="@style/Theme.MyApp"
         tools:targetApi="31">
         <activity
-            android:name=".signup"
+            android:name="com.example.garage.signup"
             android:exported="false" />
         <activity
-            android:name=".login"
+            android:name="com.example.garage.login"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.garage.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeScreen"
+            android:name="com.example.garage.WelcomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

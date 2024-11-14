@@ -53,7 +53,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@drawable/rounded_line"
+        android:background="@color/border"
         android:layout_marginHorizontal="16dp"
         />
 

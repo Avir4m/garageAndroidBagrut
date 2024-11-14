@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".add.add">
+    android:orientation="vertical"
+    >
 
     <TextView
-        android:layout_margin="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Add" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:text="Add"
+        android:textSize="18sp"
+        />
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border"
+        />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
