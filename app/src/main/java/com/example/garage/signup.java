@@ -4,19 +4,33 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class signup extends AppCompatActivity {
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class signup extends AppCompatActivity implements View.OnClickListener {
+
+    FirebaseAuth auth;
 
     TextView loginTextView;
+    Button signUpButton;
+    EditText emailEditText, passwordEditText, confirmPasswordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +38,16 @@ public class signup extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.signup);
 
+        auth = FirebaseAuth.getInstance();
+
         loginTextView = findViewById(R.id.login_text);
+        signUpButton = findViewById(R.id.signupBtn);
+        emailEditText = findViewById(R.id.emailInput);
+        passwordEditText = findViewById(R.id.passwordInput);
+        confirmPasswordEditText = findViewById(R.id.confirmPasswordInput);
+
+        signUpButton.setOnClickListener(this);
+
         String text = "Already have an account? Login";
         SpannableString spannableString = new SpannableString(text);
         ClickableSpan clickableSpan = new ClickableSpan() {
@@ -39,5 +62,45 @@ public class signup extends AppCompatActivity {
 
         loginTextView.setText(spannableString);
         loginTextView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == signUpButton) {
+            String email, password, confirmPassword;
+            email = emailEditText.getText().toString();
+            password = passwordEditText.getText().toString();
+            confirmPassword = confirmPasswordEditText.getText().toString();
+
+
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(signup.this, "Enter email.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(signup.this, "Enter password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!password.equals(confirmPassword)) {
+                Toast.makeText(signup.this, "Passwords don't match.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Account Created.", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    });
+        }
     }
 }

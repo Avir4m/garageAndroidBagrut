@@ -39,24 +39,7 @@
         android:layout_height="96dp"
         />
 
-    <EditText
-        android:id="@+id/usernameInput"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
-        android:hint="Username"
-        android:inputType="text"
-        android:minWidth="256dp"
-        />
-    
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        />
+
 
     <EditText
         android:id="@+id/emailInput"
@@ -112,7 +95,7 @@
 
     <Space
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_height="96dp"
         />
 
     <Button
