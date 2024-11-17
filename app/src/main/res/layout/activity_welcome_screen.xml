@@ -84,13 +84,4 @@
         android:layout_height="64dp"
         />
 
-    <Button
-        android:id="@+id/debugBtn"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="main"
-        />
-
-
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -15,7 +15,7 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
 
     FirebaseAuth auth;
 
-    Button signupBtn, loginBtn, debugBtn;
+    Button signupBtn, loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +29,8 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
         signupBtn = findViewById(R.id.signupBtn);
         loginBtn = findViewById(R.id.loginBtn);
 
-        debugBtn = findViewById(R.id.debugBtn);// Debug only
-
         signupBtn.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
-
-        debugBtn.setOnClickListener(this); // Debug only
     }
 
     @Override
@@ -54,10 +50,6 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(getApplicationContext(), signup.class));
         } else if (view == loginBtn) {
             startActivity(new Intent(getApplicationContext(), login.class));
-        }
-
-        if (view == debugBtn) { // Debug only
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
     }
 }
