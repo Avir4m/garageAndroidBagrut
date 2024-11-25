@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.garage.R;
@@ -21,7 +22,7 @@ public class user extends Fragment {
 
     FirebaseAuth auth;
 
-    Button signoutBtn;
+    ImageButton signoutBtn;
 
     TextView usernameText;
 
