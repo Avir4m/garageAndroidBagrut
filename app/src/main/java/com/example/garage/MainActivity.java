@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         settingsBtn = findViewById(R.id.settingsBtn);
+
         loadFragment(new home());
     }
 

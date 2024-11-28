@@ -27,9 +27,9 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
 
 
         signupBtn = findViewById(R.id.signupBtn);
-        loginBtn = findViewById(R.id.loginBtn);
-
         signupBtn.setOnClickListener(this);
+
+        loginBtn = findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(this);
     }
 

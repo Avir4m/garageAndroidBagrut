@@ -43,13 +43,19 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         auth = FirebaseAuth.getInstance();
 
         loginTextView = findViewById(R.id.login_text);
+
         signUpButton = findViewById(R.id.signupBtn);
+        signUpButton.setOnClickListener(this);
+
         displayNameEditText = findViewById(R.id.displayNameInput);
+
         emailEditText = findViewById(R.id.emailInput);
+
         passwordEditText = findViewById(R.id.passwordInput);
+
         confirmPasswordEditText = findViewById(R.id.confirmPasswordInput);
 
-        signUpButton.setOnClickListener(this);
+
 
         String text = "Already have an account? Login";
         SpannableString spannableString = new SpannableString(text);
