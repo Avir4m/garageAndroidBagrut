@@ -8,17 +8,73 @@
     android:id="@+id/relativeLayout"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        >
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/arrow"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/screenTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            />
+
+        <ImageButton
+            android:id="@+id/settingsBtn"
+            android:visibility="gone"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/settings"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/borderOfBar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/topBar"
+        android:layout_alignParentStart="true"
+        android:background="@color/border"
+        />
+
     <FrameLayout
         android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav" />
+        android:layout_above="@id/bottomNav"
+        android:layout_below="@+id/borderOfBar"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu"
+        />
 
 </RelativeLayout>

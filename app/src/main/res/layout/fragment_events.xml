@@ -6,22 +6,6 @@
     android:orientation="vertical"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:textColor="@color/black"
-        android:text="Events"
-        android:textSize="18sp"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/border"
-        />
-
-
     <include layout="@layout/event"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
