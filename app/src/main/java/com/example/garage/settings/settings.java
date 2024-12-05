@@ -41,9 +41,11 @@ public class settings extends Fragment implements View.OnClickListener {
         screenTitle = getActivity().findViewById(R.id.screenTitle);
 
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
+        settingsBtn.setVisibility(View.GONE);
 
         backBtn = getActivity().findViewById(R.id.backBtn);
         backBtn.setOnClickListener(this);
+        backBtn.setVisibility(View.VISIBLE);
 
         signoutBtn = view.findViewById(R.id.signoutBtn);
         signoutBtn.setOnClickListener(this);
@@ -57,13 +59,6 @@ public class settings extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         if (view == backBtn) {
-            FirebaseUser currentUser = auth.getCurrentUser();
-
-            navBar.setVisibility(View.VISIBLE);
-            screenTitle.setText(currentUser.getDisplayName());
-            settingsBtn.setVisibility(View.VISIBLE);
-            backBtn.setVisibility(View.GONE);
-
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.relative, new user());
             transaction.addToBackStack(null);

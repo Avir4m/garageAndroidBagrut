@@ -28,7 +28,7 @@ public class user extends Fragment implements View.OnClickListener {
 
     TextView screenTitle;
     ImageButton settingsBtn, backBtn;
-    BottomNavigationView navBar;
+    BottomNavigationView navbar;
     public user() {
     }
 
@@ -46,10 +46,13 @@ public class user extends Fragment implements View.OnClickListener {
 
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
         settingsBtn.setOnClickListener(this);
+        settingsBtn.setVisibility(View.VISIBLE);
 
         backBtn = getActivity().findViewById(R.id.backBtn);
+        backBtn.setVisibility(View.GONE);
 
-        navBar = getActivity().findViewById(R.id.bottomNav);
+        navbar = getActivity().findViewById(R.id.bottomNav);
+        navbar.setVisibility(View.VISIBLE);
 
         return view;
     }
@@ -57,11 +60,6 @@ public class user extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == settingsBtn) {
-            navBar.setVisibility(View.GONE);
-            screenTitle.setText("Settings");
-            settingsBtn.setVisibility(View.GONE);
-            backBtn.setVisibility(View.VISIBLE);
-
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.relative, new settings());
             transaction.addToBackStack(null);

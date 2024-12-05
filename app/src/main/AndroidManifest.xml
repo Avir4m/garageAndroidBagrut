@@ -13,19 +13,23 @@
         android:theme="@style/Theme.MyApp"
         tools:targetApi="31">
         <activity
-            android:name="com.example.garage.signup"
+            android:name=".chat.chat"
             android:exported="false" />
         <activity
-            android:name="com.example.garage.login"
+            android:name=".signup"
             android:exported="false" />
         <activity
-            android:name="com.example.garage.MainActivity"
+            android:name=".login"
             android:exported="false" />
         <activity
-            android:name="com.example.garage.WelcomeScreen"
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WelcomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
