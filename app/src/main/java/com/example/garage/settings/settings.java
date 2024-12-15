@@ -51,6 +51,7 @@ public class settings extends Fragment implements View.OnClickListener {
         signoutBtn.setOnClickListener(this);
 
         navBar = getActivity().findViewById(R.id.bottomNav);
+        navBar.setVisibility(View.INVISIBLE);
 
         return view;
     }
