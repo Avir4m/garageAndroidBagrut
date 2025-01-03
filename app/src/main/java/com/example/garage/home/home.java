@@ -55,7 +55,7 @@ public class home extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == chatBtn) {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.relative, new chat());
+            transaction.replace(R.id.frame, new chat());
             transaction.addToBackStack(null);
             transaction.commit();
         }

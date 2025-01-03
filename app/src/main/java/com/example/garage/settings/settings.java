@@ -61,7 +61,7 @@ public class settings extends Fragment implements View.OnClickListener {
 
         if (view == backBtn) {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.relative, new user());
+            transaction.replace(R.id.frame, new user());
             transaction.addToBackStack(null);
             transaction.commit();
         }

@@ -50,7 +50,7 @@ public class chat extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == backBtn) {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.relative, new home());
+            transaction.replace(R.id.frame, new home());
             transaction.addToBackStack(null);
             transaction.commit();
         }

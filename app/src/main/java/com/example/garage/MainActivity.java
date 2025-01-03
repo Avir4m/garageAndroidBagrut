@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void loadFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.relative, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
     }
 
     @Override

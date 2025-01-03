@@ -42,7 +42,7 @@ public class user extends Fragment implements View.OnClickListener {
         FirebaseUser currentUser = auth.getCurrentUser();
 
         screenTitle = getActivity().findViewById(R.id.screenTitle);
-        screenTitle.setText(currentUser.getDisplayName());
+        screenTitle.setText(currentUser.getDisplayName().toString());
 
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
         settingsBtn.setOnClickListener(this);
@@ -61,7 +61,7 @@ public class user extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == settingsBtn) {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.relative, new settings());
+            transaction.replace(R.id.frame, new settings());
             transaction.addToBackStack(null);
             transaction.commit();
         }
