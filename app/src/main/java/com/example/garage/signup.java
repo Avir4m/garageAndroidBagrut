@@ -1,5 +1,7 @@
 package com.example.garage;
 
+import static com.example.garage.functions.passwordValidation.isPasswordValid;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -20,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -83,17 +84,24 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
             confirmPassword = confirmPasswordEditText.getText().toString();
 
             if (TextUtils.isEmpty(displayName)) {
-                Toast.makeText(signup.this, "Enter a name", Toast.LENGTH_SHORT).show();
+                Toast.makeText(signup.this, "Enter a username", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (TextUtils.isEmpty(email)) {
-                Toast.makeText(signup.this, "Enter email.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(signup.this, "Enter an email", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (TextUtils.isEmpty(password)) {
-                Toast.makeText(signup.this, "Enter password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(signup.this, "Enter a password", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String validationMessage = isPasswordValid(password);
+
+            if (validationMessage != null) {
+                Toast.makeText(signup.this, validationMessage, Toast.LENGTH_SHORT).show();
                 return;
             }
 

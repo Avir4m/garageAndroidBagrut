@@ -1,6 +1,5 @@
-package com.example.garage.home;
+package com.example.garage;
 
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,9 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.garage.R;
-import com.example.garage.chat.chat;
-import com.example.garage.settings.settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

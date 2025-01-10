@@ -1,7 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.MyApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/gray</item>
-        <item name="android:background">#F8F8F8</item>
     </style>
     <style name="Theme.MyApp" parent="Base.Theme.MyApp" />
 </resources>

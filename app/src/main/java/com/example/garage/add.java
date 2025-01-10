@@ -1,4 +1,4 @@
-package com.example.garage.add;
+package com.example.garage;
 
 import android.os.Bundle;
 
@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.garage.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class add extends Fragment {

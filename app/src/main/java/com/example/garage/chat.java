@@ -1,4 +1,4 @@
-package com.example.garage.chat;
+package com.example.garage;
 
 import android.os.Bundle;
 
@@ -11,11 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.garage.R;
-import com.example.garage.home.home;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.w3c.dom.Text;
 
 public class chat extends Fragment implements View.OnClickListener {
 

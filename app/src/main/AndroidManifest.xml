@@ -21,7 +21,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".chat.chat"
+            android:name=".chat"
             android:exported="false" />
         <activity
             android:name=".signup"

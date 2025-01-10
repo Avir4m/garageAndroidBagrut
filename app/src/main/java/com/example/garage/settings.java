@@ -1,4 +1,4 @@
-package com.example.garage.settings;
+package com.example.garage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.garage.R;
-import com.example.garage.WelcomeScreen;
-import com.example.garage.user.user;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class settings extends Fragment implements View.OnClickListener {
 
