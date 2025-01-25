@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#181818</color>
-    <color name="white">#D0D0D0</color>
+    <color name="off_white">#D0D0D0</color>
     <color name="gray">#333333</color>
     <color name="primary">#1e1e1e</color>
     <color name="blue">#007AFF</color>
     <color name="border">#B3B3B3</color>
     <color name="secondary_text">#757575</color>
+    <color name="ripple">#D7D7D7</color>
+    <color name="white">#FAFAFA</color>
 </resources>
+

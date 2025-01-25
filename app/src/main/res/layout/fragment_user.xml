@@ -122,7 +122,8 @@
     <com.google.android.material.tabs.TabLayout
         app:tabTextColor="@color/gray"
         app:tabIndicatorColor="@color/gray"
-        app:tabRippleColor="@color/border"
+        android:background="@color/white"
+        app:tabRippleColor="@color/ripple"
         android:id="@+id/userTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
