@@ -1,5 +1,7 @@
 package com.example.garage;
 
+import static com.example.garage.functions.fragmentManager.fragmentLoadFragment;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,10 +11,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,6 +27,9 @@ public class user extends Fragment implements View.OnClickListener {
     TextView screenTitle;
     ImageButton settingsBtn, backBtn;
     BottomNavigationView navbar;
+    FrameLayout tabFrame;
+    TabLayout tabLayout;
+
     public user() {
     }
 
@@ -47,6 +54,42 @@ public class user extends Fragment implements View.OnClickListener {
 
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.VISIBLE);
+
+        tabFrame = view.findViewById(R.id.tabFrame);
+        fragmentLoadFragment(this, new user_posts_fragment(), R.id.tabFrame);
+
+        tabLayout = view.findViewById(R.id.userTabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                String selectedTab = tab.getText().toString();
+
+                Fragment selectedFragment = null;
+
+
+                if (selectedTab.equals("Posts")) {
+                    selectedFragment = new user_posts_fragment();
+                }
+
+                if (selectedTab.equals("Garage")) {
+                    selectedFragment = new user_garage_fragment();
+                }
+
+                if (selectedFragment != null) {
+                    fragmentLoadFragment(user.this, selectedFragment, R.id.tabFrame);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+
+        });
 
         return view;
     }
