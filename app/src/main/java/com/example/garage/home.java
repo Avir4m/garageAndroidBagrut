@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.garage.functions.timeUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,10 +24,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class home extends Fragment implements View.OnClickListener {
 
+    private DocumentSnapshot lastVisible = null;
+    private boolean isLoading = false;
+
     TextView screenTitle, loadingText;
     ImageButton chatBtn, backBtn, settingsBtn;
     BottomNavigationView navbar;
     LinearLayout postsContainer;
+    ScrollView scrollView;
 
     public home() {
 
@@ -56,45 +62,60 @@ public class home extends Fragment implements View.OnClickListener {
 
         postsContainer = view.findViewById(R.id.posts_container);
 
+        scrollView = view.findViewById(R.id.scrollView);
+        scrollView.setOnScrollChangeListener((scrollView, x, y, oldX, oldY) -> {
+            int scrollViewHeight = scrollView.getHeight();
+            int scrollY = scrollView.getScrollY();
+            int contentHeight = postsContainer.getHeight();
+
+            if (scrollY + scrollViewHeight == contentHeight) {
+                loadPosts();
+            }
+        });
+
         loadPosts();
 
         return view;
     }
 
     private void loadPosts() {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("posts").orderBy("timestamp", Query.Direction.DESCENDING).get().addOnCompleteListener(task -> {
+        Query query = db.collection("posts")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(5);
+
+        if (lastVisible != null) {
+            query = query.startAfter(lastVisible);
+        }
+
+        query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                loadingText.setVisibility(View.GONE);
-                if (task.getResult().isEmpty()) {
-                    loadingText.setVisibility(View.VISIBLE);
-                    loadingText.setText("No posts");
-                } else {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String title = document.getString("title");
-                        String author = document.getString("author");
-                        Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
+                if (task.getResult().isEmpty()) return;
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    String title = document.getString("title");
+                    String author = document.getString("author");
+                    Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
 
-                        String timeAgo = "";
-                        if (firestoreTimestamp != null) {
-                            timeAgo = timeUtil.getTimeAgo(firestoreTimestamp.toDate());
-                        }
-
-                        View postView = LayoutInflater.from(getContext()).inflate(R.layout.home_post_item, postsContainer, false);
-
-                        TextView titleView = postView.findViewById(R.id.postTitle);
-                        TextView authorView = postView.findViewById(R.id.postAuthor);
-                        TextView timestampView = postView.findViewById(R.id.postTimestamp);
-
-                        titleView.setText(title);
-                        authorView.setText(author);
-                        timestampView.setText(timeAgo);
-
-                        postsContainer.addView(postView);
+                    String timeAgo = "";
+                    if (firestoreTimestamp != null) {
+                        timeAgo = timeUtil.getTimeAgo(firestoreTimestamp.toDate());
                     }
+
+                    View postView = LayoutInflater.from(getContext()).inflate(R.layout.home_post_item, postsContainer, false);
+
+                    TextView titleView = postView.findViewById(R.id.postTitle);
+                    TextView authorView = postView.findViewById(R.id.postAuthor);
+                    TextView timestampView = postView.findViewById(R.id.postTimestamp);
+
+                    titleView.setText(title);
+                    authorView.setText(author);
+                    timestampView.setText(timeAgo);
+
+                    postsContainer.addView(postView);
                 }
-            } else {
-                loadingText.setText("Error loading posts.");
+                lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                loadingText.setVisibility(View.GONE);
             }
         });
     }
