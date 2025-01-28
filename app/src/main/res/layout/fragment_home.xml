@@ -6,19 +6,29 @@
     android:orientation="vertical"
     >
 
-    <ScrollView
+    <TextView
+        android:id="@+id/loading_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-    >
-        <LinearLayout
+        android:gravity="center"
+        android:text="Loading..."
+        android:textSize="24sp"
+        android:visibility="visible" />
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-            <include layout="@layout/post" />
-        </LinearLayout>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/posts_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
+
     </ScrollView>
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

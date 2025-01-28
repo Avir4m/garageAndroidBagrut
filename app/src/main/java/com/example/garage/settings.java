@@ -19,7 +19,7 @@ public class settings extends Fragment implements View.OnClickListener {
 
     FirebaseAuth auth;
 
-    TextView screenTitle;
+    TextView userEmail;
     ImageButton settingsBtn, backBtn;
     BottomNavigationView navBar;
     Button signoutBtn;
@@ -33,8 +33,6 @@ public class settings extends Fragment implements View.OnClickListener {
 
         auth = FirebaseAuth.getInstance();
 
-        screenTitle = getActivity().findViewById(R.id.screenTitle);
-
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
         settingsBtn.setVisibility(View.GONE);
 
@@ -47,6 +45,9 @@ public class settings extends Fragment implements View.OnClickListener {
 
         navBar = getActivity().findViewById(R.id.bottomNav);
         navBar.setVisibility(View.INVISIBLE);
+
+        userEmail = view.findViewById(R.id.userEmail);
+        userEmail.setText(auth.getCurrentUser().getEmail());
 
         return view;
     }

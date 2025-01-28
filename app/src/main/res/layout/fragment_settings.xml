@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".settings">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        />
+
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        />
     
     <Space
         android:layout_width="wrap_content"
