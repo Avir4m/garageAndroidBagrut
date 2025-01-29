@@ -30,7 +30,7 @@ public class user extends Fragment implements View.OnClickListener {
 
     FirebaseAuth auth;
 
-    TextView screenTitle, loadingText;
+    TextView screenTitle;
     ImageButton settingsBtn, backBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
@@ -60,8 +60,6 @@ public class user extends Fragment implements View.OnClickListener {
 
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.VISIBLE);
-
-        loadingText = view.findViewById(R.id.loading_text);
 
         postsContainer = view.findViewById(R.id.postsContainer);
         postsContainerItems = view.findViewById(R.id.postsContainerItems);
@@ -121,10 +119,7 @@ public class user extends Fragment implements View.OnClickListener {
 
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                if (task.getResult().isEmpty()) {
-                    loadingText.setText("No posts available");
-                    return;
-                }
+                if (task.getResult().isEmpty()) return;
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String postEmail = document.getString("authorEmail");
                     if (!postEmail.equals(auth.getCurrentUser().getEmail().toString())) {
@@ -150,7 +145,6 @@ public class user extends Fragment implements View.OnClickListener {
                     } catch (Error error) {return;}
                 }
                 lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
-                loadingText.setVisibility(View.GONE);
             }
         });
     }

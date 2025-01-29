@@ -143,15 +143,6 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <TextView
-        android:id="@+id/loading_text"
-        android:text="Loading..."
-        android:textSize="24dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
     <LinearLayout
         android:id="@+id/postsContainer"
         android:visibility="visible"
