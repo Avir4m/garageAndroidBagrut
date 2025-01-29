@@ -1,6 +1,6 @@
 package com.example.garage;
 
-import static com.example.garage.functions.fragmentManager.activityReplaceFragment;
+import static com.example.garage.functions.fragmentUtils.activityReplaceFragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;

@@ -5,15 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.garage.functions.timeUtil;
+import com.example.garage.functions.timeUtils;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -66,7 +64,7 @@ public class user_posts_fragment extends Fragment {
 
                     String timeAgo = "";
                     if (firestoreTimestamp != null) {
-                        timeAgo = timeUtil.getTimeAgo(firestoreTimestamp.toDate());
+                        timeAgo = timeUtils.getTimeAgo(firestoreTimestamp.toDate());
                     }
                     try {
                         View postView = LayoutInflater.from(getContext()).inflate(R.layout.user_post_item, postsContainer, false);

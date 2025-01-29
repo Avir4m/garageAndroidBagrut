@@ -1,6 +1,6 @@
 package com.example.garage.functions;
 
-public class passwordValidation {
+public class validationUtils {
 
     public static String isPasswordValid(String password) {
         if (password.length() < 7) {

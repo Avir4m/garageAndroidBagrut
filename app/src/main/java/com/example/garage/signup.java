@@ -1,6 +1,6 @@
 package com.example.garage;
 
-import static com.example.garage.functions.passwordValidation.isPasswordValid;
+import static com.example.garage.functions.validationUtils.isPasswordValid;
 
 import android.content.Intent;
 import android.os.Bundle;

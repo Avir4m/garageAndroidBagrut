@@ -1,10 +1,6 @@
 package com.example.garage;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.garage.functions.timeUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.garage.functions.timeUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -99,7 +98,7 @@ public class home extends Fragment implements View.OnClickListener {
 
                     String timeAgo = "";
                     if (firestoreTimestamp != null) {
-                        timeAgo = timeUtil.getTimeAgo(firestoreTimestamp.toDate());
+                        timeAgo = timeUtils.getTimeAgo(firestoreTimestamp.toDate());
                     }
 
                     View postView = LayoutInflater.from(getContext()).inflate(R.layout.home_post_item, postsContainer, false);

@@ -4,7 +4,7 @@ import android.text.format.DateUtils;
 
 import java.util.Date;
 
-public class timeUtil {
+public class timeUtils {
     public static String getTimeAgo(Date date) {
         if (date == null) return "";
 
