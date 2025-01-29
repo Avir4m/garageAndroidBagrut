@@ -1,6 +1,9 @@
 package com.example.garage;
 
 
+import static com.example.garage.functions.formatUtils.formatCount;
+import static com.example.garage.functions.formatUtils.getTimeAgo;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.garage.functions.timeUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
@@ -130,16 +132,18 @@ public class user extends Fragment implements View.OnClickListener {
 
                     String timeAgo = "";
                     if (firestoreTimestamp != null) {
-                        timeAgo = timeUtils.getTimeAgo(firestoreTimestamp.toDate());
+                        timeAgo = getTimeAgo(firestoreTimestamp.toDate());
                     }
                     try {
                         View postView = LayoutInflater.from(getContext()).inflate(R.layout.user_post_item, postsContainer, false);
 
                         TextView titleView = postView.findViewById(R.id.postTitle);
                         TextView timestampView = postView.findViewById(R.id.postTimestamp);
+                        TextView likeCount = postView.findViewById(R.id.likeCount);
 
                         titleView.setText(title);
                         timestampView.setText(timeAgo);
+                        likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
 
                         postsContainerItems.addView(postView);
                     } catch (Error error) {return;}

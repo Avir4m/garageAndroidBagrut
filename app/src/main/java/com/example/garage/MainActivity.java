@@ -1,7 +1,5 @@
 package com.example.garage;
 
-import static com.example.garage.functions.fragmentUtils.activityReplaceFragment;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         settingsBtn = findViewById(R.id.settingsBtn);
         chatBtn = findViewById(R.id.chatBtn);
 
-        activityReplaceFragment(this, new home(), R.id.frame);
+        activityReplaceFragment(new home());
     }
 
 
@@ -62,8 +60,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             chatBtn.setVisibility(View.GONE);
         }
         if (fragment != null) {
-            activityReplaceFragment(this, fragment, R.id.frame);
+            activityReplaceFragment(fragment);
         }
         return true;
+    }
+
+    private void activityReplaceFragment(Fragment fragment) {
+            this.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
     }
 }

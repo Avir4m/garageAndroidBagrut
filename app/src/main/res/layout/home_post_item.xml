@@ -82,20 +82,23 @@
             android:layout_weight="0"
             >
 
+            <TextView
+                android:id="@+id/likeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="0"
+                />
+
             <ImageButton
+
+                android:id="@+id/likeBtn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/heart"
                 android:background="@null"
                 android:scaleType="fitCenter"
-                android:layout_marginEnd="4dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:text="0"
                 />
 
             <ImageButton

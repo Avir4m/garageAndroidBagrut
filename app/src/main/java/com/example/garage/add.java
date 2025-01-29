@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -106,6 +107,8 @@ public class add extends Fragment implements View.OnClickListener {
         post.put("author", auth.getCurrentUser().getDisplayName());
         post.put("authorEmail", auth.getCurrentUser().getEmail());
         post.put("timestamp", new Date());
+        post.put("likes", new ArrayList<>());
+        post.put("likeCount", 0);
 
         postsCollection.add(post)
                 .addOnSuccessListener(documentReference -> {

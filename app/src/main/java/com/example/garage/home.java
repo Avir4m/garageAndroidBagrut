@@ -1,5 +1,8 @@
 package com.example.garage;
 
+import static com.example.garage.functions.formatUtils.formatCount;
+import static com.example.garage.functions.formatUtils.getTimeAgo;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +15,17 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.garage.functions.timeUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class home extends Fragment implements View.OnClickListener {
@@ -27,7 +34,7 @@ public class home extends Fragment implements View.OnClickListener {
     private boolean isLoading = false;
 
     TextView screenTitle, loadingText;
-    ImageButton chatBtn, backBtn, settingsBtn;
+    ImageButton chatBtn, backBtn, settingsBtn, likeBtn;
     BottomNavigationView navbar;
     LinearLayout postsContainer;
     ScrollView scrollView;
@@ -78,7 +85,7 @@ public class home extends Fragment implements View.OnClickListener {
     }
 
     private void loadPosts() {
-
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Query query = db.collection("posts")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -95,13 +102,15 @@ public class home extends Fragment implements View.OnClickListener {
                     return;
                 }
                 for (QueryDocumentSnapshot document : task.getResult()) {
+                    String postId = document.getId();
                     String title = document.getString("title");
                     String author = document.getString("author");
                     Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
+                    List<String> likes = (List<String>) document.get("likes");
 
                     String timeAgo = "";
                     if (firestoreTimestamp != null) {
-                        timeAgo = timeUtils.getTimeAgo(firestoreTimestamp.toDate());
+                        timeAgo = getTimeAgo(firestoreTimestamp.toDate());
                     }
 
                     View postView = LayoutInflater.from(getContext()).inflate(R.layout.home_post_item, postsContainer, false);
@@ -109,10 +118,16 @@ public class home extends Fragment implements View.OnClickListener {
                     TextView titleView = postView.findViewById(R.id.postTitle);
                     TextView authorView = postView.findViewById(R.id.postAuthor);
                     TextView timestampView = postView.findViewById(R.id.postTimestamp);
+                    TextView likeCount = postView.findViewById(R.id.likeCount);
+                    ImageButton likeButton = postView.findViewById(R.id.likeBtn);
 
                     titleView.setText(title);
                     authorView.setText(author);
                     timestampView.setText(timeAgo);
+                    likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
+
+                    likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
+                    likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
 
                     postsContainer.addView(postView);
                 }
@@ -130,5 +145,36 @@ public class home extends Fragment implements View.OnClickListener {
             transaction.addToBackStack(null);
             transaction.commit();
         }
+    }
+
+    private void toggleLikePost(String postId, ImageButton likeBtn, TextView likeCountText) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth  = FirebaseAuth.getInstance();
+        DocumentReference postRef = db.collection("posts").document(postId);
+
+        postRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<String> likes = (List<String>) documentSnapshot.get("likes");
+                int likeCount = documentSnapshot.getLong("likeCount").intValue();
+                String currentUserId = auth.getCurrentUser().getUid();
+                if (likes == null) {
+                    likes = new ArrayList<>();
+                }
+                if (likes.contains(currentUserId)) {
+                    likes.remove(currentUserId);
+                    postRef.update("likes", likes);
+                    postRef.update("likeCount", --likeCount);
+                    likeBtn.setImageResource(R.drawable.heart);
+                } else {
+                    likes.add(currentUserId);
+                    postRef.update("likes", likes);
+                    postRef.update("likeCount", ++likeCount);
+                    likeBtn.setImageResource(R.drawable.heart_filled);
+                }
+                likeCountText.setText(formatCount(likeCount));
+            }
+        }).addOnFailureListener(e -> {
+
+        });
     }
 }
