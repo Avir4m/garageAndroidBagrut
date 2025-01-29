@@ -1,11 +1,8 @@
 package com.example.garage;
 
-import static com.example.garage.functions.ImageUtils.uploadImageToFirestore;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;

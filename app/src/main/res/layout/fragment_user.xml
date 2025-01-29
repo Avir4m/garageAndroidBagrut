@@ -14,6 +14,7 @@
         >
 
         <ImageView
+            android:id="@+id/userImage"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:src="@drawable/default_profile_pic"
@@ -142,11 +143,54 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <FrameLayout
-        android:id="@+id/tabFrame"
+    <TextView
+        android:id="@+id/loading_text"
+        android:text="Loading..."
+        android:textSize="24dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
+    <LinearLayout
+        android:id="@+id/postsContainer"
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <android.widget.ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:id="@+id/postsContainerItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
+        </android.widget.ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/garageContainer"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <android.widget.ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/garageContainerItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <include layout="@layout/temp_garage"/>
+            </LinearLayout>
+        </android.widget.ScrollView>
+    </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

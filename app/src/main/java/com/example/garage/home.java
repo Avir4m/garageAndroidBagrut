@@ -90,7 +90,10 @@ public class home extends Fragment implements View.OnClickListener {
 
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                if (task.getResult().isEmpty()) return;
+                if (task.getResult().isEmpty()) {
+                    loadingText.setText("No posts available");
+                    return;
+                }
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String title = document.getString("title");
                     String author = document.getString("author");

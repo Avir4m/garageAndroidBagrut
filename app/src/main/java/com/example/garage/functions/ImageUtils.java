@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,24 +33,27 @@ public class ImageUtils {
                 });
     }
 
-    public static Bitmap getImageFromFirestore(String documentId) {
-        final Bitmap[] resultBitmap = new Bitmap[1];
-
+    public static Task<Bitmap> getImageFromFirestore(String documentId) {
+        TaskCompletionSource<Bitmap> taskCompletionSource = new TaskCompletionSource<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         db.collection("images").document(documentId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         String base64ImageData = documentSnapshot.getString("imageData");
-                        resultBitmap[0] = decodeBase64ToBitmap(base64ImageData);
+                        Bitmap bitmap = decodeBase64ToBitmap(base64ImageData);
+                        taskCompletionSource.setResult(bitmap);
                     } else {
                         Log.d("Firestore", "No such document!");
+                        taskCompletionSource.setResult(null);
                     }
                 })
                 .addOnFailureListener(e -> {
                     Log.d("Firestore", "Error retrieving image: ", e);
+                    taskCompletionSource.setException(e);
                 });
 
-        return resultBitmap[0];
+        return taskCompletionSource.getTask();
     }
 
     private static Bitmap decodeBase64ToBitmap(String base64String) {
