@@ -89,7 +89,7 @@ public class home extends Fragment implements View.OnClickListener {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Query query = db.collection("posts")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
-                .limit(5);
+                .limit(10);
 
         if (lastVisible != null) {
             query = query.startAfter(lastVisible);

@@ -151,6 +151,7 @@
         android:layout_height="match_parent"
         >
         <android.widget.ScrollView
+            android:id="@+id/postsScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
@@ -171,7 +172,8 @@
         android:layout_height="match_parent"
         >
         <android.widget.ScrollView
-        android:layout_width="match_parent"
+            android:id="@+id/garageScrollView"
+            android:layout_width="match_parent"
         android:layout_height="match_parent">
             <LinearLayout
                 android:id="@+id/garageContainerItems"

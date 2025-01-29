@@ -5,11 +5,13 @@ import static com.example.garage.functions.formatUtils.formatCount;
 import static com.example.garage.functions.formatUtils.getTimeAgo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,10 +39,10 @@ public class user extends Fragment implements View.OnClickListener {
     BottomNavigationView navbar;
     TabLayout tabLayout;
     LinearLayout postsContainer, postsContainerItems, garageContainer, garageContainerItems;
+    ScrollView postsScrollView, garageScrollView;
 
     public user() {
     }
-
 
 
     @Override
@@ -67,6 +69,26 @@ public class user extends Fragment implements View.OnClickListener {
         postsContainerItems = view.findViewById(R.id.postsContainerItems);
         garageContainer = view.findViewById(R.id.garageContainer);
         garageContainerItems = view.findViewById(R.id.garageContainerItems);
+
+        postsScrollView = view.findViewById(R.id.postsScrollView);
+        postsScrollView.setOnScrollChangeListener((scrollView, x, y, oldX, oldY) -> {
+            int scrollViewHeight = scrollView.getHeight();
+            int scrollY = scrollView.getScrollY();
+            int contentHeight = postsContainerItems.getHeight();
+            if (scrollY + scrollViewHeight == contentHeight) {
+                loadPosts();
+            }
+        });
+
+        garageScrollView = view.findViewById(R.id.garageScrollView);
+        garageScrollView.setOnScrollChangeListener((scrollView, x, y, oldX, oldY) -> {
+            int scrollViewHeight = scrollView.getHeight();
+            int scrollY = scrollView.getScrollY();
+            int contentHeight = garageContainerItems.getHeight();
+            if (scrollY + scrollViewHeight == contentHeight) {
+                loadPosts();
+            }
+        });
 
         loadPosts();
         loadGarge();
@@ -112,8 +134,14 @@ public class user extends Fragment implements View.OnClickListener {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        String currentUserId = currentUser.getUid();
+
         Query query = db.collection("posts")
-                .orderBy("timestamp", Query.Direction.DESCENDING);
+                .whereEqualTo("authorId", currentUserId)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(10);
 
         if (lastVisible != null) {
             query = query.startAfter(lastVisible);
@@ -121,19 +149,15 @@ public class user extends Fragment implements View.OnClickListener {
 
         query.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                if (task.getResult().isEmpty()) return;
+                if (task.getResult().isEmpty()) {
+                    return;
+                }
+
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    String postEmail = document.getString("authorEmail");
-                    if (!postEmail.equals(auth.getCurrentUser().getEmail().toString())) {
-                        continue;
-                    }
                     String title = document.getString("title");
                     Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
+                    String timeAgo = (firestoreTimestamp != null) ? getTimeAgo(firestoreTimestamp.toDate()) : "";
 
-                    String timeAgo = "";
-                    if (firestoreTimestamp != null) {
-                        timeAgo = getTimeAgo(firestoreTimestamp.toDate());
-                    }
                     try {
                         View postView = LayoutInflater.from(getContext()).inflate(R.layout.user_post_item, postsContainer, false);
 
@@ -143,15 +167,19 @@ public class user extends Fragment implements View.OnClickListener {
 
                         titleView.setText(title);
                         timestampView.setText(timeAgo);
-                        likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
+                        likeCount.setText(formatCount(document.getLong("likeCount").longValue()) + " Likes");
 
                         postsContainerItems.addView(postView);
-                    } catch (Error error) {return;}
+                    } catch (Exception error) {
+                        return;
+                    }
                 }
+
                 lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
             }
         });
     }
+
 
     @Override
     public void onClick(View view) {

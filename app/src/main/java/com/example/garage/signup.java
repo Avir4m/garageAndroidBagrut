@@ -26,6 +26,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class signup extends AppCompatActivity implements View.OnClickListener {
 
@@ -123,10 +127,22 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
-                                                        Toast.makeText(getApplicationContext(), "Account created successfully.", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                        startActivity(intent);
-                                                        finish();
+                                                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                                        Map<String, Object> userData = new HashMap<>();
+                                                        userData.put("name", displayName);
+                                                        userData.put("profilePicture", null);
+
+                                                        db.collection("users").document(user.getUid())
+                                                                .set(userData)
+                                                                .addOnSuccessListener(aVoid -> {
+                                                                    Toast.makeText(getApplicationContext(), "Account created successfully.", Toast.LENGTH_SHORT).show();
+                                                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                })
+                                                                .addOnFailureListener(e -> {
+                                                                    Toast.makeText(getApplicationContext(), "Error saving user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                });
                                                     }
                                                 }
                                             });

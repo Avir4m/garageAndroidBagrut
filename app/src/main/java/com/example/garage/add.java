@@ -105,7 +105,7 @@ public class add extends Fragment implements View.OnClickListener {
         Map<String, Object> post = new HashMap<>();
         post.put("title", title);
         post.put("author", auth.getCurrentUser().getDisplayName());
-        post.put("authorEmail", auth.getCurrentUser().getEmail());
+        post.put("authorId", auth.getCurrentUser().getUid());
         post.put("timestamp", new Date());
         post.put("likes", new ArrayList<>());
         post.put("likeCount", 0);
