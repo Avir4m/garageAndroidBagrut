@@ -1,15 +1,16 @@
 package com.example.garage;
 
 
+import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
 import static com.example.garage.functions.formatUtils.formatCount;
 import static com.example.garage.functions.formatUtils.getTimeAgo;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,10 +24,14 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class user extends Fragment implements View.OnClickListener {
 
@@ -154,20 +159,34 @@ public class user extends Fragment implements View.OnClickListener {
                 }
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
+                    String postId = document.getId();
                     String title = document.getString("title");
+                    String imageId = document.getString("imageId");
                     Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
                     String timeAgo = (firestoreTimestamp != null) ? getTimeAgo(firestoreTimestamp.toDate()) : "";
+                    List<String> likes = (List<String>) document.get("likes");
 
                     try {
-                        View postView = LayoutInflater.from(getContext()).inflate(R.layout.user_post_item, postsContainer, false);
+                        View postView = LayoutInflater.from(getContext()).inflate(R.layout.compact_post_item, postsContainer, false);
 
                         TextView titleView = postView.findViewById(R.id.postTitle);
                         TextView timestampView = postView.findViewById(R.id.postTimestamp);
                         TextView likeCount = postView.findViewById(R.id.likeCount);
+                        ImageButton likeButton = postView.findViewById(R.id.likeBtn);
+                        ImageView imageView = postView.findViewById(R.id.postImage);
 
                         titleView.setText(title);
                         timestampView.setText(timeAgo);
-                        likeCount.setText(formatCount(document.getLong("likeCount").longValue()) + " Likes");
+                        likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
+
+                        if (imageId != null) {
+                            getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> imageView.setImageBitmap(bitmap));
+                        } else {
+                            imageView.setVisibility(View.GONE);
+                        }
+
+                        likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
+                        likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
 
                         postsContainerItems.addView(postView);
                     } catch (Exception error) {
@@ -177,6 +196,37 @@ public class user extends Fragment implements View.OnClickListener {
 
                 lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
             }
+        });
+    }
+
+    private void toggleLikePost(String postId, ImageButton likeBtn, TextView likeCountText) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth  = FirebaseAuth.getInstance();
+        DocumentReference postRef = db.collection("posts").document(postId);
+
+        postRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<String> likes = (List<String>) documentSnapshot.get("likes");
+                int likeCount = documentSnapshot.getLong("likeCount").intValue();
+                String currentUserId = auth.getCurrentUser().getUid();
+                if (likes == null) {
+                    likes = new ArrayList<>();
+                }
+                if (likes.contains(currentUserId)) {
+                    likes.remove(currentUserId);
+                    postRef.update("likes", likes);
+                    postRef.update("likeCount", --likeCount);
+                    likeBtn.setImageResource(R.drawable.heart);
+                } else {
+                    likes.add(currentUserId);
+                    postRef.update("likes", likes);
+                    postRef.update("likeCount", ++likeCount);
+                    likeBtn.setImageResource(R.drawable.heart_filled);
+                }
+                likeCountText.setText(formatCount(likeCount));
+            }
+        }).addOnFailureListener(e -> {
+
         });
     }
 

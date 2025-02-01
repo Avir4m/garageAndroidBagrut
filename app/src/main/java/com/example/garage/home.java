@@ -1,5 +1,6 @@
 package com.example.garage;
 
+import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
 import static com.example.garage.functions.formatUtils.formatCount;
 import static com.example.garage.functions.formatUtils.getTimeAgo;
 
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -105,6 +107,7 @@ public class home extends Fragment implements View.OnClickListener {
                     String postId = document.getId();
                     String title = document.getString("title");
                     String author = document.getString("author");
+                    String imageId = document.getString("imageId");
                     Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
                     List<String> likes = (List<String>) document.get("likes");
 
@@ -113,18 +116,25 @@ public class home extends Fragment implements View.OnClickListener {
                         timeAgo = getTimeAgo(firestoreTimestamp.toDate());
                     }
 
-                    View postView = LayoutInflater.from(getContext()).inflate(R.layout.home_post_item, postsContainer, false);
+                    View postView = LayoutInflater.from(getContext()).inflate(R.layout.post_item, postsContainer, false);
 
                     TextView titleView = postView.findViewById(R.id.postTitle);
                     TextView authorView = postView.findViewById(R.id.postAuthor);
                     TextView timestampView = postView.findViewById(R.id.postTimestamp);
                     TextView likeCount = postView.findViewById(R.id.likeCount);
                     ImageButton likeButton = postView.findViewById(R.id.likeBtn);
+                    ImageView imageView = postView.findViewById(R.id.postImage);
 
                     titleView.setText(title);
                     authorView.setText(author);
                     timestampView.setText(timeAgo);
                     likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
+
+                    if (imageId != null) {
+                        getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> imageView.setImageBitmap(bitmap));
+                    } else {
+                        imageView.setVisibility(View.GONE);
+                    }
 
                     likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
                     likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));

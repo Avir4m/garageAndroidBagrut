@@ -6,6 +6,6 @@
     android:orientation="vertical"
     >
 
-    <include layout="@layout/event"/>
+    <include layout="@layout/event_item"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

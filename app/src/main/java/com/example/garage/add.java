@@ -1,11 +1,15 @@
 package com.example.garage;
 
+import static com.example.garage.functions.ImageUtils.uploadImageToFirestore;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +39,8 @@ public class add extends Fragment implements View.OnClickListener {
     FirebaseAuth auth;
 
     private static final int PICK_IMAGE_REQUEST = 1;
+
+    private boolean imageSelected = false;
 
     public add() {}
 
@@ -84,6 +90,7 @@ public class add extends Fragment implements View.OnClickListener {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
                 imagePreview.setImageBitmap(bitmap);
                 imagePreview.setVisibility(View.VISIBLE);
+                imageSelected = true;
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_SHORT).show();
@@ -109,7 +116,23 @@ public class add extends Fragment implements View.OnClickListener {
         post.put("timestamp", new Date());
         post.put("likes", new ArrayList<>());
         post.put("likeCount", 0);
+        post.put("imageId", null);
 
+        if (imageSelected) {
+            uploadImageToFirestore(((BitmapDrawable) imagePreview.getDrawable()).getBitmap()).addOnSuccessListener(docId -> {
+                        post.replace("imageId", docId);
+                        addPostToFirestore(post, postsCollection);
+                        Log.d("Firestore", "Uploaded Document ID: " + docId);
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("Firestore", "Upload failed: ", e);
+                    });
+        } else {
+            addPostToFirestore(post, postsCollection);
+        }
+    }
+
+    private void addPostToFirestore(Map<String, Object> post, CollectionReference postsCollection) {
         postsCollection.add(post)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(getActivity(), "Post added successfully", Toast.LENGTH_SHORT).show();
@@ -118,7 +141,7 @@ public class add extends Fragment implements View.OnClickListener {
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getActivity(), "Failed to add post: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    System.out.println(e.getMessage());
+                    Log.e("Firestore", "Failed to add post", e);
                 });
     }
 }

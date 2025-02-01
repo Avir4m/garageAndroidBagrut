@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ImageUtils {
 
-    public static void uploadImageToFirestore(Bitmap bitmap) {
+    public static Task<String> uploadImageToFirestore(Bitmap bitmap) {
         String base64Image = convertImageToBase64(bitmap);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference imagesRef = db.collection("images");
@@ -24,12 +24,13 @@ public class ImageUtils {
         Map<String, String> imageData = new HashMap<>();
         imageData.put("imageData", base64Image);
 
-        imagesRef.add(imageData)
-                .addOnSuccessListener(documentReference -> {
-                    Log.d("Firestore", "Image uploaded successfully!");
-                })
-                .addOnFailureListener(e -> {
-                    Log.d("Firestore", "Error uploading image: ", e);
+        return imagesRef.add(imageData)
+                .continueWith(task -> {
+                    if (task.isSuccessful()) {
+                        return task.getResult().getId(); // Return document ID
+                    } else {
+                        throw task.getException();
+                    }
                 });
     }
 
