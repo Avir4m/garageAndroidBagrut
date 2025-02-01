@@ -13,6 +13,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/userFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -60,7 +61,8 @@
 
     <TextView
         android:id="@+id/postTitle"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

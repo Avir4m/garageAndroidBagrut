@@ -4,8 +4,10 @@ package com.example.garage;
 import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
 import static com.example.garage.functions.formatUtils.formatCount;
 import static com.example.garage.functions.formatUtils.getTimeAgo;
+import static com.example.garage.functions.postInteractions.toggleLikePost;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,24 +26,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class user extends Fragment implements View.OnClickListener {
 
     private DocumentSnapshot lastVisible = null;
+    private String userId ;
 
     FirebaseAuth auth;
 
     TextView screenTitle;
-    ImageButton settingsBtn, backBtn;
+    ImageButton settingsBtn, backBtn, chatBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
     LinearLayout postsContainer, postsContainerItems, garageContainer, garageContainerItems;
@@ -54,18 +56,49 @@ public class user extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
 
-        auth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = auth.getCurrentUser();
-
         screenTitle = getActivity().findViewById(R.id.screenTitle);
-        screenTitle.setText(currentUser.getDisplayName().toString());
 
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
-        settingsBtn.setOnClickListener(this);
-        settingsBtn.setVisibility(View.VISIBLE);
+
 
         backBtn = getActivity().findViewById(R.id.backBtn);
-        backBtn.setVisibility(View.GONE);
+
+        auth = FirebaseAuth.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        if (getArguments() != null) {
+            userId = getArguments().getString("userId");
+            backBtn.setVisibility(View.VISIBLE);
+            backBtn.setOnClickListener(this);
+        } else {
+            userId = auth.getCurrentUser().getUid();
+            settingsBtn.setOnClickListener(this);
+            settingsBtn.setVisibility(View.VISIBLE);
+            backBtn.setVisibility(View.GONE);
+        }
+
+        DocumentReference userRef = db.collection("users").document(userId);
+        userRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    screenTitle.setText(document.getString("name"));
+
+                } else {
+                    Toast.makeText(getActivity(), "No such user", Toast.LENGTH_SHORT).show();
+                    screenTitle.setText("NoUserDocument");
+                    Log.d("Firestore", "No such user document");
+                }
+            } else {
+                Toast.makeText(getActivity(), "Error getting user", Toast.LENGTH_SHORT).show();
+                screenTitle.setText("NoUserDocument");
+                Log.d("Firestore", "Error getting user document: ", task.getException());
+            }
+        });
+
+        chatBtn = getActivity().findViewById(R.id.chatBtn);
+        chatBtn.setVisibility(View.GONE);
 
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.VISIBLE);
@@ -81,7 +114,7 @@ public class user extends Fragment implements View.OnClickListener {
             int scrollY = scrollView.getScrollY();
             int contentHeight = postsContainerItems.getHeight();
             if (scrollY + scrollViewHeight == contentHeight) {
-                loadPosts();
+                loadPosts(userId);
             }
         });
 
@@ -91,11 +124,11 @@ public class user extends Fragment implements View.OnClickListener {
             int scrollY = scrollView.getScrollY();
             int contentHeight = garageContainerItems.getHeight();
             if (scrollY + scrollViewHeight == contentHeight) {
-                loadPosts();
+                loadPosts(userId);
             }
         });
 
-        loadPosts();
+        loadPosts(userId);
         loadGarge();
 
         tabLayout = view.findViewById(R.id.userTabLayout);
@@ -108,7 +141,7 @@ public class user extends Fragment implements View.OnClickListener {
                 if (selectedTab.equals("Posts")) {
                     postsContainer.setVisibility(View.VISIBLE);
                     garageContainer.setVisibility(View.GONE);
-                    loadPosts();
+                    loadPosts(userId);
                 }
 
                 if (selectedTab.equals("Garage")) {
@@ -135,16 +168,12 @@ public class user extends Fragment implements View.OnClickListener {
     private void loadGarge() {
     }
 
-    private void loadPosts() {
+    private void loadPosts(String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        FirebaseUser currentUser = auth.getCurrentUser();
-
-        String currentUserId = currentUser.getUid();
-
         Query query = db.collection("posts")
-                .whereEqualTo("authorId", currentUserId)
+                .whereEqualTo("authorId", userId)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(10);
 
@@ -199,37 +228,6 @@ public class user extends Fragment implements View.OnClickListener {
         });
     }
 
-    private void toggleLikePost(String postId, ImageButton likeBtn, TextView likeCountText) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseAuth auth  = FirebaseAuth.getInstance();
-        DocumentReference postRef = db.collection("posts").document(postId);
-
-        postRef.get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                List<String> likes = (List<String>) documentSnapshot.get("likes");
-                int likeCount = documentSnapshot.getLong("likeCount").intValue();
-                String currentUserId = auth.getCurrentUser().getUid();
-                if (likes == null) {
-                    likes = new ArrayList<>();
-                }
-                if (likes.contains(currentUserId)) {
-                    likes.remove(currentUserId);
-                    postRef.update("likes", likes);
-                    postRef.update("likeCount", --likeCount);
-                    likeBtn.setImageResource(R.drawable.heart);
-                } else {
-                    likes.add(currentUserId);
-                    postRef.update("likes", likes);
-                    postRef.update("likeCount", ++likeCount);
-                    likeBtn.setImageResource(R.drawable.heart_filled);
-                }
-                likeCountText.setText(formatCount(likeCount));
-            }
-        }).addOnFailureListener(e -> {
-
-        });
-    }
-
 
     @Override
     public void onClick(View view) {
@@ -238,6 +236,9 @@ public class user extends Fragment implements View.OnClickListener {
             transaction.replace(R.id.frame, new settings());
             transaction.addToBackStack(null);
             transaction.commit();
+        }
+        if (view == backBtn) {
+            getParentFragmentManager().popBackStack();
         }
     }
 }

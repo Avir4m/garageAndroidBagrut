@@ -8,7 +8,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,10 +43,7 @@ public class chat extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == backBtn) {
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, new home());
-            transaction.addToBackStack(null);
-            transaction.commit();
+            getParentFragmentManager().popBackStack();
         }
     }
 }
