@@ -18,7 +18,8 @@
         android:roundIcon="@drawable/transparent_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        >
 
         <receiver
             android:name=".Receiver"
@@ -27,19 +28,29 @@
 
         <activity
             android:name=".chat"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".signup"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".login"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".WelcomeScreen"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
