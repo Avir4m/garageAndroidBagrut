@@ -2,8 +2,6 @@ package com.example.garage;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +12,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     BottomNavigationView bottomNavigationView;
-    ImageButton settingsBtn, chatBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +20,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
-        settingsBtn = findViewById(R.id.settingsBtn);
-        chatBtn = findViewById(R.id.chatBtn);
 
         activityReplaceFragment(new home());
     }
@@ -41,23 +35,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         if (item.getItemId() == R.id.homeBtn) {
             fragment = new home();
-            settingsBtn.setVisibility(View.GONE);
-            chatBtn.setVisibility(View.VISIBLE);
         }
         if (item.getItemId() == R.id.eventsBtn) {
             fragment = new events();
-            settingsBtn.setVisibility(View.GONE);
-            chatBtn.setVisibility(View.GONE);
         }
         if (item.getItemId() == R.id.addBtn) {
             fragment = new add();
-            settingsBtn.setVisibility(View.GONE);
-            chatBtn.setVisibility(View.GONE);
         }
         if (item.getItemId() == R.id.userBtn) {
             fragment = new user();
-            settingsBtn.setVisibility(View.VISIBLE);
-            chatBtn.setVisibility(View.GONE);
         }
         if (fragment != null) {
             activityReplaceFragment(fragment);

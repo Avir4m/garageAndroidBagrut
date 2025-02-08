@@ -89,6 +89,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/profileBtns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -97,12 +98,14 @@
         android:weightSum="2">
 
         <Button
+            android:id="@+id/followBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Follow"
             android:backgroundTint="@color/gray"
             />
+
 
         <Space
             android:layout_width="8dp"
@@ -111,10 +114,49 @@
 
 
         <Button
+            android:id="@+id/messageBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Message"
+            android:backgroundTint="@color/black"
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ownProfileBtns"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="16dp"
+        android:weightSum="2"
+        >
+
+        <Button
+            android:id="@+id/editProfileBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit Profile"
+            android:backgroundTint="@color/gray"
+            />
+
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/addVehicleBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add Vehicle"
             android:backgroundTint="@color/black"
             />
 

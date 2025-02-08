@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ public class events extends Fragment {
 
     TextView screenTitle;
     BottomNavigationView navbar;
+    ImageButton chatBtn, backBtn, settingsBtn, addBtn;
 
     public events() {
     }
@@ -29,6 +31,18 @@ public class events extends Fragment {
 
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.VISIBLE);
+
+        chatBtn = getActivity().findViewById(R.id.chatBtn);
+        chatBtn.setVisibility(View.GONE);
+
+        settingsBtn = getActivity().findViewById(R.id.settingsBtn);
+        settingsBtn.setVisibility(View.GONE);
+
+        backBtn = getActivity().findViewById(R.id.backBtn);
+        backBtn.setVisibility(View.GONE);
+
+        addBtn = getActivity().findViewById(R.id.addBtn);
+        addBtn.setVisibility(View.VISIBLE);
 
         return view;
     }

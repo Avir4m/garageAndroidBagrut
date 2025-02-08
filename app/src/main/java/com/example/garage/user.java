@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,8 +46,9 @@ public class user extends Fragment implements View.OnClickListener {
     ImageButton settingsBtn, backBtn, chatBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
-    LinearLayout postsContainer, postsContainerItems, garageContainer, garageContainerItems;
+    LinearLayout postsContainer, postsContainerItems, garageContainer, garageContainerItems, ownProfileBtns, profileBtns;
     ScrollView postsScrollView, garageScrollView;
+    Button editProfileBtn, followBtn, addVehicleBtn, messageBtn;
 
     public user() {
     }
@@ -60,6 +62,13 @@ public class user extends Fragment implements View.OnClickListener {
 
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
 
+        editProfileBtn = view.findViewById(R.id.editProfileBtn);
+        followBtn = view.findViewById(R.id.followBtn);
+        addVehicleBtn = view.findViewById(R.id.addVehicleBtn);
+        messageBtn = view.findViewById(R.id.messageBtn);
+
+        profileBtns = view.findViewById(R.id.profileBtns);
+        ownProfileBtns = view.findViewById(R.id.ownProfileBtns);
 
         backBtn = getActivity().findViewById(R.id.backBtn);
 
@@ -76,6 +85,14 @@ public class user extends Fragment implements View.OnClickListener {
             settingsBtn.setOnClickListener(this);
             settingsBtn.setVisibility(View.VISIBLE);
             backBtn.setVisibility(View.GONE);
+        }
+
+        if (userId.equals(auth.getCurrentUser().getUid())) {
+            ownProfileBtns.setVisibility(View.VISIBLE);
+            profileBtns.setVisibility(View.GONE);
+        } else {
+            ownProfileBtns.setVisibility(View.GONE);
+            profileBtns.setVisibility(View.VISIBLE);
         }
 
         DocumentReference userRef = db.collection("users").document(userId);

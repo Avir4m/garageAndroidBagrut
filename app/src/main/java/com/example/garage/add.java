@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -37,6 +39,8 @@ public class add extends Fragment implements View.OnClickListener {
     ImageView imagePreview;
     EditText titleInput;
     FirebaseAuth auth;
+    TextView screenTitle;
+    ImageButton chatBtn, backBtn, settingsBtn, addBtn;
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -47,8 +51,24 @@ public class add extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container, false);
+
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.VISIBLE);
+
+        screenTitle = getActivity().findViewById(R.id.screenTitle);
+        screenTitle.setText("Add");
+
+        chatBtn = getActivity().findViewById(R.id.chatBtn);
+        chatBtn.setVisibility(View.GONE);
+
+        settingsBtn = getActivity().findViewById(R.id.settingsBtn);
+        settingsBtn.setVisibility(View.GONE);
+
+        backBtn = getActivity().findViewById(R.id.backBtn);
+        backBtn.setVisibility(View.GONE);
+
+        addBtn = getActivity().findViewById(R.id.addBtn);
+        addBtn.setVisibility(View.GONE);
 
         pickImageBtn = view.findViewById(R.id.pickImage);
         pickImageBtn.setOnClickListener(this);

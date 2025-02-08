@@ -15,7 +15,7 @@ public class chat extends Fragment implements View.OnClickListener {
 
     BottomNavigationView navbar;
     TextView screenTitle;
-    ImageButton backBtn, chatbtn;
+    ImageButton chatBtn, backBtn, settingsBtn, addBtn;
 
     public chat() {
     }
@@ -27,8 +27,14 @@ public class chat extends Fragment implements View.OnClickListener {
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.GONE);
 
-        chatbtn = getActivity().findViewById(R.id.chatBtn);
-        chatbtn.setVisibility(View.GONE);
+        chatBtn = getActivity().findViewById(R.id.chatBtn);
+        chatBtn.setVisibility(View.GONE);
+
+        addBtn = getActivity().findViewById(R.id.addBtn);
+        addBtn.setVisibility(View.GONE);
+
+        settingsBtn = getActivity().findViewById(R.id.settingsBtn);
+        settingsBtn.setVisibility(View.GONE);
 
         backBtn = getActivity().findViewById(R.id.backBtn);
         backBtn.setVisibility(View.VISIBLE);

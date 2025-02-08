@@ -34,7 +34,7 @@ public class home extends Fragment implements View.OnClickListener {
     private DocumentSnapshot lastVisible = null;
 
     TextView screenTitle, loadingText;
-    ImageButton chatBtn, backBtn, settingsBtn, likeBtn;
+    ImageButton chatBtn, backBtn, settingsBtn, addBtn;
     BottomNavigationView navbar;
     LinearLayout postsContainer;
     ScrollView scrollView;
@@ -74,6 +74,9 @@ public class home extends Fragment implements View.OnClickListener {
 
         backBtn = getActivity().findViewById(R.id.backBtn);
         backBtn.setVisibility(View.GONE);
+
+        addBtn = getActivity().findViewById(R.id.addBtn);
+        addBtn.setVisibility(View.GONE);
 
         loadingText = view.findViewById(R.id.loading_text);
         postsContainer = view.findViewById(R.id.posts_container);
