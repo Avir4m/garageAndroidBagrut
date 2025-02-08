@@ -61,7 +61,6 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         confirmPasswordEditText = findViewById(R.id.confirmPasswordInput);
 
 
-
         String text = "Already have an account? Login";
         SpannableString spannableString = new SpannableString(text);
         ClickableSpan clickableSpan = new ClickableSpan() {

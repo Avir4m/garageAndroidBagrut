@@ -60,9 +60,7 @@ public class settings extends Fragment implements View.OnClickListener {
             transaction.replace(R.id.frame, new user());
             transaction.addToBackStack(null);
             transaction.commit();
-        }
-
-        else if (view == signoutBtn) {
+        } else if (view == signoutBtn) {
             auth.signOut();
             Intent intent = new Intent(getActivity(), WelcomeScreen.class);
             startActivity(intent);

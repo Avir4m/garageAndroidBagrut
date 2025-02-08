@@ -31,15 +31,15 @@ import java.util.List;
 
 public class home extends Fragment implements View.OnClickListener {
 
-    private DocumentSnapshot lastVisible = null;
-
     TextView screenTitle, loadingText;
     ImageButton chatBtn, backBtn, settingsBtn, addBtn;
     BottomNavigationView navbar;
     LinearLayout postsContainer;
     ScrollView scrollView;
+    private DocumentSnapshot lastVisible = null;
 
-    public home() {}
+    public home() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

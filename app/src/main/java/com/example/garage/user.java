@@ -37,11 +37,7 @@ import java.util.List;
 
 public class user extends Fragment implements View.OnClickListener {
 
-    private DocumentSnapshot lastVisible = null;
-    private String userId ;
-
     FirebaseAuth auth;
-
     TextView screenTitle;
     ImageButton settingsBtn, backBtn, chatBtn;
     BottomNavigationView navbar;
@@ -49,6 +45,8 @@ public class user extends Fragment implements View.OnClickListener {
     LinearLayout postsContainer, postsContainerItems, garageContainer, garageContainerItems, ownProfileBtns, profileBtns;
     ScrollView postsScrollView, garageScrollView;
     Button editProfileBtn, followBtn, addVehicleBtn, messageBtn;
+    private DocumentSnapshot lastVisible = null;
+    private String userId;
 
     public user() {
     }

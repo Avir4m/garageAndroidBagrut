@@ -17,7 +17,7 @@ public class postInteractions {
 
     public static void toggleLikePost(String postId, ImageButton likeBtn, TextView likeCountText) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseAuth auth  = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         DocumentReference postRef = db.collection("posts").document(postId);
 
         postRef.get().addOnSuccessListener(documentSnapshot -> {

@@ -34,6 +34,7 @@ import java.util.Map;
 
 public class add extends Fragment implements View.OnClickListener {
 
+    private static final int PICK_IMAGE_REQUEST = 1;
     BottomNavigationView navbar;
     Button pickImageBtn, submitBtn;
     ImageView imagePreview;
@@ -41,12 +42,10 @@ public class add extends Fragment implements View.OnClickListener {
     FirebaseAuth auth;
     TextView screenTitle;
     ImageButton chatBtn, backBtn, settingsBtn, addBtn;
-
-    private static final int PICK_IMAGE_REQUEST = 1;
-
     private boolean imageSelected = false;
 
-    public add() {}
+    public add() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,6 +93,7 @@ public class add extends Fragment implements View.OnClickListener {
             addPostToFirestore();
         }
     }
+
     private void openImagePicker() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");

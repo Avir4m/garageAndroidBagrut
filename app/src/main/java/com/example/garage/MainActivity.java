@@ -52,6 +52,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     private void activityReplaceFragment(Fragment fragment) {
-            this.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
     }
 }
