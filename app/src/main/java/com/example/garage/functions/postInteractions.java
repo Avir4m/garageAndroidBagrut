@@ -45,4 +45,31 @@ public class postInteractions {
 
         });
     }
+
+    public static void toggleSavePost(String postId, ImageButton saveBtn) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String currentUserId = auth.getCurrentUser().getUid();
+        DocumentReference userRef = db.collection("users").document(currentUserId);
+
+        userRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<String> saves = (List<String>) documentSnapshot.get("savedPosts");
+                if (saves == null) {
+                    saves = new ArrayList<>();
+                }
+                if (saves.contains(postId)) {
+                    saves.remove(postId);
+                    userRef.update("savedPosts", saves);
+                    saveBtn.setImageResource(R.drawable.bookmark);
+                } else {
+                    saves.add(postId);
+                    userRef.update("savedPosts", saves);
+                    saveBtn.setImageResource(R.drawable.bookmark_filled);
+                }
+            }
+        }).addOnFailureListener(e -> {
+
+        });
+    }
 }

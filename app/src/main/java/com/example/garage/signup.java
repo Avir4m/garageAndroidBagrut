@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,6 +131,8 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                                                         Map<String, Object> userData = new HashMap<>();
                                                         userData.put("name", displayName);
                                                         userData.put("profilePicture", null);
+                                                        userData.put("likedPosts", new ArrayList<>());
+                                                        userData.put("savedPosts", new ArrayList<>());
 
                                                         db.collection("users").document(user.getUid())
                                                                 .set(userData)

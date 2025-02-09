@@ -4,6 +4,7 @@ import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
 import static com.example.garage.functions.formatUtils.formatCount;
 import static com.example.garage.functions.formatUtils.getTimeAgo;
 import static com.example.garage.functions.postInteractions.toggleLikePost;
+import static com.example.garage.functions.postInteractions.toggleSavePost;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,11 +22,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -100,6 +103,8 @@ public class home extends Fragment implements View.OnClickListener {
     private void loadPosts() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
         Query query = db.collection("posts")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .limit(10);
@@ -123,6 +128,7 @@ public class home extends Fragment implements View.OnClickListener {
                     Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
                     List<String> likes = (List<String>) document.get("likes");
 
+
                     String timeAgo = "";
                     if (firestoreTimestamp != null) {
                         timeAgo = getTimeAgo(firestoreTimestamp.toDate());
@@ -135,6 +141,7 @@ public class home extends Fragment implements View.OnClickListener {
                     TextView timestampView = postView.findViewById(R.id.postTimestamp);
                     TextView likeCount = postView.findViewById(R.id.likeCount);
                     ImageButton likeButton = postView.findViewById(R.id.likeBtn);
+                    ImageButton saveButton = postView.findViewById(R.id.saveBtn);
                     ImageView imageView = postView.findViewById(R.id.postImage);
                     LinearLayout userFrame = postView.findViewById(R.id.userFrame);
 
@@ -151,6 +158,16 @@ public class home extends Fragment implements View.OnClickListener {
 
                     likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
                     likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
+
+                    DocumentReference userRef = db.collection("users").document(auth.getCurrentUser().getUid().toString());
+                    userRef.get().addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            List<String> saves = (List<String>) documentSnapshot.get("savedPosts");
+                            saveButton.setImageResource(saves != null && saves.contains(postId) ? R.drawable.bookmark_filled : R.drawable.bookmark);
+
+                        }
+                    });
+                    saveButton.setOnClickListener(v -> toggleSavePost(postId, saveButton));
 
                     userFrame.setOnClickListener(v -> navigateToUserProfile(authorId));
 
