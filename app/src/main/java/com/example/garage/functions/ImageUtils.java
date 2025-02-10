@@ -17,7 +17,9 @@ import java.util.Map;
 public class ImageUtils {
 
     public static Task<String> uploadImageToFirestore(Bitmap bitmap) {
-        String base64Image = convertImageToBase64(bitmap);
+        Bitmap resizedBitmap = resizeImage(bitmap, 1024, 1024);
+        String base64Image = convertImageToBase64(resizedBitmap);
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference imagesRef = db.collection("images");
 
@@ -27,7 +29,7 @@ public class ImageUtils {
         return imagesRef.add(imageData)
                 .continueWith(task -> {
                     if (task.isSuccessful()) {
-                        return task.getResult().getId(); // Return document ID
+                        return task.getResult().getId();
                     } else {
                         throw task.getException();
                     }
@@ -57,6 +59,25 @@ public class ImageUtils {
         return taskCompletionSource.getTask();
     }
 
+    private static Bitmap resizeImage(Bitmap original, int maxWidth, int maxHeight) {
+        int width = original.getWidth();
+        int height = original.getHeight();
+        float aspectRatio = (float) width / height;
+
+        if (width > maxWidth || height > maxHeight) {
+            if (aspectRatio > 1) {
+                width = maxWidth;
+                height = Math.round(width / aspectRatio);
+            } else {
+                height = maxHeight;
+                width = Math.round(height * aspectRatio);
+            }
+        }
+
+        return Bitmap.createScaledBitmap(original, width, height, true);
+    }
+
+    // Decode Base64 string to Bitmap
     private static Bitmap decodeBase64ToBitmap(String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -64,7 +85,7 @@ public class ImageUtils {
 
     private static String convertImageToBase64(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
