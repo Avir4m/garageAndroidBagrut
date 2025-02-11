@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class user extends Fragment implements View.OnClickListener {
@@ -202,6 +203,7 @@ public class user extends Fragment implements View.OnClickListener {
                     return;
                 }
 
+                List<View> newPostsViews = new ArrayList<>();
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String postId = document.getId();
                     String title = document.getString("title");
@@ -210,35 +212,37 @@ public class user extends Fragment implements View.OnClickListener {
                     String timeAgo = (firestoreTimestamp != null) ? getTimeAgo(firestoreTimestamp.toDate()) : "";
                     List<String> likes = (List<String>) document.get("likes");
 
-                    try {
-                        View postView = LayoutInflater.from(getContext()).inflate(R.layout.compact_post_item, postsContainer, false);
+                    View postView = LayoutInflater.from(getContext()).inflate(R.layout.compact_post_item, postsContainer, false);
 
-                        TextView titleView = postView.findViewById(R.id.postTitle);
-                        TextView timestampView = postView.findViewById(R.id.postTimestamp);
-                        TextView likeCount = postView.findViewById(R.id.likeCount);
-                        ImageButton likeButton = postView.findViewById(R.id.likeBtn);
-                        ImageView imageView = postView.findViewById(R.id.postImage);
+                    TextView titleView = postView.findViewById(R.id.postTitle);
+                    TextView timestampView = postView.findViewById(R.id.postTimestamp);
+                    TextView likeCount = postView.findViewById(R.id.likeCount);
+                    ImageButton likeButton = postView.findViewById(R.id.likeBtn);
+                    ImageView imageView = postView.findViewById(R.id.postImage);
 
-                        titleView.setText(title);
-                        timestampView.setText(timeAgo);
-                        likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
+                    titleView.setText(title);
+                    timestampView.setText(timeAgo);
+                    likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
 
-                        if (imageId != null) {
-                            getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> imageView.setImageBitmap(bitmap));
-                        } else {
-                            imageView.setVisibility(View.GONE);
-                        }
-
-                        likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
-                        likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
-
-                        postsContainerItems.addView(postView);
-                    } catch (Exception error) {
-                        return;
+                    if (imageId != null) {
+                        getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> imageView.setImageBitmap(bitmap));
+                    } else {
+                        imageView.setVisibility(View.GONE);
                     }
+
+                    likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
+                    likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
+
+                    newPostsViews.add(postView);
+                }
+
+                for (View postView : newPostsViews) {
+                    postsContainerItems.addView(postView);
                 }
 
                 lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
+            } else {
+                Log.d("Firestore", "Error loading posts: ", task.getException());
             }
         });
     }

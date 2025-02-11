@@ -77,7 +77,6 @@ public class ImageUtils {
         return Bitmap.createScaledBitmap(original, width, height, true);
     }
 
-    // Decode Base64 string to Bitmap
     private static Bitmap decodeBase64ToBitmap(String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

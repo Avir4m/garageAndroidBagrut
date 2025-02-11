@@ -7,6 +7,7 @@ import static com.example.garage.functions.postInteractions.toggleLikePost;
 import static com.example.garage.functions.postInteractions.toggleSavePost;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class home extends Fragment implements View.OnClickListener {
 
@@ -40,13 +39,9 @@ public class home extends Fragment implements View.OnClickListener {
     LinearLayout postsContainer;
     ScrollView scrollView;
     private DocumentSnapshot lastVisible = null;
+    private boolean isLoading = false;
 
     public home() {
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -90,7 +85,7 @@ public class home extends Fragment implements View.OnClickListener {
             int scrollY = scrollView.getScrollY();
             int contentHeight = postsContainer.getHeight();
 
-            if (scrollY + scrollViewHeight == contentHeight) {
+            if (!isLoading && scrollY + scrollViewHeight >= contentHeight - 100) {
                 loadPosts();
             }
         });
@@ -101,9 +96,11 @@ public class home extends Fragment implements View.OnClickListener {
     }
 
     private void loadPosts() {
+        if (isLoading) return;
+        isLoading = true;
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
         Query query = db.collection("posts")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -114,6 +111,8 @@ public class home extends Fragment implements View.OnClickListener {
         }
 
         query.get().addOnCompleteListener(task -> {
+            isLoading = false;
+
             if (task.isSuccessful()) {
                 if (task.getResult().isEmpty()) {
                     return;
@@ -127,7 +126,6 @@ public class home extends Fragment implements View.OnClickListener {
                     String imageId = document.getString("imageId");
                     Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
                     List<String> likes = (List<String>) document.get("likes");
-
 
                     String timeAgo = "";
                     if (firestoreTimestamp != null) {
@@ -151,7 +149,15 @@ public class home extends Fragment implements View.OnClickListener {
                     likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
 
                     if (imageId != null) {
-                        getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> imageView.setImageBitmap(bitmap));
+                        getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> {
+                            if (bitmap != null) {
+                                imageView.setImageBitmap(bitmap);
+                            } else {
+                                imageView.setVisibility(View.GONE);
+                            }
+                        }).addOnFailureListener(e -> {
+                            Log.e("Firestore", "Error loading image", e);
+                        });
                     } else {
                         imageView.setVisibility(View.GONE);
                     }
@@ -159,12 +165,11 @@ public class home extends Fragment implements View.OnClickListener {
                     likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
                     likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
 
-                    DocumentReference userRef = db.collection("users").document(auth.getCurrentUser().getUid().toString());
+                    DocumentReference userRef = db.collection("users").document(auth.getCurrentUser().getUid());
                     userRef.get().addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
                             List<String> saves = (List<String>) documentSnapshot.get("savedPosts");
                             saveButton.setImageResource(saves != null && saves.contains(postId) ? R.drawable.bookmark_filled : R.drawable.bookmark);
-
                         }
                     });
                     saveButton.setOnClickListener(v -> toggleSavePost(postId, saveButton));
@@ -176,7 +181,6 @@ public class home extends Fragment implements View.OnClickListener {
 
                 lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
                 loadingText.setVisibility(View.GONE);
-
             } else {
                 loadingText.setText("Error loading posts");
                 loadingText.setVisibility(View.VISIBLE);

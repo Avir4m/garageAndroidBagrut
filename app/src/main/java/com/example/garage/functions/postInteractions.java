@@ -9,6 +9,7 @@ import com.example.garage.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,30 +20,34 @@ public class postInteractions {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DocumentReference postRef = db.collection("posts").document(postId);
+        String currentUserId = auth.getCurrentUser().getUid();
 
         postRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 List<String> likes = (List<String>) documentSnapshot.get("likes");
                 int likeCount = documentSnapshot.getLong("likeCount").intValue();
-                String currentUserId = auth.getCurrentUser().getUid();
-                if (likes == null) {
-                    likes = new ArrayList<>();
-                }
-                if (likes.contains(currentUserId)) {
+                if (likes == null) likes = new ArrayList<>();
+
+                boolean liked = likes.contains(currentUserId);
+                WriteBatch batch = db.batch();
+
+                if (liked) {
                     likes.remove(currentUserId);
-                    postRef.update("likes", likes);
-                    postRef.update("likeCount", --likeCount);
+                    likeCount--;
                     likeBtn.setImageResource(R.drawable.heart);
                 } else {
                     likes.add(currentUserId);
-                    postRef.update("likes", likes);
-                    postRef.update("likeCount", ++likeCount);
+                    likeCount++;
                     likeBtn.setImageResource(R.drawable.heart_filled);
                 }
+
+                batch.update(postRef, "likes", likes);
+                batch.update(postRef, "likeCount", likeCount);
+                batch.commit();
+
                 likeCountText.setText(formatCount(likeCount));
             }
         }).addOnFailureListener(e -> {
-
         });
     }
 
@@ -55,21 +60,23 @@ public class postInteractions {
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 List<String> saves = (List<String>) documentSnapshot.get("savedPosts");
-                if (saves == null) {
-                    saves = new ArrayList<>();
-                }
-                if (saves.contains(postId)) {
+                if (saves == null) saves = new ArrayList<>();
+
+                boolean saved = saves.contains(postId);
+                WriteBatch batch = db.batch();
+
+                if (saved) {
                     saves.remove(postId);
-                    userRef.update("savedPosts", saves);
                     saveBtn.setImageResource(R.drawable.bookmark);
                 } else {
                     saves.add(postId);
-                    userRef.update("savedPosts", saves);
                     saveBtn.setImageResource(R.drawable.bookmark_filled);
                 }
+
+                batch.update(userRef, "savedPosts", saves);
+                batch.commit();
             }
         }).addOnFailureListener(e -> {
-
         });
     }
 }
