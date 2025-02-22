@@ -39,7 +39,7 @@ public class user extends Fragment implements View.OnClickListener {
 
     FirebaseAuth auth;
     TextView screenTitle;
-    ImageButton settingsBtn, backBtn, chatBtn;
+    ImageButton settingsBtn, backBtn, chatBtn, addBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
     LinearLayout postsContainer, postsContainerItems, garageContainer, garageContainerItems, ownProfileBtns, profileBtns;
@@ -69,6 +69,10 @@ public class user extends Fragment implements View.OnClickListener {
         ownProfileBtns = view.findViewById(R.id.ownProfileBtns);
 
         backBtn = getActivity().findViewById(R.id.backBtn);
+
+
+        addBtn = getActivity().findViewById(R.id.addBtn);
+        addBtn.setVisibility(View.GONE);
 
         auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
