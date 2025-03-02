@@ -94,7 +94,7 @@ public class Post {
                     .addOnSuccessListener(new OnSuccessListener<String>() {
                         @Override
                         public void onSuccess(String docId) {
-                            setImageId(docId); // Set imageId from Firestore
+                            setImageId(docId);
                             saveToFirestore(context, postsCollection);
                         }
                     })

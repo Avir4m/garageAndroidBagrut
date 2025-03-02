@@ -63,8 +63,10 @@ public class user extends Fragment implements View.OnClickListener {
 
         editProfileBtn = view.findViewById(R.id.editProfileBtn);
         followBtn = view.findViewById(R.id.followBtn);
-        addVehicleBtn = view.findViewById(R.id.addVehicleBtn);
         messageBtn = view.findViewById(R.id.messageBtn);
+
+        addVehicleBtn = view.findViewById(R.id.addVehicleBtn);
+        addVehicleBtn.setOnClickListener(this);
 
         profileBtns = view.findViewById(R.id.profileBtns);
         ownProfileBtns = view.findViewById(R.id.ownProfileBtns);
@@ -262,6 +264,10 @@ public class user extends Fragment implements View.OnClickListener {
         }
         if (view == backBtn) {
             getParentFragmentManager().popBackStack();
+        }
+        if (view == addVehicleBtn) {
+            AddVehicleDialog addVehicleDialog = new AddVehicleDialog();
+            addVehicleDialog.show(getParentFragmentManager(), "AddVehicleDialog");
         }
     }
 }
