@@ -14,6 +14,12 @@
         android:layout_marginBottom="32dp"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Vehicle make" />
+
     <EditText
         android:id="@+id/vehicleMake"
         android:layout_width="match_parent"
@@ -24,6 +30,12 @@
         android:background="@drawable/rounded_edit_text"
         android:hint="Vehicle Make"
         android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Vehicle model " />
 
     <EditText
         android:id="@+id/vehicleModel"
@@ -36,6 +48,11 @@
         android:hint="Vehicle Model"
         android:inputType="text" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Vehicle year" />
 
     <EditText
         android:id="@+id/vehicleYear"
@@ -43,10 +60,25 @@
         android:layout_height="wrap_content"
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
         android:hint="Vehicle year"
         android:inputType="number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Vehicle type" />
+
+    <Spinner
+        android:id="@+id/vehicleTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edit_text"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="32dp" />
 
     <Button
         android:id="@+id/saveButton"

@@ -18,13 +18,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.garage.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 public class add extends Fragment implements View.OnClickListener {
 
@@ -116,9 +112,7 @@ public class add extends Fragment implements View.OnClickListener {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference postsCollection = db.collection("posts");
 
-        Post post = new Post(title, auth.getCurrentUser().getDisplayName(), auth.getCurrentUser().getUid(), new Date(), new ArrayList<>(), 0, null);
 
-        post.uploadPostToFirestore(getActivity(), selectedBitmap, postsCollection);
         titleInput.setText("");
     }
 }

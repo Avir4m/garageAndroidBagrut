@@ -1,35 +1,17 @@
 package com.example.garage;
 
-import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
-import static com.example.garage.functions.formatUtils.formatCount;
-import static com.example.garage.functions.formatUtils.getTimeAgo;
-import static com.example.garage.functions.postInteractions.toggleLikePost;
-import static com.example.garage.functions.postInteractions.toggleSavePost;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import java.util.List;
 
 public class home extends Fragment implements View.OnClickListener {
 
@@ -37,9 +19,6 @@ public class home extends Fragment implements View.OnClickListener {
     ImageButton chatBtn, backBtn, settingsBtn, addBtn;
     BottomNavigationView navbar;
     LinearLayout postsContainer;
-    ScrollView scrollView;
-    private DocumentSnapshot lastVisible = null;
-    private boolean isLoading = false;
 
     public home() {
     }
@@ -47,10 +26,6 @@ public class home extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        if (lastVisible != null) {
-            lastVisible = null;
-            loadPosts();
-        }
     }
 
     @Override
@@ -79,113 +54,8 @@ public class home extends Fragment implements View.OnClickListener {
         loadingText = view.findViewById(R.id.loading_text);
         postsContainer = view.findViewById(R.id.posts_container);
 
-        scrollView = view.findViewById(R.id.scrollView);
-        scrollView.setOnScrollChangeListener((scrollView, x, y, oldX, oldY) -> {
-            int scrollViewHeight = scrollView.getHeight();
-            int scrollY = scrollView.getScrollY();
-            int contentHeight = postsContainer.getHeight();
-
-            if (!isLoading && scrollY + scrollViewHeight >= contentHeight - 100) {
-                loadPosts();
-            }
-        });
-
-        loadPosts();
 
         return view;
-    }
-
-    private void loadPosts() {
-        if (isLoading) return;
-        isLoading = true;
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Query query = db.collection("posts")
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .limit(10);
-
-        if (lastVisible != null) {
-            query = query.startAfter(lastVisible);
-        }
-
-        query.get().addOnCompleteListener(task -> {
-            isLoading = false;
-
-            if (task.isSuccessful()) {
-                if (task.getResult().isEmpty()) {
-                    return;
-                }
-
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    String postId = document.getId();
-                    String title = document.getString("title");
-                    String author = document.getString("author");
-                    String authorId = document.getString("authorId");
-                    String imageId = document.getString("imageId");
-                    Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
-                    List<String> likes = (List<String>) document.get("likes");
-
-                    String timeAgo = "";
-                    if (firestoreTimestamp != null) {
-                        timeAgo = getTimeAgo(firestoreTimestamp.toDate());
-                    }
-
-                    View postView = LayoutInflater.from(getContext()).inflate(R.layout.post_item, postsContainer, false);
-
-                    TextView titleView = postView.findViewById(R.id.postTitle);
-                    TextView authorView = postView.findViewById(R.id.postAuthor);
-                    TextView timestampView = postView.findViewById(R.id.postTimestamp);
-                    TextView likeCount = postView.findViewById(R.id.likeCount);
-                    ImageButton likeButton = postView.findViewById(R.id.likeBtn);
-                    ImageButton saveButton = postView.findViewById(R.id.saveBtn);
-                    ImageView imageView = postView.findViewById(R.id.postImage);
-                    LinearLayout userFrame = postView.findViewById(R.id.userFrame);
-
-                    titleView.setText(title);
-                    authorView.setText(author);
-                    timestampView.setText(timeAgo);
-                    likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
-
-                    if (imageId != null) {
-                        getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> {
-                            if (bitmap != null) {
-                                imageView.setImageBitmap(bitmap);
-                            } else {
-                                imageView.setVisibility(View.GONE);
-                            }
-                        }).addOnFailureListener(e -> {
-                            Log.e("Firestore", "Error loading image", e);
-                        });
-                    } else {
-                        imageView.setVisibility(View.GONE);
-                    }
-
-                    likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
-                    likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
-
-                    DocumentReference userRef = db.collection("users").document(auth.getCurrentUser().getUid());
-                    userRef.get().addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.exists()) {
-                            List<String> saves = (List<String>) documentSnapshot.get("savedPosts");
-                            saveButton.setImageResource(saves != null && saves.contains(postId) ? R.drawable.bookmark_filled : R.drawable.bookmark);
-                        }
-                    });
-                    saveButton.setOnClickListener(v -> toggleSavePost(postId, saveButton));
-
-                    userFrame.setOnClickListener(v -> navigateToUserProfile(authorId));
-
-                    postsContainer.addView(postView);
-                }
-
-                lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
-                loadingText.setVisibility(View.GONE);
-            } else {
-                loadingText.setText("Error loading posts");
-                loadingText.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
     private void navigateToUserProfile(String userId) {

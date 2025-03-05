@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
@@ -19,6 +22,10 @@ import java.util.Map;
 public class AddVehicleDialog extends DialogFragment {
 
     FirebaseAuth auth;
+    EditText makeInput, modelInput, yearInput;
+    String[] vehicleTypes = {"Coupe", "SUV", "Convertible", "Sport", "Hatchback", "Sedan", "Motorcycle", "Other"};
+    private Spinner vehicleTypeSpinner;
+
 
     public AddVehicleDialog() {
     }
@@ -33,16 +40,25 @@ public class AddVehicleDialog extends DialogFragment {
         Button cancelButton = view.findViewById(R.id.cancelButton);
         Button saveButton = view.findViewById(R.id.saveButton);
 
+        makeInput = view.findViewById(R.id.vehicleMake);
+        modelInput = view.findViewById(R.id.vehicleModel);
+        yearInput = view.findViewById(R.id.vehicleYear);
+        vehicleTypeSpinner = view.findViewById(R.id.vehicleTypeSpinner);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, vehicleTypes);
+        vehicleTypeSpinner.setAdapter(adapter);
+
         cancelButton.setOnClickListener(v -> dismiss());
 
         saveButton.setOnClickListener(v -> {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference garageCollection = db.collection("garage");
+            CollectionReference garageCollection = db.collection("vehicles");
             Map<String, Object> vehicleData = new HashMap<>();
-            vehicleData.put("make", "Mazda");
-            vehicleData.put("model", "Mazda 3");
-            vehicleData.put("year", 2024);
-            vehicleData.put("userId", auth.getCurrentUser().getUid());
+            vehicleData.put("make", makeInput.getText().toString());
+            vehicleData.put("model", modelInput.getText().toString());
+            vehicleData.put("year", yearInput.getText().toString());
+            vehicleData.put("type", vehicleTypeSpinner.getSelectedItem().toString());
+            vehicleData.put("ownerId", auth.getCurrentUser().getUid());
             garageCollection.add(vehicleData)
                     .addOnSuccessListener(documentReference -> {
                         Toast.makeText(v.getContext(), "Vehicle added successfully!", Toast.LENGTH_SHORT).show();

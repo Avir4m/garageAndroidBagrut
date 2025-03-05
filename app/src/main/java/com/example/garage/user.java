@@ -1,11 +1,6 @@
 package com.example.garage;
 
 
-import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
-import static com.example.garage.functions.formatUtils.formatCount;
-import static com.example.garage.functions.formatUtils.getTimeAgo;
-import static com.example.garage.functions.postInteractions.toggleLikePost;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,25 +8,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.garage.adapters.CompactPostAdapter;
+import com.example.garage.adapters.VehicleAdapter;
+import com.example.garage.models.Post;
+import com.example.garage.models.Vehicle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +40,16 @@ public class user extends Fragment implements View.OnClickListener {
     ImageButton settingsBtn, backBtn, chatBtn, addBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
-    LinearLayout postsContainer, postsContainerItems, garageContainer, garageContainerItems, ownProfileBtns, profileBtns;
-    ScrollView postsScrollView, garageScrollView;
+    LinearLayout postsContainer, garageContainer, ownProfileBtns, profileBtns;
     Button editProfileBtn, followBtn, addVehicleBtn, messageBtn;
-    private DocumentSnapshot lastVisible = null;
+
     private String userId;
+
+    private List<Vehicle> vehicleList;
+    private VehicleAdapter garageAdapter;
+    private CompactPostAdapter postAdapter;
+    private List<Post> postList;
+
 
     public user() {
     }
@@ -126,32 +128,26 @@ public class user extends Fragment implements View.OnClickListener {
         navbar.setVisibility(View.VISIBLE);
 
         postsContainer = view.findViewById(R.id.postsContainer);
-        postsContainerItems = view.findViewById(R.id.postsContainerItems);
         garageContainer = view.findViewById(R.id.garageContainer);
-        garageContainerItems = view.findViewById(R.id.garageContainerItems);
 
-        postsScrollView = view.findViewById(R.id.postsScrollView);
-        postsScrollView.setOnScrollChangeListener((scrollView, x, y, oldX, oldY) -> {
-            int scrollViewHeight = scrollView.getHeight();
-            int scrollY = scrollView.getScrollY();
-            int contentHeight = postsContainerItems.getHeight();
-            if (scrollY + scrollViewHeight == contentHeight) {
-                loadPosts(userId);
-            }
-        });
+        RecyclerView garageRecyclerView = view.findViewById(R.id.garageRecyclerView);
+        garageRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        garageScrollView = view.findViewById(R.id.garageScrollView);
-        garageScrollView.setOnScrollChangeListener((scrollView, x, y, oldX, oldY) -> {
-            int scrollViewHeight = scrollView.getHeight();
-            int scrollY = scrollView.getScrollY();
-            int contentHeight = garageContainerItems.getHeight();
-            if (scrollY + scrollViewHeight == contentHeight) {
-                loadPosts(userId);
-            }
-        });
+        vehicleList = new ArrayList<>();
+        garageAdapter = new VehicleAdapter(getContext(), vehicleList);
+        garageRecyclerView.setAdapter(garageAdapter);
+
+        loadGarage(userId);
+
+        RecyclerView postRecyclerView = view.findViewById(R.id.postsRecyclerView);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        postList = new ArrayList<>();
+        postAdapter = new CompactPostAdapter(getContext(), postList);
+        postRecyclerView.setAdapter(postAdapter);
 
         loadPosts(userId);
-        loadGarge();
+
 
         tabLayout = view.findViewById(R.id.userTabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -169,7 +165,7 @@ public class user extends Fragment implements View.OnClickListener {
                 if (selectedTab.equals("Garage")) {
                     postsContainer.setVisibility(View.GONE);
                     garageContainer.setVisibility(View.VISIBLE);
-                    loadGarge();
+                    loadGarage(userId);
                 }
 
             }
@@ -187,70 +183,51 @@ public class user extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    private void loadGarge() {
+    private void loadGarage(String userId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("vehicles")
+                .whereEqualTo("ownerId", userId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    vehicleList.clear();
+
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        Vehicle vehicle = doc.toObject(Vehicle.class);
+                        vehicleList.add(vehicle);
+                    }
+
+                    garageAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(getContext(), "Failed to load vehicles", Toast.LENGTH_SHORT).show()
+                );
     }
+
 
     private void loadPosts(String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        Query query = db.collection("posts")
+        db.collection("posts")
                 .whereEqualTo("authorId", userId)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
-                .limit(10);
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    postList.clear();
 
-        if (lastVisible != null) {
-            query = query.startAfter(lastVisible);
-        }
-
-        query.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                if (task.getResult().isEmpty()) {
-                    return;
-                }
-
-                List<View> newPostsViews = new ArrayList<>();
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    String postId = document.getId();
-                    String title = document.getString("title");
-                    String imageId = document.getString("imageId");
-                    Timestamp firestoreTimestamp = document.getTimestamp("timestamp");
-                    String timeAgo = (firestoreTimestamp != null) ? getTimeAgo(firestoreTimestamp.toDate()) : "";
-                    List<String> likes = (List<String>) document.get("likes");
-
-                    View postView = LayoutInflater.from(getContext()).inflate(R.layout.compact_post_item, postsContainer, false);
-
-                    TextView titleView = postView.findViewById(R.id.postTitle);
-                    TextView timestampView = postView.findViewById(R.id.postTimestamp);
-                    TextView likeCount = postView.findViewById(R.id.likeCount);
-                    ImageButton likeButton = postView.findViewById(R.id.likeBtn);
-                    ImageView imageView = postView.findViewById(R.id.postImage);
-
-                    titleView.setText(title);
-                    timestampView.setText(timeAgo);
-                    likeCount.setText(formatCount(document.getLong("likeCount").longValue()));
-
-                    if (imageId != null) {
-                        getImageFromFirestore(imageId).addOnSuccessListener(bitmap -> imageView.setImageBitmap(bitmap));
-                    } else {
-                        imageView.setVisibility(View.GONE);
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        String postId = doc.getId();
+                        Post post = doc.toObject(Post.class);
+                        post.setPostId(postId);
+                        postList.add(post);
                     }
 
-                    likeButton.setImageResource(likes != null && likes.contains(auth.getCurrentUser().getUid()) ? R.drawable.heart_filled : R.drawable.heart);
-                    likeButton.setOnClickListener(v -> toggleLikePost(postId, likeButton, likeCount));
-
-                    newPostsViews.add(postView);
-                }
-
-                for (View postView : newPostsViews) {
-                    postsContainerItems.addView(postView);
-                }
-
-                lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
-            } else {
-                Log.d("Firestore", "Error loading posts: ", task.getException());
-            }
-        });
+                    postAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show();
+                    Log.d("Firestore", "Error getting posts: ", e);
+                });
     }
 
 

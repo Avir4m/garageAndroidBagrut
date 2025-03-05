@@ -1,9 +1,6 @@
 package com.example.garage.functions;
 
-import static com.example.garage.functions.formatUtils.formatCount;
-
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.example.garage.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,7 +13,7 @@ import java.util.List;
 
 public class postInteractions {
 
-    public static void toggleLikePost(String postId, ImageButton likeBtn, TextView likeCountText) {
+    public static void toggleLikePost(String postId, ImageButton likeBtn) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DocumentReference postRef = db.collection("posts").document(postId);
@@ -44,8 +41,6 @@ public class postInteractions {
                 batch.update(postRef, "likes", likes);
                 batch.update(postRef, "likeCount", likeCount);
                 batch.commit();
-
-                likeCountText.setText(formatCount(likeCount));
             }
         }).addOnFailureListener(e -> {
         });

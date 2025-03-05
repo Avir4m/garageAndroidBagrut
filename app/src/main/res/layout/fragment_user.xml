@@ -187,45 +187,31 @@
 
     <LinearLayout
         android:id="@+id/postsContainer"
-        android:visibility="visible"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <android.widget.ScrollView
-            android:id="@+id/postsScrollView"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <LinearLayout
-                android:id="@+id/postsContainerItems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                />
-        </android.widget.ScrollView>
+            android:layout_height="match_parent" />
+
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/garageContainer"
         android:visibility="gone"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <android.widget.ScrollView
-            android:id="@+id/garageScrollView"
-            android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <LinearLayout
-                android:id="@+id/garageContainerItems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <include layout="@layout/temp_garage"/>
-            </LinearLayout>
-        </android.widget.ScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/garageRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:scrollbars="vertical" />
     </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

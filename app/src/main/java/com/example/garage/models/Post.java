@@ -1,28 +1,24 @@
 package com.example.garage.models;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.Log;
-import android.widget.Toast;
+import com.google.firebase.Timestamp;
 
-import com.example.garage.functions.ImageUtils;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-
-import java.util.Date;
 import java.util.List;
 
 public class Post {
+    private String postId;
     private String title;
     private String author;
     private String authorId;
-    private Date timestamp;
+    private Timestamp timestamp;
     private List<String> likes;
     private int likeCount;
     private String imageId;
 
-    public Post(String title, String author, String authorId, Date timestamp, List<String> likes, int likeCount, String imageId) {
+    public Post() {
+    }
+
+    public Post(String postId, String title, String author, String authorId, Timestamp timestamp, List<String> likes, int likeCount, String imageId) {
+        this.postId = postId;
         this.title = title;
         this.author = author;
         this.authorId = authorId;
@@ -30,6 +26,14 @@ public class Post {
         this.likes = likes;
         this.likeCount = likeCount;
         this.imageId = imageId;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
 
     public String getTitle() {
@@ -56,11 +60,11 @@ public class Post {
         this.authorId = authorId;
     }
 
-    public Date getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -86,39 +90,5 @@ public class Post {
 
     public void setImageId(String imageId) {
         this.imageId = imageId;
-    }
-
-    public void uploadPostToFirestore(Context context, Bitmap bitmap, CollectionReference postsCollection) {
-        if (bitmap != null) {
-            ImageUtils.uploadImageToFirestore(bitmap)
-                    .addOnSuccessListener(new OnSuccessListener<String>() {
-                        @Override
-                        public void onSuccess(String docId) {
-                            setImageId(docId);
-                            saveToFirestore(context, postsCollection);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(Exception e) {
-                            Log.e("Firestore", "Image upload failed: ", e);
-                            Toast.makeText(context, "Image upload failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        } else {
-            saveToFirestore(context, postsCollection);
-        }
-    }
-
-    private void saveToFirestore(Context context, CollectionReference postsCollection) {
-        postsCollection.add(this)
-                .addOnSuccessListener(documentReference -> {
-                    Log.d("Firestore", "Post added successfully");
-                    Toast.makeText(context, "Post added successfully", Toast.LENGTH_SHORT).show();
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("Firestore", "Failed to add post", e);
-                    Toast.makeText(context, "Failed to add post", Toast.LENGTH_SHORT).show();
-                });
     }
 }
