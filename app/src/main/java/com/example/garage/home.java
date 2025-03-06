@@ -1,24 +1,39 @@
 package com.example.garage;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.garage.adapters.HomePostAdapter;
+import com.example.garage.models.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class home extends Fragment implements View.OnClickListener {
 
     TextView screenTitle, loadingText;
     ImageButton chatBtn, backBtn, settingsBtn, addBtn;
     BottomNavigationView navbar;
-    LinearLayout postsContainer;
+    RecyclerView recyclerView;
+
+    private HomePostAdapter postAdapter;
+    private List<Post> postList = new ArrayList<>();
+    ;
 
     public home() {
     }
@@ -52,10 +67,45 @@ public class home extends Fragment implements View.OnClickListener {
         addBtn.setVisibility(View.GONE);
 
         loadingText = view.findViewById(R.id.loading_text);
-        postsContainer = view.findViewById(R.id.posts_container);
+
+        recyclerView = view.findViewById(R.id.postsRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        postList = new ArrayList<>();
+        postAdapter = new HomePostAdapter(getContext(), postList, userId -> navigateToUserProfile(userId));
+        recyclerView.setAdapter(postAdapter);
+
+        loadPosts();
 
 
         return view;
+    }
+
+    private void loadPosts() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("posts")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    postList.clear();
+
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        String postId = doc.getId();
+                        Post post = doc.toObject(Post.class);
+                        post.setPostId(postId);
+                        postList.add(post);
+                    }
+
+                    loadingText.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    postAdapter.notifyDataSetChanged();
+
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show();
+                    Log.d("Firestore", "Error getting posts: ", e);
+                });
     }
 
     private void navigateToUserProfile(String userId) {
