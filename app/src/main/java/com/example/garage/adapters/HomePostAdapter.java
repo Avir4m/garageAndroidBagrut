@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostViewHolder> {
     private final Context context;
@@ -65,6 +66,10 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
         holder.postAuthor.setOnClickListener(v -> listener.onUserClick(post.getAuthorId()));
         holder.likeButton.setOnClickListener(v -> postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount));
         holder.saveButton.setOnClickListener(v -> postInteractions.toggleSavePost(post.getPostId(), holder.saveButton));
+
+        if (!Objects.equals(post.getAuthorId(), currentUserId)) {
+            holder.dotsButton.setVisibility(View.GONE);
+        }
 
         holder.dotsButton.setOnClickListener(v -> {
             PostDialog postDialog = PostDialog.newInstance(post.getPostId());

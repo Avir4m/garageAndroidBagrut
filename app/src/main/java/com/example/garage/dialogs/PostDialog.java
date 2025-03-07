@@ -7,19 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.garage.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PostDialog extends DialogFragment {
 
     private String postId;
-    private FirebaseAuth auth;
-    private FirebaseUser currentUser;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public PostDialog() {
     }
@@ -36,8 +35,6 @@ public class PostDialog extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        currentUser = auth.getCurrentUser();
-
         if (getArguments() != null) {
             postId = getArguments().getString("postId");
         }
@@ -53,9 +50,15 @@ public class PostDialog extends DialogFragment {
         }
 
         Button deleteButton = view.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(v -> {
-
-        });
+        deleteButton.setOnClickListener(v ->
+                db.collection("posts").document(postId).delete().addOnSuccessListener(aVoid -> {
+                            Toast.makeText(getContext(), "Post deleted successfully", Toast.LENGTH_SHORT).show();
+                            dismiss();
+                        }
+                ).addOnFailureListener(aVoid -> {
+                    Toast.makeText(getContext(), "Error deleting post", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }));
 
         return view;
     }
