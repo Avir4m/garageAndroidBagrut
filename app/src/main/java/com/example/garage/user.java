@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.adapters.CompactPostAdapter;
 import com.example.garage.adapters.VehicleAdapter;
+import com.example.garage.dialogs.AddVehicleDialog;
 import com.example.garage.models.Post;
 import com.example.garage.models.Vehicle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

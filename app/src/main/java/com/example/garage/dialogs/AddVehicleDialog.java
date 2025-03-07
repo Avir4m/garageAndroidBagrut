@@ -1,4 +1,4 @@
-package com.example.garage;
+package com.example.garage.dialogs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.example.garage.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +34,7 @@ public class AddVehicleDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_vehicle_dialog, container, false);
+        View view = inflater.inflate(R.layout.add_vehicle_dialog, container, false);
 
         auth = FirebaseAuth.getInstance();
 

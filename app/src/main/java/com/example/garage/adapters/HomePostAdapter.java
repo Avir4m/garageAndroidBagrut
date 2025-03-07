@@ -13,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.R;
+import com.example.garage.dialogs.PostDialog;
 import com.example.garage.functions.postInteractions;
 import com.example.garage.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,6 +66,12 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
         holder.likeButton.setOnClickListener(v -> postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount));
         holder.saveButton.setOnClickListener(v -> postInteractions.toggleSavePost(post.getPostId(), holder.saveButton));
 
+        holder.dotsButton.setOnClickListener(v -> {
+            PostDialog postDialog = PostDialog.newInstance(post.getPostId());
+            postDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
+        });
+
+
         if (post.getLikes() != null && post.getLikes().contains(currentUserId)) {
             holder.likeButton.setImageResource(R.drawable.heart_filled);
         } else {
@@ -108,7 +116,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView postTitle, postAuthor, timestamp, likeCount;
         ImageView postImage;
-        ImageButton likeButton, saveButton;
+        ImageButton likeButton, saveButton, dotsButton;
 
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -119,6 +127,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
             postImage = itemView.findViewById(R.id.postImage);
             likeButton = itemView.findViewById(R.id.likeBtn);
             saveButton = itemView.findViewById(R.id.saveBtn);
+            dotsButton = itemView.findViewById(R.id.dotsButton);
         }
     }
 }
