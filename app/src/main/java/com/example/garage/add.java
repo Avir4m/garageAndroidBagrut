@@ -1,14 +1,12 @@
 package com.example.garage;
 
+import static android.app.Activity.RESULT_OK;
 import static com.example.garage.functions.ImageUtils.uploadImageToFirestore;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.Timestamp;
@@ -31,17 +31,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class add extends Fragment implements View.OnClickListener {
+public class add extends Fragment {
 
-    private static final int PICK_IMAGE_REQUEST = 1;
     boolean imageSelected = false;
+
     Button pickImageBtn, submitBtn;
     ImageView imagePreview;
     EditText titleInput;
     FirebaseAuth auth;
     TextView screenTitle;
     ImageButton chatBtn, backBtn, settingsBtn, addBtn;
-    private Bitmap selectedBitmap;
+    private Uri imageUri;
 
     public add() {
     }
@@ -66,51 +66,37 @@ public class add extends Fragment implements View.OnClickListener {
         backBtn.setVisibility(View.GONE);
 
         pickImageBtn = view.findViewById(R.id.pickImage);
-        pickImageBtn.setOnClickListener(this);
+        pickImageBtn.setOnClickListener(v -> openSystemImagePicker());
 
         submitBtn = view.findViewById(R.id.submitButton);
-        submitBtn.setOnClickListener(this);
+        submitBtn.setOnClickListener(v -> addPostToFirestore());
 
         titleInput = view.findViewById(R.id.postTitleInput);
         imagePreview = view.findViewById(R.id.imagePreview);
         auth = FirebaseAuth.getInstance();
 
+
         return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view == pickImageBtn) {
-            openImagePicker();
-        }
-        if (view == submitBtn) {
-            addPostToFirestore();
-        }
-    }
-
-    private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    private void openSystemImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        imagePickerLauncher.launch(intent);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-            try {
-                Uri imageUri = data.getData();
-                selectedBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                imagePreview.setImageBitmap(selectedBitmap);
-                imagePreview.setVisibility(View.VISIBLE);
-                imageSelected = true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(getActivity(), "Error loading image", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+    private final ActivityResultLauncher<Intent> imagePickerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Uri selectedImageUri = result.getData().getData();
+                    imagePreview.setImageURI(selectedImageUri);
+                    imagePreview.setVisibility(View.VISIBLE);
+                    imageSelected = true;
+                }
+            });
 
     private void addPostToFirestore() {
         String title = titleInput.getText().toString();
@@ -135,14 +121,28 @@ public class add extends Fragment implements View.OnClickListener {
         post.put("imageId", null);
 
         if (imageSelected) {
-            uploadImageToFirestore(((BitmapDrawable) imagePreview.getDrawable()).getBitmap()).addOnSuccessListener(docId ->
-                    post.put("imageId", docId));
-        }
+            uploadImageToFirestore(((BitmapDrawable) imagePreview.getDrawable()).getBitmap()).addOnSuccessListener(docId -> {
+                post.put("imageId", docId);
 
-        postsCollection.add(post).addOnSuccessListener(documentReference -> {
-            Toast.makeText(getContext(), "Post has been uploaded successfully.", Toast.LENGTH_SHORT).show();
-            titleInput.setText("");
-            imageSelected = false;
-        });
+                postsCollection.add(post).addOnSuccessListener(documentReference -> {
+                    Toast.makeText(getContext(), "Post has been uploaded successfully.", Toast.LENGTH_SHORT).show();
+                    titleInput.setText("");
+                    imageSelected = false;
+                }).addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error uploading post.", Toast.LENGTH_SHORT).show();
+                });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(getContext(), "Error uploading image.", Toast.LENGTH_SHORT).show();
+            });
+        } else {
+            postsCollection.add(post).addOnSuccessListener(documentReference -> {
+                Toast.makeText(getContext(), "Post has been uploaded successfully.", Toast.LENGTH_SHORT).show();
+                titleInput.setText("");
+                imageSelected = false;
+            }).addOnFailureListener(e -> {
+                Toast.makeText(getContext(), "Error uploading post.", Toast.LENGTH_SHORT).show();
+            });
+        }
     }
+
 }
