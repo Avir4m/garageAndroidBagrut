@@ -1,0 +1,2400 @@
+[
+  {
+    "brand": "Aion",
+    "models": [
+      "Aion LX",
+      "Aion S",
+      "Aion V"
+    ]
+  },
+  {
+    "brand": "Aiways",
+    "models": [
+      "U5",
+      "U6"
+    ]
+  },
+  {
+    "brand": "Alfa Romeo",
+    "models": [
+      "145",
+      "146",
+      "147",
+      "155",
+      "156",
+      "156 Sportwagon",
+      "159",
+      "159 Sportwagon",
+      "164",
+      "166",
+      "4C",
+      "Brera",
+      "Crosswagon",
+      "GT",
+      "GTV",
+      "Giulia",
+      "Giulietta",
+      "MiTo",
+      "Spider",
+      "Stelvio"
+    ]
+  },
+  {
+    "brand": "Alpine",
+    "models": [
+      "A110",
+      "A110 GT",
+      "A110 R",
+      "A110 S"
+    ]
+  },
+  {
+    "brand": "Aprilia",
+    "models": [
+      "RS 660",
+      "RSV4 1100 Factory",
+      "RSV4 1100",
+      "Tuono 660",
+      "Tuono V4 1100 Factory",
+      "Tuono V4 1100",
+      "Dorsoduro 900",
+      "Shiver 900",
+      "Caponord 1200",
+      "Mana 850",
+      "RX 125",
+      "SX 125",
+      "Rally 50",
+      "Rally 125",
+      "Tuareg 660",
+      "Tuono V4 Factory",
+      "RS 125",
+      "Sportcity 250",
+      "Mojito 50",
+      "Bresta 250"
+    ]
+  },
+  {
+    "brand": "Arcfox",
+    "models": [
+      "Alpha S",
+      "Alpha T"
+    ]
+  },
+  {
+    "brand": "Aston Martin",
+    "models": [
+      "DB11",
+      "DB9",
+      "DBS",
+      "Rapide",
+      "V12 Vanquish",
+      "V8 Vantage",
+      "Vanquish",
+      "Vantage",
+      "Virage"
+    ]
+  },
+  {
+    "brand": "Audi",
+    "models": [
+      "100",
+      "100 Avant",
+      "80",
+      "80 Avant",
+      "80 Cabrio",
+      "90",
+      "A1",
+      "A2",
+      "A3",
+      "A3 Cabriolet",
+      "A3 Limuzina",
+      "A3 Sportback",
+      "A4",
+      "A4 Allroad",
+      "A4 Avant",
+      "A4 Cabriolet",
+      "A5",
+      "A5 Cabriolet",
+      "A5 Sportback",
+      "A6",
+      "A6 Allroad",
+      "A6 Avant",
+      "A7",
+      "A8",
+      "A8 Long",
+      "Q3",
+      "Q4 e-tron",
+      "Q5",
+      "Q7",
+      "R8",
+      "RS4 Cabriolet",
+      "RS4/RS4 Avant",
+      "RS5",
+      "RS6 Avant",
+      "RS7",
+      "S3/S3 Sportback",
+      "S4 Cabriolet",
+      "S4/S4 Avant",
+      "S5/S5 Cabriolet",
+      "S6/RS6",
+      "S7",
+      "S8",
+      "SQ5",
+      "TT Coupe",
+      "TT Roadster",
+      "TTS"
+    ]
+  },
+  {
+    "brand": "BAIC",
+    "models": [
+      "EC5",
+      "EU-X",
+      "EU5",
+      "EX360"
+    ]
+  },
+  {
+    "brand": "BMW",
+    "models": [
+      "1 Series ",
+      "2 Series ",
+      "3 Series ",
+      "4 Series ",
+      "5 Series ",
+      "6 Series ",
+      "7 Series ",
+      "8 Series ",
+      "M3",
+      "M4",
+      "M5",
+      "M6",
+      "Rad 1",
+      "Rad 1 Cabrio",
+      "Rad 1 Coupe",
+      "Rad 2",
+      "Rad 2 Active Tourer",
+      "Rad 2 Coupe",
+      "Rad 2 Gran Tourer",
+      "Rad 3",
+      "Rad 3 Cabrio",
+      "Rad 3 Compact",
+      "Rad 3 Coupe",
+      "Rad 3 GT",
+      "Rad 3 Touring",
+      "Rad 4",
+      "Rad 4 Cabrio",
+      "Rad 4 Gran Coupe",
+      "Rad 5",
+      "Rad 5 GT",
+      "Rad 5 Touring",
+      "Rad 6",
+      "Rad 6 Cabrio",
+      "Rad 6 Coupe",
+      "Rad 6 Gran Coupe",
+      "Rad 7",
+      "Rad 8 Coupe",
+      "X1",
+      "X2",
+      "X3",
+      "X4",
+      "X5",
+      "X6",
+      "Z3",
+      "Z3 Coupe",
+      "Z3 Roadster",
+      "Z4",
+      "Z4 Roadster",
+      "i3",
+      "i8",
+      "iX",
+      "iX3"
+    ]
+  },
+  {
+    "brand": "BMW Motorrad",
+    "models": [
+      "F 900 R",
+      "F 900 XR",
+      "G 310 R",
+      "G 310 GS",
+      "K 1600 B",
+      "K 1600 GT",
+      "K 1600 GTL",
+      "R 1250 GS",
+      "R 1250 GSA",
+      "R 1250 RT",
+      "R nineT",
+      "R nineT Pure",
+      "R nineT Scrambler",
+      "S 1000 RR",
+      "S 1000 R",
+      "S 1000 XR",
+      "S 1000 XR M Sport",
+      "K 1300 S",
+      "M 1000 RR",
+      "C 400 X",
+      "C 400 GT"
+    ]
+  },
+  {
+    "brand": "BYD",
+    "models": [
+      "Denza",
+      "Denza Z9 GT EV",
+      "Dolphin",
+      "Han",
+      "Seal",
+      "Seal 07 DM-i",
+      "Sealion 07 EV",
+      "Sealion 7",
+      "Song Max",
+      "Tang",
+      "Yangwang U8",
+      "Yangwang U9",
+      "Yuan Plus"
+    ]
+  },
+  {
+    "brand": "BYTON",
+    "models": [
+      "K-Byte",
+      "M-Byte"
+    ]
+  },
+  {
+    "brand": "Baojun",
+    "models": [
+      "310",
+      "510",
+      "530",
+      "E100",
+      "E200",
+      "E300",
+      "KiWi EV",
+      "RC-5",
+      "RC-6",
+      "RM-5",
+      "RS-3",
+      "RS-5",
+      "RS-7"
+    ]
+  },
+  {
+    "brand": "Benelli",
+    "models": [
+      "302S",
+      "502C",
+      "502R",
+      "600i",
+      "Leoncino 500",
+      "Leoncino 800",
+      "TNT 600",
+      "TNT 135",
+      "TNT 25",
+      "Trk 251",
+      "Trk 502",
+      "Trk 502X",
+      "Tre 1130K",
+      "Tre 1130 Amazonas",
+      "Zafferano 250"
+    ]
+  },
+  {
+    "brand": "Bentley",
+    "models": [
+      "Arnage",
+      "Azure",
+      "Bentayga",
+      "Brooklands",
+      "Continental",
+      "Continental Flying Spur",
+      "Continental GT",
+      "Continental GTC",
+      "Flying Spur",
+      "Mulsanne"
+    ]
+  },
+  {
+    "brand": "Bestune",
+    "models": [
+      "B70",
+      "E01",
+      "T77",
+      "T99"
+    ]
+  },
+  {
+    "brand": "Bugatti",
+    "models": [
+      "Chiron",
+      "Divo",
+      "Veyron"
+    ]
+  },
+  {
+    "brand": "Cadillac",
+    "models": [
+      "ATS",
+      "BLS",
+      "CT5",
+      "CT6",
+      "CTS",
+      "DeVille",
+      "Eldorado",
+      "Escalade",
+      "SRX",
+      "STS",
+      "Seville",
+      "XT4",
+      "XT5",
+      "XT6",
+      "XTS"
+    ]
+  },
+  {
+    "brand": "Cagiva",
+    "models": [
+      "Elefant 900",
+      "Gran Canyon 900",
+      "Raptor 650",
+      "Raptor 1000",
+      "Mito 125",
+      "Mito 50",
+      "Supercity 125",
+      "Alazzurra 650",
+      "W12 125",
+      "Raptor 650",
+      "Planet 50",
+      "Freccia 125",
+      "Canyon 500",
+      "Canyon 600",
+      "Cagiva SST 350"
+    ]
+  },
+  {
+    "brand": "Changan",
+    "models": [
+      "Alsvin",
+      "BenBen",
+      "CS35",
+      "CS55",
+      "CS75 Plus",
+      "Eado",
+      "UNI-E",
+      "UNI-K",
+      "UNI-T",
+      "UNI-V"
+    ]
+  },
+  {
+    "brand": "Chery",
+    "models": [
+      "Arrizo 5",
+      "Arrizo 5 Plus",
+      "Arrizo 7",
+      "Arrizo 8",
+      "E5",
+      "QQ",
+      "Tiggo 2",
+      "Tiggo 3",
+      "Tiggo 4",
+      "Tiggo 5",
+      "Tiggo 7",
+      "Tiggo 8"
+    ]
+  },
+  {
+    "brand": "Chevrolet",
+    "models": [
+      "Alero",
+      "Aveo",
+      "Blazer",
+      "Camaro",
+      "Captiva",
+      "Corvette",
+      "Cruze",
+      "Cruze SW",
+      "Epica",
+      "Equinox",
+      "Evanda",
+      "HHR",
+      "Kalos",
+      "Lacetti",
+      "Lacetti SW",
+      "Lumina",
+      "Malibu",
+      "Matiz",
+      "Monte Carlo",
+      "Nubira",
+      "Orlando",
+      "Spark",
+      "Suburban",
+      "Tacuma",
+      "Tahoe",
+      "Trax"
+    ]
+  },
+  {
+    "brand": "Chrysler",
+    "models": [
+      "300C",
+      "300M",
+      "Crossfire",
+      "Grand Voyager",
+      "Neon",
+      "PT Cruiser",
+      "Pacifica",
+      "Plymouth",
+      "Sebring",
+      "Stratus",
+      "Viper",
+      "Vision",
+      "Voyager"
+    ]
+  },
+  {
+    "brand": "Citroen",
+    "models": [
+      "Berlingo",
+      "C-Crosser",
+      "C-Elissee",
+      "C-Zero",
+      "C1",
+      "C2",
+      "C3",
+      "C3 Aircross",
+      "C3 Picasso",
+      "C4",
+      "C4 Aircross",
+      "C4 Cactus",
+      "C4 Coupe",
+      "C4 Grand Picasso",
+      "C4 Sedan",
+      "C4 SpaceTourer",
+      "C5",
+      "C5 Break",
+      "C5 Tourer",
+      "C5 X",
+      "C6",
+      "C8",
+      "DS3",
+      "DS4",
+      "DS5",
+      "Evasion",
+      "Jumper",
+      "Jumpy",
+      "Nemo",
+      "Saxo",
+      "Xantia",
+      "Xsara",
+      "e-C4"
+    ]
+  },
+  {
+    "brand": "DS Automobiles",
+    "models": [
+      "DS 3 Crossback E-Tense",
+      "DS 7 Crossback E-Tense",
+      "DS 9 E-Tense"
+    ]
+  },
+  {
+    "brand": "Dacia",
+    "models": [
+      "Bigster",
+      "Dokker",
+      "Duster",
+      "Jogger",
+      "Lodgy",
+      "Logan",
+      "Logan MCV",
+      "Logan Van",
+      "Sandero",
+      "Solenza",
+      "Spring"
+    ]
+  },
+  {
+    "brand": "Daewoo",
+    "models": [
+      "Espero",
+      "Kalos",
+      "Lacetti",
+      "Lanos",
+      "Leganza",
+      "Lublin",
+      "Matiz",
+      "Nexia",
+      "Nubira",
+      "Nubira kombi",
+      "Racer",
+      "Tacuma",
+      "Tico"
+    ]
+  },
+  {
+    "brand": "Daihatsu",
+    "models": [
+      "Altis",
+      "Atrai",
+      "Boon",
+      "Copen",
+      "Hijet",
+      "Mira",
+      "Rocky",
+      "Sirion",
+      "Tanto",
+      "Terios",
+      "Thor"
+    ]
+  },
+  {
+    "brand": "Dodge",
+    "models": [
+      "Avenger",
+      "Caliber",
+      "Challenger",
+      "Charger",
+      "Dakota",
+      "Durango",
+      "Grand Caravan",
+      "Journey",
+      "Magnum",
+      "Nitro",
+      "RAM"
+    ]
+  },
+  {
+    "brand": "Dongfeng",
+    "models": [
+      "Fengon E3",
+      "Fengon E5",
+      "Fengon E6",
+      "Junfeng EV",
+      "Kangdian EV"
+    ]
+  },
+  {
+    "brand": "Drako Motors",
+    "models": [
+      "Dragon",
+      "GTE"
+    ]
+  },
+  {
+    "brand": "Ducati",
+    "models": [
+      "Panigale V2",
+      "Panigale V4",
+      "Panigale V4 R",
+      "Monster 1200",
+      "Monster 821",
+      "Monster 797",
+      "Diavel 1260",
+      "Diavel 1260 S",
+      "Multistrada V4",
+      "Multistrada V4 S",
+      "Scrambler 1100",
+      "Scrambler Desert Sled",
+      "Scrambler Icon",
+      "Scrambler Nightshift",
+      "Hypermotard 950",
+      "Hypermotard 950 SP",
+      "Streetfighter V4",
+      "Streetfighter V4 S",
+      "XDiavel",
+      "XDiavel S",
+      "Supersport 950",
+      "Supersport 950 S"
+    ]
+  },
+  {
+    "brand": "EdisonFuture",
+    "models": [
+      "EF1-T",
+      "EF1-V"
+    ]
+  },
+  {
+    "brand": "Elaris",
+    "models": [
+      "Beo",
+      "Caro",
+      "Dyo",
+      "Finn"
+    ]
+  },
+  {
+    "brand": "Enovate",
+    "models": [
+      "ME7",
+      "ME9"
+    ]
+  },
+  {
+    "brand": "Evergrande (Hengchi)",
+    "models": [
+      "Hengchi 1",
+      "Hengchi 3",
+      "Hengchi 5",
+      "Hengchi 6",
+      "Hengchi 7"
+    ]
+  },
+  {
+    "brand": "Evolute",
+    "models": [
+      "i-Joy",
+      "i-Pro",
+      "i-Sky",
+      "i-Van"
+    ]
+  },
+  {
+    "brand": "FREZe",
+    "models": [
+      "Nikrob"
+    ]
+  },
+  {
+    "brand": "Faraday Future",
+    "models": [
+      "FF 71",
+      "FF 81",
+      "FF 91"
+    ]
+  },
+  {
+    "brand": "Ferrari",
+    "models": [
+      "348",
+      "360 Modena",
+      "458 Italia",
+      "488 GTB",
+      "512",
+      "550 Maranello",
+      "575M Maranello",
+      "599 GTB Fiorano",
+      "612 Scaglietti",
+      "812 Superfast",
+      "California",
+      "Enzo",
+      "F12berlinetta",
+      "F355",
+      "F430",
+      "FF",
+      "LaFerrari",
+      "Portofino",
+      "Roma",
+      "SF90 Stradale"
+    ]
+  },
+  {
+    "brand": "Fiat",
+    "models": [
+      "124 Spider",
+      "500",
+      "500C",
+      "500L",
+      "500X",
+      "850",
+      "Barchetta",
+      "Brava",
+      "Cinquecento",
+      "Coupe",
+      "Croma",
+      "Doblo",
+      "Doblo Cargo",
+      "Doblo Kombi",
+      "Ducato",
+      "Ducato Van",
+      "Freemont",
+      "Fullback",
+      "Grande Punto",
+      "Idea",
+      "Linea",
+      "Marea",
+      "Marea Weekend",
+      "Multipla",
+      "Palio",
+      "Panda",
+      "Panda 4x4",
+      "Punto",
+      "Punto Cabrio",
+      "Punto Evo",
+      "Qubo",
+      "Scudo",
+      "Sedici",
+      "Seicento",
+      "Stilo",
+      "Strada",
+      "Talento",
+      "Tipo",
+      "Ulysse",
+      "Uno"
+    ]
+  },
+  {
+    "brand": "Fisker",
+    "models": [
+      "Alaska",
+      "Atlantic",
+      "Karma",
+      "Ocean",
+      "Pear",
+      "Ronin"
+    ]
+  },
+  {
+    "brand": "Ford",
+    "models": [
+      "B-MAX",
+      "C-MAX",
+      "Cougar",
+      "Edge",
+      "Escort",
+      "Escort Cabrio",
+      "Escort kombi",
+      "Explorer",
+      "Fiesta",
+      "Fiesta Courier",
+      "Focus",
+      "Focus C-MAX",
+      "Focus Cabrio",
+      "Focus kombi",
+      "Galaxy",
+      "Grand C-MAX",
+      "Ka",
+      "Kuga",
+      "Mondeo",
+      "Mondeo kombi",
+      "Mustang",
+      "Orion",
+      "Puma",
+      "Ranger",
+      "S-MAX",
+      "Sierra",
+      "Streetka",
+      "Tourneo Connect",
+      "Tourneo Courier",
+      "Transit",
+      "Transit Bus",
+      "Transit Connect",
+      "Transit Courier",
+      "Transit Custom",
+      "Transit Van"
+    ]
+  },
+  {
+    "brand": "Foxtron",
+    "models": [
+      "Model C",
+      "Model E",
+      "Model T"
+    ]
+  },
+  {
+    "brand": "Geely",
+    "models": [
+      "Atlas",
+      "Binrui",
+      "Borui",
+      "Emgrand 7",
+      "Emgrand GT",
+      "Emgrand X7",
+      "Icon",
+      "Okavango",
+      "Panda",
+      "Tugella"
+    ]
+  },
+  {
+    "brand": "Geely",
+    "models": [
+      "Atlas",
+      "Binrui",
+      "Borui",
+      "Emgrand 7",
+      "Emgrand GT",
+      "Emgrand X7",
+      "Icon",
+      "Okavango",
+      "Panda",
+      "Tugella"
+    ]
+  },
+  {
+    "brand": "Genesis",
+    "models": [
+      "G70",
+      "G80",
+      "G90",
+      "GV60",
+      "GV70",
+      "GV80"
+    ]
+  },
+  {
+    "brand": "Great Wall",
+    "models": [
+      "C30",
+      "C50",
+      "Hover",
+      "Poer",
+      "Steed 5",
+      "Tank 300",
+      "Tank 500",
+      "Wingle 7"
+    ]
+  },
+  {
+    "brand": "Haima",
+    "models": [
+      "7X",
+      "E3",
+      "E6",
+      "S5"
+    ]
+  },
+  {
+    "brand": "Harley Davidson",
+    "models": [
+      "Street 500",
+      "Street 750",
+      "Iron 1200",
+      "Iron 883",
+      "Forty-Eight",
+      "Fat Boy",
+      "Fat Bob",
+      "Breakout",
+      "Low Rider",
+      "Low Rider S",
+      "Sportster S",
+      "Road King",
+      "Road Glide",
+      "Road Glide Special",
+      "Electra Glide Standard",
+      "Electra Glide Ultra Limited",
+      "Street Glide",
+      "Street Glide Special",
+      "Ultra Limited",
+      "Pan America 1250",
+      "Pan America 1250 Special",
+      "Livewire"
+    ]
+  },
+  {
+    "brand": "Haval",
+    "models": [
+      "Big Dog",
+      "Chulian",
+      "Dargo",
+      "F7",
+      "F7x",
+      "H6",
+      "H9",
+      "Jolion"
+    ]
+  },
+  {
+    "brand": "HiPhi",
+    "models": [
+      "HiPhi X",
+      "HiPhi Y",
+      "HiPhi Z"
+    ]
+  },
+  {
+    "brand": "Honda",
+    "models": [
+      "Accord",
+      "Accord Coupe",
+      "CR-V",
+      "CR-Z",
+      "City",
+      "Civic",
+      "Civic Aerodeck",
+      "Civic Coupe",
+      "Civic Tourer",
+      "Civic Type R",
+      "Concerto",
+      "Element",
+      "FR-V",
+      "HR-V",
+      "Insight",
+      "Integra",
+      "Jazz",
+      "Legend",
+      "Logo",
+      "NSX",
+      "Prelude",
+      "S2000",
+      "Shuttle",
+      "Stream"
+    ]
+  },
+  {
+    "brand": "Honda Bike",
+    "models": [
+      "CB1000R",
+      "CB125R",
+      "CB500F",
+      "CB650R",
+      "CBR1000RR",
+      "CBR500R",
+      "CBR600RR",
+      "CBR650R",
+      "CRF110F",
+      "CRF250L",
+      "CRF450R",
+      "CRF450X",
+      "Africa Twin",
+      "Africa Twin Adventure Sports",
+      "CT125",
+      "Grom",
+      "Monkey",
+      "Rebel 300",
+      "Rebel 500",
+      "VFR800F",
+      "Shadow Phantom",
+      "Gold Wing",
+      "CB300R",
+      "CB500X",
+      "CBR250R"
+    ]
+  },
+  {
+    "brand": "Hongqi",
+    "models": [
+      "E-HS9",
+      "H5",
+      "H9",
+      "L5",
+      "S9"
+    ]
+  },
+  {
+    "brand": "Hummer",
+    "models": [
+      "H2",
+      "H3"
+    ]
+  },
+  {
+    "brand": "Hyundai",
+    "models": [
+      "Accent",
+      "Atos",
+      "Azera",
+      "Coupe",
+      "Creta",
+      "Elantra",
+      "Galloper",
+      "Genesis",
+      "Getz",
+      "Grandeur",
+      "H 350",
+      "H1",
+      "Ioniq",
+      "Kona",
+      "Lantra",
+      "Matrix",
+      "Palisade",
+      "Santa Fe",
+      "Sonata",
+      "Staria",
+      "Terracan",
+      "Tucson",
+      "Veloster",
+      "Venue",
+      "XG 30",
+      "i10",
+      "i20",
+      "i30",
+      "i30 CW",
+      "i40",
+      "i40 CW",
+      "ix20",
+      "ix35"
+    ]
+  },
+  {
+    "brand": "IM Motors",
+    "models": [
+      "IM L6",
+      "IM L7"
+    ]
+  },
+  {
+    "brand": "Infiniti",
+    "models": [
+      "EX",
+      "FX",
+      "G",
+      "JX",
+      "M",
+      "Q30",
+      "Q50",
+      "Q60",
+      "Q70",
+      "QX30",
+      "QX50",
+      "QX60",
+      "QX70",
+      "QX80"
+    ]
+  },
+  {
+    "brand": "Isuzu",
+    "models": [
+      "Amigo",
+      "Ascender",
+      "Axiom",
+      "D-Max",
+      "Hombre",
+      "MU-7",
+      "MU-X",
+      "Rodeo",
+      "Trooper",
+      "VehiCROSS"
+    ]
+  },
+  {
+    "brand": "JAC",
+    "models": [
+      "Refine E6",
+      "Refine S4",
+      "Refine S5",
+      "iEV6S",
+      "iEV7S"
+    ]
+  },
+  {
+    "brand": "JMC",
+    "models": [
+      "EV6",
+      "Yuhu EV",
+      "Yuhu Pickup"
+    ]
+  },
+  {
+    "brand": "Jaguar",
+    "models": [
+      "Daimler",
+      "F-Pace",
+      "F-Type",
+      "S-Type",
+      "X-Type",
+      "XE",
+      "XF",
+      "XJ",
+      "XK",
+      "XK8"
+    ]
+  },
+  {
+    "brand": "Jeep",
+    "models": [
+      "Cherokee",
+      "Commander",
+      "Compass",
+      "Grand Cherokee",
+      "Patriot",
+      "Renegade",
+      "Wrangler"
+    ]
+  },
+  {
+    "brand": "Kawasaki",
+    "models": [
+      "Ninja 400",
+      "Ninja 650",
+      "Ninja ZX-10R",
+      "Ninja ZX-6R",
+      "Z125 Pro",
+      "Z400",
+      "Z650",
+      "Z900",
+      "Z1000",
+      "Z1000 R",
+      "Versys 300",
+      "Versys 650",
+      "Versys 1000",
+      "Vulcan S",
+      "Vulcan 900 Classic",
+      "Vulcan 1700 Voyager",
+      "KLX110R",
+      "KLX230R",
+      "KLX300R",
+      "KX250",
+      "KX450",
+      "KLR650",
+      "KX450X"
+    ]
+  },
+  {
+    "brand": "Kia",
+    "models": [
+      "Carens",
+      "Carnival",
+      "Ceed",
+      "Ceed SW",
+      "Cerato",
+      "Joice",
+      "K2500",
+      "Magentis",
+      "Niro",
+      "Opirus",
+      "Optima",
+      "Picanto",
+      "Pregio",
+      "Pride",
+      "ProCeed",
+      "Rio",
+      "Rio Combi",
+      "Sephia",
+      "Shuma",
+      "Sorento",
+      "Soul",
+      "Sportage",
+      "Venga"
+    ]
+  },
+  {
+    "brand": "Koenigsegg",
+    "models": [
+      "Agera",
+      "CC8S",
+      "CCX",
+      "Gemera",
+      "Jesko",
+      "One:1",
+      "Regera"
+    ]
+  },
+  {
+    "brand": "Ktm",
+    "models": [
+      "125 Duke",
+      "200 Duke",
+      "390 Duke",
+      "490 Duke",
+      "690 Enduro R",
+      "790 Duke",
+      "890 Duke R",
+      "1290 Super Duke R",
+      "125 SX",
+      "250 SX",
+      "300 EXC",
+      "350 SX-F",
+      "450 SX-F",
+      "500 EXC-F",
+      "690 SMC R",
+      "890 Adventure",
+      "1290 Super Adventure R",
+      "250 XC-W",
+      "300 XC-W",
+      "Freeride 250R",
+      "RC 390",
+      "RC 8C",
+      "250 EXC",
+      "350 EXC-F",
+      "450 EXC-F"
+    ]
+  },
+  {
+    "brand": "Kymco",
+    "models": [
+      "Agility 50",
+      "Agility 125",
+      "Like 50",
+      "Like 125",
+      "Dink 125",
+      "Xciting 400",
+      "Xciting 400i",
+      "People 150",
+      "People 200",
+      "People 300",
+      "Super 8 50",
+      "Super 8 125",
+      "Sento 50",
+      "Venox 250",
+      "Downtown 300i",
+      "MXU 150",
+      "MXU 300",
+      "MXU 500i",
+      "K-XCT 300i",
+      "Kymco AK550"
+    ]
+  },
+  {
+    "brand": "Lamborghini",
+    "models": [
+      "Aventador",
+      "Countach",
+      "Diablo",
+      "Gallardo",
+      "Huracan",
+      "Murcielago",
+      "Reventon",
+      "Sian",
+      "Urus",
+      "Veneno"
+    ]
+  },
+  {
+    "brand": "Lancia",
+    "models": [
+      "Delta",
+      "Lybra",
+      "Musa",
+      "Phedra",
+      "Thesis",
+      "Ypsilon"
+    ]
+  },
+  {
+    "brand": "Land Rover",
+    "models": [
+      "Defender",
+      "Discovery",
+      "Discovery Sport",
+      "Freelander",
+      "Range Rover",
+      "Range Rover Evoque",
+      "Range Rover Sport",
+      "Range Rover Velar"
+    ]
+  },
+  {
+    "brand": "Leapmotor",
+    "models": [
+      "C01",
+      "C11",
+      "T03"
+    ]
+  },
+  {
+    "brand": "Leapmotor",
+    "models": [
+      "C01",
+      "C11",
+      "T03"
+    ]
+  },
+  {
+    "brand": "Lexus",
+    "models": [
+      "CT",
+      "GS",
+      "GS 300",
+      "GX",
+      "IS",
+      "IS 200",
+      "IS 250 C",
+      "IS-F",
+      "LS",
+      "LX",
+      "NX",
+      "RC F",
+      "RX",
+      "RX 300",
+      "RX 400h",
+      "RX 450h",
+      "SC 430",
+      "UX"
+    ]
+  },
+  {
+    "brand": "Li Auto",
+    "models": [
+      "L7",
+      "L8",
+      "L9",
+      "One"
+    ]
+  },
+  {
+    "brand": "Lordstown Motors",
+    "models": [
+      "Endurance"
+    ]
+  },
+  {
+    "brand": "Lotus",
+    "models": [
+      "Elan",
+      "Elise",
+      "Emira",
+      "Evija",
+      "Evora",
+      "Exige"
+    ]
+  },
+  {
+    "brand": "Lucid",
+    "models": [
+      "Air",
+      "Gravity"
+    ]
+  },
+  {
+    "brand": "MG",
+    "models": [
+      "3",
+      "5",
+      "6",
+      "Astor",
+      "Cyberster",
+      "Gloster",
+      "Hector",
+      "ZS",
+      "ZS EV"
+    ]
+  },
+  {
+    "brand": "MINI",
+    "models": [
+      "Cooper",
+      "Cooper Cabrio",
+      "Cooper Clubman",
+      "Cooper D",
+      "Cooper D Clubman",
+      "Cooper S",
+      "Cooper S Cabrio",
+      "Cooper S Clubman",
+      "Countryman",
+      "Mini One",
+      "One D"
+    ]
+  },
+  {
+    "brand": "MV Agusta",
+    "models": [
+      "Brutale 1000 RR",
+      "Brutale 800",
+      "Brutale 800 RR",
+      "F3 675",
+      "F3 800",
+      "F4 1000",
+      "F4 1000 R",
+      "F4 1000 RR",
+      "Dragster 800",
+      "Dragster 800 RR",
+      "Turismo Veloce 800",
+      "Turismo Veloce 800 Lusso",
+      "Rush 1000",
+      "Reparto Corse F4",
+      "Reparto Corse Dragster",
+      "Superveloce 800",
+      "Superveloce 800 AGO"
+    ]
+  },
+  {
+    "brand": "Mahindra",
+    "models": [
+      "Bolero",
+      "KUV100",
+      "Marazzo",
+      "Scorpio",
+      "TUV300",
+      "Thar",
+      "XUV300",
+      "XUV500",
+      "XUV700"
+    ]
+  },
+  {
+    "brand": "Maserati",
+    "models": [
+      "3200 GT",
+      "4200",
+      "Ghibli",
+      "GranCabrio",
+      "GranTurismo",
+      "Levante",
+      "MC20",
+      "Quattroporte"
+    ]
+  },
+  {
+    "brand": "Maxus",
+    "models": [
+      "E Deliver 3",
+      "E Deliver 9",
+      "MIFA 9",
+      "T90 EV"
+    ]
+  },
+  {
+    "brand": "Maybach",
+    "models": [
+      "57",
+      "57S",
+      "62",
+      "62S",
+      "GLS 600",
+      "Landaulet",
+      "S480",
+      "S580",
+      "S650",
+      "S680"
+    ]
+  },
+  {
+    "brand": "Mazda",
+    "models": [
+      "121",
+      "2",
+      "3",
+      "323",
+      "323 Combi",
+      "323 Coupe",
+      "323 F",
+      "5",
+      "6",
+      "6 Combi",
+      "626",
+      "626 Combi",
+      "B-Fighter",
+      "B2500",
+      "BT",
+      "CX-3",
+      "CX-30",
+      "CX-5",
+      "CX-60",
+      "CX-7",
+      "CX-9",
+      "Demio",
+      "MPV",
+      "MX-3",
+      "MX-5",
+      "MX-6",
+      "Premacy",
+      "RX-7",
+      "RX-8",
+      "Xedox 6"
+    ]
+  },
+  {
+    "brand": "McLaren",
+    "models": [
+      "540C",
+      "570GT",
+      "570S",
+      "600LT",
+      "650S",
+      "675LT",
+      "720S",
+      "765LT",
+      "GT",
+      "P1",
+      "Senna",
+      "Speedtail"
+    ]
+  },
+  {
+    "brand": "Mercedes-Benz",
+    "models": [
+      "100 D",
+      "115",
+      "124",
+      "126",
+      "190",
+      "190 D",
+      "190 E",
+      "200 - 300",
+      "200 D",
+      "200 E",
+      "210 Van",
+      "210 kombi",
+      "230 - 300 CE Coupe",
+      "260 - 560 SE",
+      "260 - 560 SEL",
+      "310 Van",
+      "310 kombi",
+      "500 - 600 SEC Coupe",
+      "A",
+      "A L",
+      "AMG GT",
+      "C",
+      "C Sportcoupe",
+      "C T",
+      "CLA",
+      "CLC",
+      "CLK Cabrio",
+      "CLK Coupe",
+      "CLS",
+      "Citan",
+      "E",
+      "E Cabrio",
+      "E Coupe",
+      "E T",
+      "G",
+      "G Cabrio",
+      "GL",
+      "GLA",
+      "GLC",
+      "GLE",
+      "GLK",
+      "LS",
+      "LX",
+      "M",
+      "R",
+      "S",
+      "S Coupe",
+      "SC",
+      "SL",
+      "SLC",
+      "SLK",
+      "SLR",
+      "Sprinter"
+    ]
+  },
+  {
+    "brand": "Mitsubishi",
+    "models": [
+      "3000 GT",
+      "ASX",
+      "Carisma",
+      "Colt",
+      "Colt CC",
+      "Eclipse",
+      "Fuso canter",
+      "Galant",
+      "Galant Combi",
+      "Grandis",
+      "L200",
+      "L200 Pick up",
+      "L200 Pick up Allrad",
+      "L300",
+      "Lancer",
+      "Lancer Combi",
+      "Lancer Evo",
+      "Lancer Sportback",
+      "Outlander",
+      "Pajero",
+      "Pajero Pinin",
+      "Pajero Pinin Wagon",
+      "Pajero Sport",
+      "Pajero Wagon",
+      "Space Star"
+    ]
+  },
+  {
+    "brand": "NIO",
+    "models": [
+      "EC6",
+      "EP9",
+      "ES6",
+      "ES7",
+      "ES8",
+      "ES9",
+      "ET5",
+      "ET7"
+    ]
+  },
+  {
+    "brand": "Neta",
+    "models": [
+      "Neta S",
+      "Neta U",
+      "Neta V"
+    ]
+  },
+  {
+    "brand": "Neta Auto",
+    "models": [
+      "GT",
+      "N01",
+      "S",
+      "U",
+      "V",
+      "V-II",
+      "X"
+    ]
+  },
+  {
+    "brand": "Nikola",
+    "models": [
+      "Badger",
+      "Tre",
+      "Two"
+    ]
+  },
+  {
+    "brand": "Nissan",
+    "models": [
+      "100 NX",
+      "200 SX",
+      "350 Z",
+      "370 Z",
+      "Almera",
+      "Almera Tino",
+      "GT-R",
+      "Interstar",
+      "Juke",
+      "King Cab",
+      "Leaf",
+      "Maxima",
+      "Micra",
+      "Murano",
+      "NP300 Pickup",
+      "NV200",
+      "NV400",
+      "Navara",
+      "Note",
+      "Pathfinder",
+      "Patrol",
+      "Pick Up",
+      "Primastar",
+      "Primera",
+      "Pulsar",
+      "Qashqai",
+      "Serena",
+      "Terrano",
+      "Tiida",
+      "Trade",
+      "Vanette Cargo",
+      "X-Trail"
+    ]
+  },
+  {
+    "brand": "Opel",
+    "models": [
+      "Agila",
+      "Ampera",
+      "Antara",
+      "Astra",
+      "Astra Electric",
+      "Astra cabrio",
+      "Astra caravan",
+      "Astra coupe",
+      "Calibra",
+      "Campo",
+      "Cascada",
+      "Corsa",
+      "Crossland",
+      "Frontera",
+      "Grandland",
+      "Insignia",
+      "Insignia kombi",
+      "Kadett",
+      "Meriva",
+      "Mokka",
+      "Mokka-e",
+      "Movano",
+      "Omega",
+      "Signum",
+      "Vectra",
+      "Vectra Caravan",
+      "Vivaro",
+      "Vivaro Kombi",
+      "Zafira",
+      "Zafira Life"
+    ]
+  },
+  {
+    "brand": "Ora",
+    "models": [
+      "Black Cat",
+      "Good Cat",
+      "Lightning Cat",
+      "Punk Cat"
+    ]
+  },
+  {
+    "brand": "Pagani",
+    "models": [
+      "Huayra",
+      "Huayra BC",
+      "Huayra Imola",
+      "Huayra Roadster",
+      "Zonda"
+    ]
+  },
+  {
+    "brand": "Perodua",
+    "models": [
+      "Alza",
+      "Aruz",
+      "Axia",
+      "Bezza",
+      "Kelisa",
+      "Kembara",
+      "Myvi",
+      "Viva"
+    ]
+  },
+  {
+    "brand": "Peugeot",
+    "models": [
+      "1007",
+      "106",
+      "107",
+      "108",
+      "2008",
+      "205",
+      "205 Cabrio",
+      "206",
+      "206 CC",
+      "206 SW",
+      "207",
+      "207 CC",
+      "207 SW",
+      "208",
+      "3008 Hybrid",
+      "306",
+      "307",
+      "307 CC",
+      "307 SW",
+      "308",
+      "308 CC",
+      "308 Hybrid",
+      "308 SW",
+      "309",
+      "4007",
+      "4008",
+      "405",
+      "406",
+      "407",
+      "407 SW",
+      "408",
+      "5008",
+      "5008 Hybrid",
+      "508",
+      "508 PSE",
+      "508 SW",
+      "605",
+      "607",
+      "806",
+      "807",
+      "Bipper",
+      "RCZ",
+      "e-2008",
+      "e-208"
+    ]
+  },
+  {
+    "brand": "Piech Automotive",
+    "models": [
+      "GT",
+      "Mark Zero"
+    ]
+  },
+  {
+    "brand": "Polestar",
+    "models": [
+      "Polestar 1",
+      "Polestar 2",
+      "Polestar 3",
+      "Polestar 4",
+      "Polestar 5",
+      "Polestar 6"
+    ]
+  },
+  {
+    "brand": "Porsche",
+    "models": [
+      "911 Carrera",
+      "911 Carrera Cabrio",
+      "911 Targa",
+      "911 Turbo",
+      "924",
+      "944",
+      "Boxster",
+      "Cayenne",
+      "Cayman",
+      "Macan",
+      "Panamera",
+      "Taycan"
+    ]
+  },
+  {
+    "brand": "Proton",
+    "models": [
+      "Exora",
+      "Iriz",
+      "Persona",
+      "Preve",
+      "Saga",
+      "X50",
+      "X70"
+    ]
+  },
+  {
+    "brand": "Qoros",
+    "models": [
+      "Qoros 3",
+      "Qoros 9"
+    ]
+  },
+  {
+    "brand": "Ram",
+    "models": [
+      "1500",
+      "1500 TRX",
+      "2500",
+      "3500",
+      "ProMaster",
+      "ProMaster City"
+    ]
+  },
+  {
+    "brand": "Renault",
+    "models": [
+      "Arkana",
+      "Austral",
+      "Captur",
+      "Clio",
+      "Clio Grandtour",
+      "Espace",
+      "Express",
+      "Fluence",
+      "Grand Espace",
+      "Grand Modus",
+      "Grand Scenic",
+      "Kadjar",
+      "Kangoo",
+      "Kangoo Express",
+      "Kiger",
+      "Koleos",
+      "Laguna",
+      "Laguna Grandtour",
+      "Latitude",
+      "Mascott",
+      "Megane",
+      "Megane CC",
+      "Megane Combi",
+      "Megane Coupe",
+      "Megane E-Tech",
+      "Megane Grandtour",
+      "Megane Scenic",
+      "Scenic",
+      "Talisman",
+      "Talisman Grandtour",
+      "Thalia",
+      "Triber",
+      "Twingo",
+      "Wind",
+      "Zoe"
+    ]
+  },
+  {
+    "brand": "Rezvani",
+    "models": [
+      "Beast",
+      "Tank",
+      "Vengeance"
+    ]
+  },
+  {
+    "brand": "Rimac",
+    "models": [
+      "Concept One",
+      "Nevera"
+    ]
+  },
+  {
+    "brand": "Rising Auto",
+    "models": [
+      "R3",
+      "R7",
+      "R9"
+    ]
+  },
+  {
+    "brand": "Rivian",
+    "models": [
+      "R1S",
+      "R1T"
+    ]
+  },
+  {
+    "brand": "Roewe",
+    "models": [
+      "Ei5",
+      "RX5",
+      "RX6",
+      "i6"
+    ]
+  },
+  {
+    "brand": "Rolls-Royce",
+    "models": [
+      "Cullinan",
+      "Dawn",
+      "Ghost",
+      "Phantom",
+      "Wraith"
+    ]
+  },
+  {
+    "brand": "Rover",
+    "models": [
+      "200",
+      "214",
+      "218",
+      "25",
+      "400",
+      "414",
+      "416",
+      "620",
+      "75"
+    ]
+  },
+  {
+    "brand": "Saab",
+    "models": [
+      "9-3",
+      "9-3 Cabriolet",
+      "9-3 Coupe",
+      "9-3 SportCombi",
+      "9-5",
+      "9-5 SportCombi",
+      "900",
+      "900 C",
+      "900 C Turbo",
+      "9000"
+    ]
+  },
+  {
+    "brand": "Seat",
+    "models": [
+      "Alhambra",
+      "Altea",
+      "Altea XL",
+      "Arona",
+      "Arosa",
+      "Ateca",
+      "Cordoba",
+      "Cordoba Vario",
+      "Exeo",
+      "Exeo ST",
+      "Ibiza",
+      "Ibiza ST",
+      "Inca",
+      "Leon",
+      "Leon ST",
+      "Mii",
+      "Tarraco",
+      "Toledo"
+    ]
+  },
+  {
+    "brand": "Seres",
+    "models": [
+      "3",
+      "5",
+      "7"
+    ]
+  },
+  {
+    "brand": "Singulato",
+    "models": [
+      "iS6",
+      "iS7"
+    ]
+  },
+  {
+    "brand": "Skoda",
+    "models": [
+      "Citigo",
+      "Enyaq",
+      "Fabia",
+      "Fabia Combi",
+      "Fabia Sedan",
+      "Favorit",
+      "Felicia",
+      "Karoq",
+      "Kodiaq",
+      "Octavia",
+      "Octavia Combi",
+      "Roomster",
+      "Superb",
+      "Superb Combi"
+    ]
+  },
+  {
+    "brand": "Skywell",
+    "models": [
+      "ET5"
+    ]
+  },
+  {
+    "brand": "Smart",
+    "models": [
+      "Cabrio",
+      "City-Coupe",
+      "Compact Pulse",
+      "Forfour",
+      "Fortwo cabrio",
+      "Fortwo coupe",
+      "Roadster"
+    ]
+  },
+  {
+    "brand": "Subaru",
+    "models": [
+      "BRZ",
+      "Forester",
+      "Impreza",
+      "Impreza Wagon",
+      "Justy",
+      "Legacy",
+      "Legacy Outback",
+      "Levorg",
+      "Outback",
+      "SVX",
+      "Tribeca",
+      "Tribeca B9",
+      "WRX",
+      "WRX STI",
+      "XV"
+    ]
+  },
+  {
+    "brand": "Suzuki",
+    "models": [
+      "Alto",
+      "Baleno",
+      "Baleno kombi",
+      "Celerio",
+      "Ertiga",
+      "Grand Vitara",
+      "Grand Vitara XL-7",
+      "Ignis",
+      "Jimny",
+      "Kizashi",
+      "Liana",
+      "S-Cross",
+      "SX4",
+      "SX4 Sedan",
+      "Samurai",
+      "Splash",
+      "Swift",
+      "Vitara",
+      "Wagon R+"
+    ]
+  },
+  {
+    "brand": "Suzuki Cycles",
+    "models": [
+      "V-Strom 250",
+      "V-Strom 650",
+      "V-Strom 1050",
+      "GSX-R1000",
+      "GSX-R750",
+      "GSX-S1000",
+      "GSX-S750",
+      "SV650",
+      "SV650X",
+      "Boulevard M109R",
+      "Boulevard C50",
+      "Boulevard C50T",
+      "Boulevard S40",
+      "Hayabusa",
+      "DR-Z400S",
+      "DR-Z400SM",
+      "RM-Z250",
+      "RM-Z450",
+      "KingQuad 400FSi",
+      "KingQuad 750AXi"
+    ]
+  },
+  {
+    "brand": "Tata Motors",
+    "models": [
+      "Altroz",
+      "Harrier",
+      "Hexa",
+      "Nexon",
+      "Punch",
+      "Safari",
+      "Tiago",
+      "Tigor",
+      "Zest"
+    ]
+  },
+  {
+    "brand": "Tesla",
+    "models": [
+      "Cybertruck",
+      "Model 3",
+      "Model S",
+      "Model X",
+      "Model Y",
+      "Roadster"
+    ]
+  },
+  {
+    "brand": "Thunder Power",
+    "models": [
+      "SUV",
+      "Sedan"
+    ]
+  },
+  {
+    "brand": "Toyota",
+    "models": [
+      "4-Runner",
+      "Auris",
+      "Avensis",
+      "Avensis Combi",
+      "Avensis Van Verso",
+      "Aygo",
+      "Camry",
+      "Carina",
+      "Celica",
+      "Corolla",
+      "Corolla Combi",
+      "Corolla Verso",
+      "Corolla sedan",
+      "FJ Cruiser",
+      "GT86",
+      "Hiace",
+      "Hiace Van",
+      "Highlander",
+      "Hilux",
+      "Land Cruiser",
+      "MR2",
+      "Paseo",
+      "Picnic",
+      "Prius",
+      "RAV4",
+      "Sequoia",
+      "Starlet",
+      "Supra",
+      "Tundra",
+      "Urban Cruiser",
+      "Verso",
+      "Yaris",
+      "Yaris Cross",
+      "Yaris Verso"
+    ]
+  },
+  {
+    "brand": "Triumph",
+    "models": [
+      "Bonneville Bobber",
+      "Bonneville T100",
+      "Bonneville T120",
+      "Daytona Moto2 765",
+      "Rocket 3 R",
+      "Scrambler 1200 XC",
+      "Scrambler 900",
+      "Speed Triple 1200 RS",
+      "Speed Twin",
+      "Speedmaster",
+      "Street Cup",
+      "Street Twin",
+      "Street Triple RS",
+      "Thruxton RS",
+      "Tiger 1200",
+      "Tiger 850 Sport",
+      "Tiger Explorer",
+      "Tiger 900",
+      "Trident 660",
+      "Thunderbird X"
+    ]
+  },
+  {
+    "brand": "Trumpchi",
+    "models": [
+      "ES6",
+      "GE3",
+      "GE3 Plus",
+      "GS4",
+      "GS8"
+    ]
+  },
+  {
+    "brand": "VinFast",
+    "models": [
+      "VF 5",
+      "VF 6",
+      "VF 7",
+      "VF 8",
+      "VF 9"
+    ]
+  },
+  {
+    "brand": "Volkswagen",
+    "models": [
+      "Amarok",
+      "Beetle",
+      "Bora",
+      "Bora Variant",
+      "CC",
+      "Caddy",
+      "Caddy Van",
+      "California",
+      "Caravelle",
+      "Crafter",
+      "Crafter Kombi",
+      "Crafter Van",
+      "CrossTouran",
+      "Eos",
+      "Fox",
+      "Golf",
+      "Golf Cabrio",
+      "Golf Plus",
+      "Golf Sportvan",
+      "Golf Variant",
+      "ID. Buzz",
+      "ID.3",
+      "ID.4",
+      "ID.5",
+      "Jetta",
+      "LT",
+      "Lupo",
+      "Multivan",
+      "New Beetle",
+      "New Beetle Cabrio",
+      "Passat",
+      "Passat Alltrack",
+      "Passat CC",
+      "Passat Variant",
+      "Passat Variant Van",
+      "Phaeton",
+      "Polo",
+      "Polo Van",
+      "Polo Variant",
+      "Scirocco",
+      "Sharan",
+      "T4",
+      "T4 Caravelle",
+      "T4 Multivan",
+      "T5",
+      "Tera",
+      "Tiguan",
+      "Touareg",
+      "Touran"
+    ]
+  },
+  {
+    "brand": "Volvo",
+    "models": [
+      "240",
+      "340",
+      "360",
+      "460",
+      "850",
+      "850 kombi",
+      "C30",
+      "C70",
+      "C70 Cabrio",
+      "C70 Coupe",
+      "S40",
+      "S60",
+      "S70",
+      "S80",
+      "S90",
+      "V40",
+      "V50",
+      "V60",
+      "V70",
+      "V90",
+      "XC40",
+      "XC60",
+      "XC70",
+      "XC90"
+    ]
+  },
+  {
+    "brand": "Voyah",
+    "models": [
+      "Dreamer",
+      "Free",
+      "Passion",
+      "Pro"
+    ]
+  },
+  {
+    "brand": "Weltmeister",
+    "models": [
+      "E5",
+      "EX5",
+      "EX6 Plus",
+      "W6"
+    ]
+  },
+  {
+    "brand": "Wuling",
+    "models": [
+      "Air EV",
+      "Almaz",
+      "Alvez",
+      "Cortez",
+      "Hongguang Mini EV",
+      "Victory"
+    ]
+  },
+  {
+    "brand": "XPeng",
+    "models": [
+      "G3",
+      "G6",
+      "P5",
+      "P7",
+      "P9",
+      "X9"
+    ]
+  },
+  {
+    "brand": "Xiaomi",
+    "models": [
+      "Kunlun",
+      "MS11",
+      "MS12",
+      "MX11",
+      "SU7"
+    ]
+  },
+  {
+    "brand": "Yamaha",
+    "models": [
+      "MT-10",
+      "MT-10 SP",
+      "MT-125",
+      "MT-03",
+      "MT-07",
+      "MT-09",
+      "MT-09 SP",
+      "MT-09 Y-AMT",
+      "NIKEN GT",
+      "Tenere 700",
+      "Tracer 7",
+      "Tracer 9",
+      "Tracer 9 GT",
+      "Tracer 9 GT+",
+      "YZF-R1",
+      "YZF-R1M",
+      "YZF-R125",
+      "YZF-R3",
+      "YZF-R6",
+      "YZF-R7"
+    ]
+  },
+  {
+    "brand": "Zeekr",
+    "models": [
+      "001",
+      "003",
+      "009"
+    ]
+  },
+  {
+    "brand": "Zotye",
+    "models": [
+      "T300",
+      "T500",
+      "T600",
+      "T700",
+      "T800",
+      "Z100",
+      "Z500"
+    ]
+  }
+]

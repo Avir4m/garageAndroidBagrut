@@ -11,83 +11,67 @@
         android:textAlignment="center"
         android:layout_gravity="center"
         android:textSize="24sp"
-        android:text="Add your vehicle to your profile"
-        android:layout_marginBottom="32dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:text="Vehicle make" />
-
-    <AutoCompleteTextView
-        android:id="@+id/vehicleMake"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dropDownWidth="wrap_content"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_edit_text"
-        android:hint="Vehicle make"
-        android:inputType="text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:text="Vehicle model " />
-
-    <AutoCompleteTextView
-        android:id="@+id/vehicleModel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dropDownWidth="wrap_content"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_edit_text"
-        android:hint="Vehicle Model"
-        android:inputType="text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:text="Vehicle year" />
-
-    <EditText
-        android:id="@+id/vehicleYear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_edit_text"
-        android:hint="Vehicle year"
-        android:inputType="number" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:text="Vehicle type" />
-
-    <Spinner
-        android:id="@+id/vehicleTypeSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
-        android:paddingHorizontal="16dp"
+        android:text="Create an event"
         android:layout_marginBottom="32dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Event Title" />
+
+    <EditText
+        android:id="@+id/eventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Event title"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Event Location" />
+
+    <EditText
+        android:id="@+id/eventLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Event Location"
+        android:inputType="text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Event Date" />
+
+    <EditText
+        android:id="@+id/eventDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_edit_text"
+        android:hint="Event Date and Time"
+        android:inputType="none" />
+
+
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/createButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:text="Add" />
+        android:text="Create" />
 
     <Button
         android:id="@+id/cancelButton"

@@ -13,3 +13,10 @@ Garage is a social platform designed for vehicle and motorcycle enthusiasts. It 
 ## Technologies Used
 - [**Android Studio**](https://developer.android.com/studio) & [**Java**](https://www.java.com)
 - [**Firebase**](https://firebase.google.com) (Authentication, Database, Cloud Storage)
+
+# Thanks to:
+
+- [getFrontend](https://github.com/getFrontend) for
+  this [car list](https://github.com/getFrontend/json-car-list)
+- [Luca Pasquale](https://github.com/lucapsq) for
+  this [motorcycle list](https://github.com/lucapsq/motorcycle-logos-dataset)

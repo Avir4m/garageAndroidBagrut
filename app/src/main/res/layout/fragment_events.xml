@@ -6,6 +6,19 @@
     android:orientation="vertical"
     >
 
-    <include layout="@layout/event_item"/>
+    <TextView
+        android:id="@+id/loading_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Loading..."
+        android:textSize="24sp"
+        android:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/eventsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/gray"
         android:layout_margin="8dp"
-        android:text="Join" />
+        android:text="Roll Up" />
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
