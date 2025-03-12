@@ -2,7 +2,6 @@ package com.example.garage;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +33,9 @@ import com.google.firebase.firestore.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class user extends Fragment implements View.OnClickListener {
+public class user extends Fragment {
 
-    FirebaseAuth auth;
-    TextView screenTitle;
+    TextView screenTitle, noVehiclesText, noPostsText, displayName, vehiclesCount, followersCount;
     ImageButton settingsBtn, backBtn, chatBtn, addBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
@@ -61,39 +59,46 @@ public class user extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
 
         screenTitle = getActivity().findViewById(R.id.screenTitle);
-
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
-
         editProfileBtn = view.findViewById(R.id.editProfileBtn);
         followBtn = view.findViewById(R.id.followBtn);
         messageBtn = view.findViewById(R.id.messageBtn);
-
         addVehicleBtn = view.findViewById(R.id.addVehicleBtn);
-        addVehicleBtn.setOnClickListener(this);
-
+        addVehicleBtn.setOnClickListener(v -> {
+            AddVehicleDialog addVehicleDialog = new AddVehicleDialog();
+            addVehicleDialog.show(getParentFragmentManager(), "AddVehicleDialog");
+        });
         profileBtns = view.findViewById(R.id.profileBtns);
         ownProfileBtns = view.findViewById(R.id.ownProfileBtns);
-
         backBtn = getActivity().findViewById(R.id.backBtn);
-
-
+        noVehiclesText = view.findViewById(R.id.noVehiclesText);
+        noPostsText = view.findViewById(R.id.noPostsText);
         addBtn = getActivity().findViewById(R.id.addBtn);
         addBtn.setVisibility(View.GONE);
+        displayName = view.findViewById(R.id.displayName);
+        vehiclesCount = view.findViewById(R.id.vehiclesCount);
+        followersCount = view.findViewById(R.id.followersCount);
 
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
         if (getArguments() != null) {
             userId = getArguments().getString("userId");
             backBtn.setVisibility(View.VISIBLE);
-            backBtn.setOnClickListener(this);
+            backBtn.setOnClickListener(v -> getParentFragmentManager().popBackStack());
         } else {
             userId = auth.getCurrentUser().getUid();
-            settingsBtn.setOnClickListener(this);
             settingsBtn.setVisibility(View.VISIBLE);
+            settingsBtn.setOnClickListener(v -> {
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame, new settings());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            });
             backBtn.setVisibility(View.GONE);
         }
+
+        followBtn.setOnClickListener(v -> follow(userId));
 
         if (userId.equals(auth.getCurrentUser().getUid())) {
             ownProfileBtns.setVisibility(View.VISIBLE);
@@ -108,17 +113,16 @@ public class user extends Fragment implements View.OnClickListener {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    screenTitle.setText(document.getString("name"));
-
+                    String name = document.getString("name");
+                    screenTitle.setText(name);
+                    displayName.setText(name);
                 } else {
                     Toast.makeText(getActivity(), "No such user", Toast.LENGTH_SHORT).show();
                     screenTitle.setText("NoUserDocument");
-                    Log.d("Firestore", "No such user document");
                 }
             } else {
                 Toast.makeText(getActivity(), "Error getting user", Toast.LENGTH_SHORT).show();
                 screenTitle.setText("NoUserDocument");
-                Log.d("Firestore", "Error getting user document: ", task.getException());
             }
         });
 
@@ -148,7 +152,6 @@ public class user extends Fragment implements View.OnClickListener {
         postRecyclerView.setAdapter(postAdapter);
 
         loadPosts(userId);
-
 
         tabLayout = view.findViewById(R.id.userTabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -184,6 +187,10 @@ public class user extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    private void follow(String userId) {
+
+    }
+
     private void loadGarage(String userId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -193,16 +200,19 @@ public class user extends Fragment implements View.OnClickListener {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     vehicleList.clear();
 
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        noVehiclesText.setVisibility(View.GONE);
+                        vehiclesCount.setText(Integer.toString(queryDocumentSnapshots.size()));
+                    }
+
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         Vehicle vehicle = doc.toObject(Vehicle.class);
                         vehicleList.add(vehicle);
                     }
 
                     garageAdapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(getContext(), "Failed to load vehicles", Toast.LENGTH_SHORT).show()
-                );
+
+                }).addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to load vehicles", Toast.LENGTH_SHORT).show());
     }
 
 
@@ -216,6 +226,10 @@ public class user extends Fragment implements View.OnClickListener {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     postList.clear();
 
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        noPostsText.setVisibility(View.GONE);
+                    }
+
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         String postId = doc.getId();
                         Post post = doc.toObject(Post.class);
@@ -224,28 +238,7 @@ public class user extends Fragment implements View.OnClickListener {
                     }
 
                     postAdapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show();
-                    Log.d("Firestore", "Error getting posts: ", e);
-                });
-    }
 
-
-    @Override
-    public void onClick(View view) {
-        if (view == settingsBtn) {
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, new settings());
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
-        if (view == backBtn) {
-            getParentFragmentManager().popBackStack();
-        }
-        if (view == addVehicleBtn) {
-            AddVehicleDialog addVehicleDialog = new AddVehicleDialog();
-            addVehicleDialog.show(getParentFragmentManager(), "AddVehicleDialog");
-        }
+                }).addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show());
     }
 }

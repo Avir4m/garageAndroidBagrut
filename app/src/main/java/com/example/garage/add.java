@@ -37,6 +37,15 @@ public class add extends Fragment {
 
     Button pickImageBtn, submitBtn;
     ImageView imagePreview;
+    private final ActivityResultLauncher<Intent> imagePickerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Uri selectedImageUri = result.getData().getData();
+                    imagePreview.setImageURI(selectedImageUri);
+                    imagePreview.setVisibility(View.VISIBLE);
+                    imageSelected = true;
+                }
+            });
     EditText titleInput;
     FirebaseAuth auth;
     TextView screenTitle;
@@ -87,16 +96,6 @@ public class add extends Fragment {
 
         imagePickerLauncher.launch(intent);
     }
-
-    private final ActivityResultLauncher<Intent> imagePickerLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Uri selectedImageUri = result.getData().getData();
-                    imagePreview.setImageURI(selectedImageUri);
-                    imagePreview.setVisibility(View.VISIBLE);
-                    imageSelected = true;
-                }
-            });
 
     private void addPostToFirestore() {
         String title = titleInput.getText().toString();

@@ -3,23 +3,19 @@
 
     <item
         android:id="@+id/homeBtn"
-        android:title="Home"
         android:icon="@drawable/home"
-        />
+        android:title="Home" />
     <item
         android:id="@+id/eventsBtn"
-        android:title="Events"
         android:icon="@drawable/calander"
-        />
+        android:title="Events" />
     <item
         android:id="@+id/addBtn"
-        android:title="Add"
         android:icon="@drawable/add"
-        />
+        android:title="Add" />
     <item
         android:id="@+id/userBtn"
-        android:title="User"
         android:icon="@drawable/user"
-        />
+        android:title="User" />
 </menu>
 

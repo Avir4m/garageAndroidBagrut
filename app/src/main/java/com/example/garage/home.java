@@ -33,7 +33,6 @@ public class home extends Fragment implements View.OnClickListener {
 
     private HomePostAdapter postAdapter;
     private List<Post> postList = new ArrayList<>();
-    ;
 
     public home() {
     }

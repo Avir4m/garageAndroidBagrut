@@ -2,8 +2,8 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/dialog_background"
+    android:orientation="vertical"
     android:padding="32dp">
 
     <Button
@@ -11,15 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Edit"
-        android:backgroundTint="@color/gray" />
+        android:backgroundTint="@color/gray"
+        android:text="Edit" />
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Delete"
-        android:backgroundTint="@color/red" />
+        android:backgroundTint="@color/red"
+        android:text="Delete" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

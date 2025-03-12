@@ -8,12 +8,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_gravity="center"
-        android:textSize="24sp"
-        android:text="Add your vehicle to your profile"
         android:layout_marginBottom="32dp"
-        />
+        android:text="Add your vehicle to your profile"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,13 +24,13 @@
         android:id="@+id/vehicleMake"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:dropDownWidth="wrap_content"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
+        android:dropDownWidth="wrap_content"
         android:hint="Vehicle make"
-        android:inputType="text" />
+        android:inputType="text"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,13 +42,13 @@
         android:id="@+id/vehicleModel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:dropDownWidth="wrap_content"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
+        android:dropDownWidth="wrap_content"
         android:hint="Vehicle Model"
-        android:inputType="text" />
+        android:inputType="text"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,12 +60,12 @@
         android:id="@+id/vehicleYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
         android:hint="Vehicle year"
-        android:inputType="number" />
+        android:inputType="number"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,9 +77,9 @@
         android:id="@+id/vehicleTypeSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/rounded_edit_text"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="32dp" />
+        android:paddingHorizontal="16dp" />
 
     <Button
         android:id="@+id/addButton"

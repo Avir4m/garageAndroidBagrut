@@ -1,9 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
     <style name="Base.Theme.MyApp" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/gray</item>
         <item name="android:windowBackground">@color/white</item>
     </style>
+
     <style name="Theme.MyApp" parent="Base.Theme.MyApp" />
+
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@color/bottom_nav_color_selector</item>
         <item name="itemTextColor">@color/bottom_nav_color_selector</item>
