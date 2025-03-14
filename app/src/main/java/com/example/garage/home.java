@@ -1,7 +1,6 @@
 package com.example.garage;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +23,10 @@ import com.google.firebase.firestore.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class home extends Fragment implements View.OnClickListener {
+public class home extends Fragment {
 
     TextView screenTitle, loadingText;
-    ImageButton chatBtn, backBtn, settingsBtn, addBtn;
+    ImageButton backBtn, settingsBtn, addBtn;
     BottomNavigationView navbar;
     RecyclerView recyclerView;
 
@@ -52,10 +51,6 @@ public class home extends Fragment implements View.OnClickListener {
         screenTitle = getActivity().findViewById(R.id.screenTitle);
         screenTitle.setText("Home");
 
-        chatBtn = getActivity().findViewById(R.id.chatBtn);
-        chatBtn.setOnClickListener(this);
-        chatBtn.setVisibility(View.VISIBLE);
-
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
         settingsBtn.setVisibility(View.GONE);
 
@@ -63,7 +58,10 @@ public class home extends Fragment implements View.OnClickListener {
         backBtn.setVisibility(View.GONE);
 
         addBtn = getActivity().findViewById(R.id.addBtn);
-        addBtn.setVisibility(View.GONE);
+        addBtn.setVisibility(View.VISIBLE);
+        addBtn.setOnClickListener(v -> {
+            getParentFragmentManager().beginTransaction().replace(R.id.frame, new add()).addToBackStack(null).commit();
+        });
 
         loadingText = view.findViewById(R.id.loading_text);
 
@@ -101,10 +99,7 @@ public class home extends Fragment implements View.OnClickListener {
                     postAdapter.notifyDataSetChanged();
 
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show();
-                    Log.d("Firestore", "Error getting posts: ", e);
-                });
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show());
     }
 
     private void navigateToUserProfile(String userId) {
@@ -117,15 +112,5 @@ public class home extends Fragment implements View.OnClickListener {
         transaction.replace(R.id.frame, userProfileFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view == chatBtn) {
-            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame, new chat());
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
     }
 }

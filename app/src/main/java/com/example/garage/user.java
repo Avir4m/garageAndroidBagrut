@@ -23,6 +23,7 @@ import com.example.garage.dialogs.AddVehicleDialog;
 import com.example.garage.models.Post;
 import com.example.garage.models.Vehicle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -36,7 +37,7 @@ import java.util.List;
 public class user extends Fragment {
 
     TextView screenTitle, noVehiclesText, noPostsText, displayName, vehiclesCount, followersCount;
-    ImageButton settingsBtn, backBtn, chatBtn, addBtn;
+    ImageButton settingsBtn, backBtn, addBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
     LinearLayout postsContainer, garageContainer, ownProfileBtns, profileBtns;
@@ -126,9 +127,6 @@ public class user extends Fragment {
             }
         });
 
-        chatBtn = getActivity().findViewById(R.id.chatBtn);
-        chatBtn.setVisibility(View.GONE);
-
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.VISIBLE);
 
@@ -163,13 +161,11 @@ public class user extends Fragment {
                 if (selectedTab.equals("Posts")) {
                     postsContainer.setVisibility(View.VISIBLE);
                     garageContainer.setVisibility(View.GONE);
-                    loadPosts(userId);
                 }
 
                 if (selectedTab.equals("Garage")) {
                     postsContainer.setVisibility(View.GONE);
                     garageContainer.setVisibility(View.VISIBLE);
-                    loadGarage(userId);
                 }
 
             }
