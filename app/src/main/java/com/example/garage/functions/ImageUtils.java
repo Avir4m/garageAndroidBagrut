@@ -3,10 +3,10 @@ package com.example.garage.functions;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -21,10 +21,12 @@ public class ImageUtils {
         String base64Image = convertImageToBase64(resizedBitmap);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         CollectionReference imagesRef = db.collection("images");
 
         Map<String, String> imageData = new HashMap<>();
         imageData.put("imageData", base64Image);
+        imageData.put("authorId", auth.getCurrentUser().getUid());
 
         return imagesRef.add(imageData)
                 .continueWith(task -> {
@@ -47,16 +49,19 @@ public class ImageUtils {
                         Bitmap bitmap = decodeBase64ToBitmap(base64ImageData);
                         taskCompletionSource.setResult(bitmap);
                     } else {
-                        Log.d("Firestore", "No such document!");
                         taskCompletionSource.setResult(null);
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Log.d("Firestore", "Error retrieving image: ", e);
                     taskCompletionSource.setException(e);
                 });
 
         return taskCompletionSource.getTask();
+    }
+
+    public static Task<Void> deleteImageFromFirebase(String imageId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        return db.collection("images").document(imageId).delete();
     }
 
     private static Bitmap resizeImage(Bitmap original, int maxWidth, int maxHeight) {

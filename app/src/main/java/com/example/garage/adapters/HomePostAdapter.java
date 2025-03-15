@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.R;
-import com.example.garage.dialogs.PostDialog;
+import com.example.garage.dialogs.PostAuthorDialog;
 import com.example.garage.functions.postInteractions;
 import com.example.garage.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,8 +72,8 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
         }
 
         holder.dotsButton.setOnClickListener(v -> {
-            PostDialog postDialog = PostDialog.newInstance(post.getPostId());
-            postDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
+            PostAuthorDialog postAuthorDialog = PostAuthorDialog.newInstance(post.getPostId());
+            postAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
         });
 
 

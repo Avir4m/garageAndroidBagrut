@@ -1,5 +1,7 @@
 package com.example.garage.dialogs;
 
+import static com.example.garage.functions.ImageUtils.deleteImageFromFirebase;
+
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,16 +17,16 @@ import androidx.fragment.app.DialogFragment;
 import com.example.garage.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class PostDialog extends DialogFragment {
+public class PostAuthorDialog extends DialogFragment {
 
     private String postId;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public PostDialog() {
+    public PostAuthorDialog() {
     }
 
-    public static PostDialog newInstance(String postId) {
-        PostDialog dialog = new PostDialog();
+    public static PostAuthorDialog newInstance(String postId) {
+        PostAuthorDialog dialog = new PostAuthorDialog();
         Bundle args = new Bundle();
         args.putString("postId", postId);
         dialog.setArguments(args);
@@ -50,15 +52,25 @@ public class PostDialog extends DialogFragment {
         }
 
         Button deleteButton = view.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(v ->
-                db.collection("posts").document(postId).delete().addOnSuccessListener(aVoid -> {
-                            Toast.makeText(getContext(), "Post deleted successfully", Toast.LENGTH_SHORT).show();
-                            dismiss();
+        deleteButton.setOnClickListener(v -> {
+            db.collection("posts").document(postId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String imageId = documentSnapshot.getString("imageId");
+
+                            db.collection("posts").document(postId).delete()
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(getContext(), "Post deleted successfully", Toast.LENGTH_SHORT).show();
+                                        dismiss();
+
+                                        if (imageId != null) {
+                                            deleteImageFromFirebase(imageId);
+                                        }
+                                    });
                         }
-                ).addOnFailureListener(aVoid -> {
-                    Toast.makeText(getContext(), "Error deleting post", Toast.LENGTH_SHORT).show();
-                    dismiss();
-                }));
+                    });
+        });
+
 
         return view;
     }
