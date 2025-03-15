@@ -27,7 +27,7 @@ public class events extends Fragment {
 
     TextView screenTitle, loadingText;
     BottomNavigationView navbar;
-    ImageButton chatBtn, backBtn, settingsBtn, addBtn;
+    ImageButton backBtn, settingsBtn, addBtn;
     RecyclerView recyclerView;
 
     private EventAdapter eventAdapter;
@@ -45,9 +45,6 @@ public class events extends Fragment {
 
         navbar = getActivity().findViewById(R.id.bottomNav);
         navbar.setVisibility(View.VISIBLE);
-
-        chatBtn = getActivity().findViewById(R.id.chatBtn);
-        chatBtn.setVisibility(View.GONE);
 
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
         settingsBtn.setVisibility(View.GONE);

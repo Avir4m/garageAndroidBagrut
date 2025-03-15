@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (item.getItemId() == R.id.eventsBtn) {
             fragment = new events();
         }
-        if (item.getItemId() == R.id.addBtn) {
-            fragment = new add();
+        if (item.getItemId() == R.id.exploerBtn) {
+            fragment = new search();
         }
         if (item.getItemId() == R.id.userBtn) {
             fragment = new user();

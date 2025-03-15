@@ -49,8 +49,7 @@ public class add extends Fragment {
     EditText titleInput;
     FirebaseAuth auth;
     TextView screenTitle;
-    ImageButton chatBtn, backBtn, settingsBtn, addBtn;
-    private Uri imageUri;
+    ImageButton backBtn, settingsBtn, addBtn;
 
     public add() {
     }
@@ -62,9 +61,6 @@ public class add extends Fragment {
         screenTitle = getActivity().findViewById(R.id.screenTitle);
         screenTitle.setText("Add");
 
-        chatBtn = getActivity().findViewById(R.id.chatBtn);
-        chatBtn.setVisibility(View.GONE);
-
         addBtn = getActivity().findViewById(R.id.addBtn);
         addBtn.setVisibility(View.GONE);
 
@@ -72,7 +68,8 @@ public class add extends Fragment {
         settingsBtn.setVisibility(View.GONE);
 
         backBtn = getActivity().findViewById(R.id.backBtn);
-        backBtn.setVisibility(View.GONE);
+        backBtn.setVisibility(View.VISIBLE);
+        backBtn.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
         pickImageBtn = view.findViewById(R.id.pickImage);
         pickImageBtn.setOnClickListener(v -> openSystemImagePicker());
