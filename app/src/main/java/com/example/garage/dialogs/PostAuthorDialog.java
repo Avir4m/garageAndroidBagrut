@@ -2,8 +2,6 @@ package com.example.garage.dialogs;
 
 import static com.example.garage.functions.ImageUtils.deleteImageFromFirebase;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +10,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import com.example.garage.R;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class PostAuthorDialog extends DialogFragment {
+public class PostAuthorDialog extends BottomSheetDialogFragment {
 
     private String postId;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,12 +42,6 @@ public class PostAuthorDialog extends DialogFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.post_dialog, container, false);
-
-        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        if (getDialog() != null && getDialog().getWindow() != null) {
-            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        }
 
         Button deleteButton = view.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(v -> {
