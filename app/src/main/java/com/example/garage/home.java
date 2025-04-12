@@ -60,7 +60,7 @@ public class home extends Fragment {
         addBtn = getActivity().findViewById(R.id.addBtn);
         addBtn.setVisibility(View.VISIBLE);
         addBtn.setOnClickListener(v -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.frame, new add()).addToBackStack(null).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.frame, new addPost()).addToBackStack(null).commit();
         });
 
         loadingText = view.findViewById(R.id.loading_text);
@@ -82,6 +82,7 @@ public class home extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("posts")
+                .whereEqualTo("archived", false)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {

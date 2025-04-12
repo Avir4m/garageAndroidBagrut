@@ -23,7 +23,6 @@ import com.example.garage.dialogs.AddVehicleDialog;
 import com.example.garage.models.Post;
 import com.example.garage.models.Vehicle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -217,6 +216,7 @@ public class user extends Fragment {
 
         db.collection("posts")
                 .whereEqualTo("authorId", userId)
+                .whereEqualTo("archived", false)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {

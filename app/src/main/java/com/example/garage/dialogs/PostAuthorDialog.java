@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.garage.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PostAuthorDialog extends BottomSheetDialogFragment {
@@ -41,29 +42,72 @@ public class PostAuthorDialog extends BottomSheetDialogFragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.post_dialog, container, false);
+        View view = inflater.inflate(R.layout.post_dialog_author, container, false);
 
         Button deleteButton = view.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(v -> {
-            db.collection("posts").document(postId).get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.exists()) {
-                            String imageId = documentSnapshot.getString("imageId");
+        deleteButton.setOnClickListener(v -> deleteBtn());
 
-                            db.collection("posts").document(postId).delete()
-                                    .addOnSuccessListener(aVoid -> {
-                                        Toast.makeText(getContext(), "Post deleted successfully", Toast.LENGTH_SHORT).show();
-                                        dismiss();
+        Button archiveButton = view.findViewById(R.id.archiveButton);
+        archiveButton.setOnClickListener(v -> archiveBtn());
 
-                                        if (imageId != null) {
-                                            deleteImageFromFirebase(imageId);
-                                        }
-                                    });
-                        }
-                    });
+        db.collection("posts").document(postId).get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                Boolean archived = documentSnapshot.getBoolean("archived");
+                if (archived != null && archived) {
+                    archiveButton.setText("Unarchive");
+                } else {
+                    archiveButton.setText("Archive");
+                }
+            }
         });
 
 
         return view;
+    }
+
+    public void editBtn() {
+
+    }
+
+    public void archiveBtn() {
+        DocumentReference docRef = db.collection("posts").document(postId);
+
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                boolean archived = Boolean.TRUE.equals(documentSnapshot.getBoolean("archived"));
+                docRef.update("archived", !archived)
+                        .addOnSuccessListener(aVoid -> {
+                            if (archived) {
+                                Toast.makeText(getContext(), "Post archived successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Post unarchived successfully", Toast.LENGTH_SHORT).show();
+                            }
+                            dismiss();
+                        }).addOnFailureListener(e -> Toast.makeText(getContext(), "An error has occurred", Toast.LENGTH_SHORT).show());
+            }
+        });
+    }
+
+    public void deleteBtn() {
+        db.collection("posts").document(postId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String imageId = documentSnapshot.getString("imageId");
+
+                        db.collection("posts").document(postId).delete()
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(getContext(), "Post deleted successfully", Toast.LENGTH_SHORT).show();
+                                    dismiss();
+
+                                    if (imageId != null) {
+                                        deleteImageFromFirebase(imageId);
+                                    }
+                                }).addOnFailureListener(e -> {
+                                    Toast.makeText(getContext(), "An error has occurred", Toast.LENGTH_SHORT).show();
+                                    dismiss();
+                                });
+                        ;
+                    }
+                });
     }
 }

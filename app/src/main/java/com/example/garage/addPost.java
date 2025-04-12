@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class add extends Fragment {
+public class addPost extends Fragment {
 
     boolean imageSelected = false;
 
@@ -51,7 +51,7 @@ public class add extends Fragment {
     TextView screenTitle;
     ImageButton backBtn, settingsBtn, addBtn;
 
-    public add() {
+    public addPost() {
     }
 
     @Override
@@ -115,6 +115,7 @@ public class add extends Fragment {
         post.put("timestamp", Timestamp.now());
         post.put("title", title);
         post.put("imageId", null);
+        post.put("archived", false);
 
         if (imageSelected) {
             uploadImageToFirestore(((BitmapDrawable) imagePreview.getDrawable()).getBitmap()).addOnSuccessListener(docId -> {

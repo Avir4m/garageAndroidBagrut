@@ -13,11 +13,12 @@ public class Post {
     private List<String> likes;
     private int likeCount;
     private String imageId;
+    private boolean archived;
 
     public Post() {
     }
 
-    public Post(String postId, String title, String author, String authorId, Timestamp timestamp, List<String> likes, int likeCount, String imageId) {
+    public Post(String postId, String title, String author, String authorId, Timestamp timestamp, List<String> likes, int likeCount, String imageId, boolean archived) {
         this.postId = postId;
         this.title = title;
         this.author = author;
@@ -26,6 +27,7 @@ public class Post {
         this.likes = likes;
         this.likeCount = likeCount;
         this.imageId = imageId;
+        this.archived = archived;
     }
 
     public String getPostId() {
@@ -90,5 +92,13 @@ public class Post {
 
     public void setImageId(String imageId) {
         this.imageId = imageId;
+    }
+
+    public boolean getArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }

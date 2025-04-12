@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.R;
 import com.example.garage.dialogs.PostAuthorDialog;
+import com.example.garage.dialogs.PostDialog;
 import com.example.garage.functions.postInteractions;
 import com.example.garage.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,13 +68,14 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
         holder.likeButton.setOnClickListener(v -> postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount));
         holder.saveButton.setOnClickListener(v -> postInteractions.toggleSavePost(post.getPostId(), holder.saveButton));
 
-        if (!Objects.equals(post.getAuthorId(), currentUserId)) {
-            holder.dotsButton.setVisibility(View.GONE);
-        }
-
         holder.dotsButton.setOnClickListener(v -> {
-            PostAuthorDialog postAuthorDialog = PostAuthorDialog.newInstance(post.getPostId());
-            postAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
+            if (Objects.equals(post.getAuthorId(), currentUserId)) {
+                PostAuthorDialog postAuthorDialog = PostAuthorDialog.newInstance(post.getPostId());
+                postAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostAuthorDialog");
+            } else {
+                PostDialog postDialog = PostDialog.newInstance(post.getPostId());
+                postDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
+            }
         });
 
 
