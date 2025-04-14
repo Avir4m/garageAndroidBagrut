@@ -33,7 +33,7 @@
         android:layout_height="72dp" />
 
     <EditText
-        android:id="@+id/displayNameInput"
+        android:id="@+id/usernameNameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

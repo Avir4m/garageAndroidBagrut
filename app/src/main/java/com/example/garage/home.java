@@ -80,28 +80,44 @@ public class home extends Fragment {
 
     private void loadPosts() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String currentUserId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        db.collection("posts")
-                .whereEqualTo("archived", false)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    postList.clear();
+        db.collection("users").document(currentUserId).get()
+                .addOnSuccessListener(userSnapshot -> {
+                    List<String> hiddenPosts = (List<String>) userSnapshot.get("hiddenPosts");
 
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        String postId = doc.getId();
-                        Post post = doc.toObject(Post.class);
-                        post.setPostId(postId);
-                        postList.add(post);
-                    }
+                    db.collection("posts")
+                            .whereEqualTo("archived", false)
+                            .orderBy("timestamp", Query.Direction.DESCENDING)
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                postList.clear();
 
-                    loadingText.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    postAdapter.notifyDataSetChanged();
+                                for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                                    String postId = doc.getId();
 
+                                    if (hiddenPosts != null && hiddenPosts.contains(postId)) {
+                                        continue;
+                                    }
+
+                                    Post post = doc.toObject(Post.class);
+                                    post.setPostId(postId);
+                                    postList.add(post);
+                                }
+
+                                loadingText.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.VISIBLE);
+                                postAdapter.notifyDataSetChanged();
+                            })
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show()
+                            );
                 })
-                .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to load posts", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e ->
+                        Toast.makeText(getContext(), "Failed to load hidden posts", Toast.LENGTH_SHORT).show()
+                );
     }
+
 
     private void navigateToUserProfile(String userId) {
         user userProfileFragment = new user();

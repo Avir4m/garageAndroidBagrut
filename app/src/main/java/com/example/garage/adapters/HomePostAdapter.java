@@ -73,7 +73,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
                 PostAuthorDialog postAuthorDialog = PostAuthorDialog.newInstance(post.getPostId());
                 postAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostAuthorDialog");
             } else {
-                PostDialog postDialog = PostDialog.newInstance(post.getPostId());
+                PostDialog postDialog = PostDialog.newInstance(post.getPostId(), post.getAuthorId());
                 postDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
             }
         });

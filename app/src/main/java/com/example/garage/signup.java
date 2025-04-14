@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,7 +39,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
 
     TextView loginTextView;
     Button signUpButton;
-    EditText displayNameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
+    EditText usernameNameEditText, emailEditText, passwordEditText, confirmPasswordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         signUpButton = findViewById(R.id.signupBtn);
         signUpButton.setOnClickListener(this);
 
-        displayNameEditText = findViewById(R.id.displayNameInput);
+        usernameNameEditText = findViewById(R.id.usernameNameInput);
 
         emailEditText = findViewById(R.id.emailInput);
 
@@ -81,13 +82,13 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == signUpButton) {
-            String displayName, email, password, confirmPassword;
-            displayName = displayNameEditText.getText().toString();
+            String username, email, password, confirmPassword;
+            username = usernameNameEditText.getText().toString();
             email = emailEditText.getText().toString();
             password = passwordEditText.getText().toString();
             confirmPassword = confirmPasswordEditText.getText().toString();
 
-            if (TextUtils.isEmpty(displayName)) {
+            if (TextUtils.isEmpty(username)) {
                 Toast.makeText(signup.this, "Enter a username", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -121,7 +122,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = auth.getCurrentUser();
                                 if (user != null) {
-                                    UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setDisplayName(displayName).build();
+                                    UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
                                     user.updateProfile(profileUpdate)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
@@ -129,10 +130,13 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                                                     if (task.isSuccessful()) {
                                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                                         Map<String, Object> userData = new HashMap<>();
-                                                        userData.put("name", displayName);
+                                                        userData.put("username", username);
                                                         userData.put("profilePicture", null);
+                                                        userData.put("joined", Timestamp.now());
                                                         userData.put("likedPosts", new ArrayList<>());
                                                         userData.put("savedPosts", new ArrayList<>());
+                                                        userData.put("hiddenPosts", new ArrayList<>());
+
 
                                                         db.collection("users").document(user.getUid())
                                                                 .set(userData)

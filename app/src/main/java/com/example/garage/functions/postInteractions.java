@@ -79,4 +79,30 @@ public class postInteractions {
         }).addOnFailureListener(e -> {
         });
     }
+
+    public static void toggleHidePost(String postId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String currentUserId = auth.getCurrentUser().getUid();
+        DocumentReference userRef = db.collection("users").document(currentUserId);
+
+        userRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                List<String> hidden = (List<String>) documentSnapshot.get("hiddenPosts");
+                if (hidden == null) hidden = new ArrayList<>();
+
+                boolean saved = hidden.contains(postId);
+                WriteBatch batch = db.batch();
+
+                if (saved) {
+                    hidden.remove(postId);
+                } else {
+                    hidden.add(postId);
+                }
+
+                batch.update(userRef, "hiddenPosts", hidden);
+                batch.commit();
+            }
+        });
+    }
 }

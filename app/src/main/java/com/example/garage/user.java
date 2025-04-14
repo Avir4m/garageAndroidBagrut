@@ -113,7 +113,7 @@ public class user extends Fragment {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    String name = document.getString("name");
+                    String name = document.getString("username");
                     screenTitle.setText(name);
                     displayName.setText(name);
                 } else {
