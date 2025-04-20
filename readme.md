@@ -20,3 +20,10 @@ Garage is a social platform designed for vehicle and motorcycle enthusiasts. It 
   this [car list](https://github.com/getFrontend/json-car-list)
 - [Luca Pasquale](https://github.com/lucapsq) for
   this [motorcycle list](https://github.com/lucapsq/motorcycle-logos-dataset)
+
+## License
+
+This project is licensed under a custom MIT-style license.  
+You may view and use the code for personal or educational purposes,  
+but redistribution or publishing any derivative work is not allowed  
+without explicit permission. See [LICENSE](./LICENSE) for details.
