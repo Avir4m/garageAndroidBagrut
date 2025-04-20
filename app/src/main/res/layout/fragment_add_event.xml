@@ -27,6 +27,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
         android:hint="Event title"
+        android:textSize="16dp"
         android:inputType="text"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp" />
@@ -44,6 +45,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
         android:hint="Event Location"
+        android:textSize="16dp"
         android:inputType="text"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp" />
@@ -54,17 +56,36 @@
         android:paddingBottom="8dp"
         android:text="Event Date" />
 
-    <EditText
+    <TextView
         android:id="@+id/eventDateTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
-        android:hint="Event Date and Time"
+        android:hint="Select Date &amp; Time"
+        android:focusable="false"
+        android:clickable="true"
         android:inputType="none"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp" />
 
+    <Button
+        android:id="@+id/pickImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/gray"
+        android:layout_marginBottom="16dp"
+        android:text="Add Image" />
+
+    <ImageView
+        android:id="@+id/imagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:src="@drawable/no_image"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/createButton"
@@ -72,12 +93,5 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         android:text="Create" />
-
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
-        android:text="Cancel" />
 
 </LinearLayout>

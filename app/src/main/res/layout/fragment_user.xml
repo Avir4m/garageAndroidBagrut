@@ -11,13 +11,31 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp">
 
-        <ImageView
-            android:id="@+id/userImage"
+        <FrameLayout
             android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:background="@drawable/round_image"
-            android:clipToOutline="true"
-            android:src="@drawable/default_profile_pic" />
+            android:layout_height="96dp">
+
+            <ImageView
+                android:id="@+id/userImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_image"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_profile_pic" />
+
+            <ImageView
+                android:id="@+id/addUserImageBtn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/add_btn"
+                android:background="@drawable/round_image"
+                android:clipToOutline="true"
+                android:layout_gravity="bottom|end"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
 
         <Space
             android:layout_width="48dp"

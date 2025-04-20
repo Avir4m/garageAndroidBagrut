@@ -1,4 +1,4 @@
-package com.example.garage.dialogs;
+package com.example.garage;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
-import com.example.garage.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -22,34 +23,46 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class AddEventDialog extends DialogFragment {
-
+public class addEvent extends Fragment {
 
     private Calendar calendar;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    Button createButton, cancelButton;
-    EditText eventTitle, eventLocation, eventDateTime;
+    Button createButton;
+    ImageButton addBtn, backBtn;
+    EditText eventTitle, eventLocation;
+    TextView eventDateTime;
+
+    public addEvent() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_event_dialog, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_event, container, false);
+
+        addBtn = getActivity().findViewById(R.id.addBtn);
+        addBtn.setVisibility(View.GONE);
+
+        backBtn = getActivity().findViewById(R.id.backBtn);
+        backBtn.setVisibility(View.VISIBLE);
+        backBtn.setOnClickListener(v -> getParentFragmentManager().popBackStack());
 
         calendar = Calendar.getInstance();
 
+
         createButton = view.findViewById(R.id.createButton);
-        cancelButton = view.findViewById(R.id.cancelButton);
         eventTitle = view.findViewById(R.id.eventTitle);
         eventLocation = view.findViewById(R.id.eventLocation);
         eventDateTime = view.findViewById(R.id.eventDateTime);
 
-        cancelButton.setOnClickListener(v -> dismiss());
         createButton.setOnClickListener(v -> createEvent());
         eventDateTime.setOnClickListener(v -> showDateTimePicker());
 
 
         return view;
+
+
     }
 
     private void showDateTimePicker() {
@@ -111,7 +124,6 @@ public class AddEventDialog extends DialogFragment {
                     eventTitle.setText("");
                     eventLocation.setText("");
                     eventDateTime.setText("");
-                    dismiss();
                 })
                 .addOnFailureListener(e -> Toast.makeText(getContext(), "Error creating event: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }

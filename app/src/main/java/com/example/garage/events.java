@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.adapters.EventAdapter;
-import com.example.garage.dialogs.AddEventDialog;
 import com.example.garage.models.Event;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -55,8 +54,7 @@ public class events extends Fragment {
         addBtn = getActivity().findViewById(R.id.addBtn);
         addBtn.setVisibility(View.VISIBLE);
         addBtn.setOnClickListener(v -> {
-            AddEventDialog addEventDialog = new AddEventDialog();
-            addEventDialog.show(getParentFragmentManager(), "AddEventDialog");
+            getParentFragmentManager().beginTransaction().replace(R.id.frame, new addEvent()).addToBackStack(null).commit();
         });
 
         loadingText = view.findViewById(R.id.loading_text);

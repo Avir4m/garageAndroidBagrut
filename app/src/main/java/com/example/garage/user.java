@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,9 +35,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class user extends Fragment {
-
     TextView screenTitle, noVehiclesText, noPostsText, displayName, vehiclesCount, followersCount;
     ImageButton settingsBtn, backBtn, addBtn;
+    ImageView userImage, addUserImageBtn;
     BottomNavigationView navbar;
     TabLayout tabLayout;
     LinearLayout postsContainer, garageContainer, ownProfileBtns, profileBtns;
@@ -78,6 +79,8 @@ public class user extends Fragment {
         displayName = view.findViewById(R.id.displayName);
         vehiclesCount = view.findViewById(R.id.vehiclesCount);
         followersCount = view.findViewById(R.id.followersCount);
+        userImage = view.findViewById(R.id.userImage);
+        addUserImageBtn = view.findViewById(R.id.addUserImageBtn);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -103,6 +106,9 @@ public class user extends Fragment {
         if (userId.equals(auth.getCurrentUser().getUid())) {
             ownProfileBtns.setVisibility(View.VISIBLE);
             profileBtns.setVisibility(View.GONE);
+            addUserImageBtn.setVisibility(View.VISIBLE);
+
+            userImage.setOnClickListener(v -> setProfilePicture());
         } else {
             ownProfileBtns.setVisibility(View.GONE);
             profileBtns.setVisibility(View.VISIBLE);
@@ -180,6 +186,9 @@ public class user extends Fragment {
         });
 
         return view;
+    }
+
+    private void setProfilePicture() {
     }
 
     private void follow(String userId) {
