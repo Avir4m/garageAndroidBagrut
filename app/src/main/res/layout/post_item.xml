@@ -2,12 +2,13 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/surface">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/border" />
+        android:background="@color/divider" />
 
     <LinearLayout
         android:id="@+id/userFrame"
@@ -38,20 +39,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aviram"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="  •  " />
+                android:text="  •  "
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/postTimestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Just Now"
-                android:textColor="@color/secondary_text" />
+                android:textColor="@color/text_secondary" />
 
         </LinearLayout>
 
@@ -66,7 +68,6 @@
 
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/postTitle"
         android:layout_width="wrap_content"
@@ -74,6 +75,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:text="Post Title"
+        android:textColor="@color/text_primary"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -91,7 +93,6 @@
         android:gravity="start"
         android:orientation="horizontal">
 
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,10 +105,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="0" />
+                android:text="0"
+                android:textColor="@color/text_secondary" />
 
             <ImageButton
-
                 android:id="@+id/likeBtn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"

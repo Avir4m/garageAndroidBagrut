@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     android:padding="32dp">
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="32dp"
         android:text="Add your vehicle to your profile"
+        android:textColor="@color/text_primary"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -18,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Vehicle make" />
+        android:text="Vehicle make"
+        android:textColor="@color/text_primary" />
 
     <AutoCompleteTextView
         android:id="@+id/vehicleMake"
@@ -36,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Vehicle model " />
+        android:text="Vehicle model "
+        android:textColor="@color/text_primary" />
 
     <AutoCompleteTextView
         android:id="@+id/vehicleModel"
@@ -54,7 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Vehicle year" />
+        android:text="Vehicle year"
+        android:textColor="@color/text_primary" />
 
     <EditText
         android:id="@+id/vehicleYear"
@@ -71,7 +76,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Vehicle type" />
+        android:text="Vehicle type"
+        android:textColor="@color/text_primary" />
 
     <Spinner
         android:id="@+id/vehicleTypeSpinner"
@@ -85,14 +91,14 @@
         android:id="@+id/addButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/gray"
         android:text="Add" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
+        android:backgroundTint="@color/primary"
         android:text="Cancel" />
 
 </LinearLayout>

@@ -50,6 +50,9 @@ public class PostAuthorDialog extends BottomSheetDialogFragment {
         Button archiveButton = view.findViewById(R.id.archiveButton);
         archiveButton.setOnClickListener(v -> archiveBtn());
 
+        Button editButton = view.findViewById(R.id.editButton);
+        editButton.setOnClickListener(v -> editBtn());
+
         db.collection("posts").document(postId).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 Boolean archived = documentSnapshot.getBoolean("archived");
@@ -66,7 +69,7 @@ public class PostAuthorDialog extends BottomSheetDialogFragment {
     }
 
     public void editBtn() {
-
+        Toast.makeText(getContext(), "This feature is currently under development", Toast.LENGTH_SHORT).show(); // Needs to be added
     }
 
     public void archiveBtn() {

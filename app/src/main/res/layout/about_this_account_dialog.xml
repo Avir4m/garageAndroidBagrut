@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
+        android:textColor="@color/text_primary"
         android:text="About this account" />
 
     <Space
@@ -40,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
+        android:textColor="@color/text_primary"
         android:text="" />
 
     <Space
@@ -68,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:text="Date joined" />
 
@@ -76,7 +78,7 @@
                 android:id="@+id/joinedAt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary"
+                android:textColor="@color/gray"
                 android:text="" />
 
         </LinearLayout>
@@ -108,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:text="Vehicles" />
 
@@ -116,7 +118,7 @@
                 android:id="@+id/vehicles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary"
+                android:textColor="@color/gray"
                 android:text="0" />
 
         </LinearLayout>

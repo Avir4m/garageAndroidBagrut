@@ -2,7 +2,8 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <Space
         android:layout_width="wrap_content"
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Login"
+        android:textColor="@color/text_primary"
         android:textSize="48sp"
         android:textStyle="bold" />
 
@@ -26,7 +28,8 @@
         android:layout_gravity="center"
         android:maxWidth="256dp"
         android:text="Welcome back! Dive back into the road and community you love."
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/text_secondary" />
 
     <Space
         android:layout_width="wrap_content"
@@ -42,7 +45,7 @@
         android:inputType="textEmailAddress"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="14sp" />
 
     <Space
@@ -59,7 +62,7 @@
         android:inputType="textPassword"
         android:minWidth="256dp"
         android:padding="10sp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="14sp" />
 
     <Space
@@ -86,8 +89,8 @@
         android:layout_gravity="center"
         android:clickable="true"
         android:focusable="true"
-        android:text="Don’t have an account? Sign Up"
+        android:text="Don't have an account? Sign Up"
         android:textAlignment="center"
-        android:textColor="@color/gray" />
+        android:textColor="@color/primary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

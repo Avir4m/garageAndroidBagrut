@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -53,6 +54,11 @@ public class PostDialog extends BottomSheetDialogFragment {
         hidePost.setOnClickListener(v -> {
             postInteractions.toggleHidePost(postId);
             dismiss();
+        });
+
+        Button reportBtn = view.findViewById(R.id.reportButton);
+        reportBtn.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "This feature is currently under development", Toast.LENGTH_SHORT).show(); // Needs to be added
         });
 
         return view;

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     android:padding="32dp">
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Create Post"
+        android:textColor="@color/text_primary"
         android:layout_marginBottom="32dp"
         android:textSize="24sp" />
 
@@ -18,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Post Title" />
+        android:text="Post Title"
+        android:textColor="@color/text_primary" />
 
     <EditText
         android:id="@+id/postTitleInput"
@@ -58,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/primary"
         android:text="Create" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

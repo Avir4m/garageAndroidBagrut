@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".WelcomeScreen">
 
     <Space
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Welcome to"
-        android:textColor="@color/gray"
+        android:textColor="@color/text_secondary"
         android:textSize="32sp"
         android:textStyle="normal" />
 
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Garage"
-        android:textColor="@color/gray"
+        android:textColor="@color/black"
         android:textSize="48sp"
         android:textStyle="bold" />
 
@@ -40,33 +41,33 @@
         android:maxWidth="256dp"
         android:text="Made by automotive lovers, for those who live for the ride."
         android:textAlignment="center"
-        android:textColor="@color/gray" />
+        android:textColor="@color/text_secondary" />
 
     <Space
         android:layout_width="wrap_content"
         android:layout_height="128dp" />
 
     <Button
-        android:id="@+id/signupBtn"
+        android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/gray"
-        android:minWidth="256dp"
-        android:text="Sign Up" />
+        android:minWidth="192dp"
+        android:text="Login" />
 
     <Space
         android:layout_width="wrap_content"
         android:layout_height="16dp" />
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/signupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/black"
-        android:minWidth="256dp"
-        android:text="Login" />
+        android:backgroundTint="@color/primary"
+        android:minWidth="192dp"
+        android:text="Sign Up" />
 
     <Space
         android:layout_width="wrap_content"

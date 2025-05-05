@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
 
 
     <LinearLayout
@@ -52,13 +53,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="0"
+                android:textColor="@color/text_primary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Vehicles" />
+                android:text="Vehicles"
+                android:textColor="@color/text_secondary" />
 
         </LinearLayout>
 
@@ -77,13 +80,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="0" />
+                android:text="0"
+                android:textColor="@color/text_primary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Followers" />
+                android:text="Followers"
+                android:textColor="@color/text_secondary" />
 
         </LinearLayout>
 
@@ -94,6 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:textColor="@color/text_primary"
         android:text="" />
 
     <LinearLayout
@@ -110,23 +116,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/primary"
             android:text="Follow" />
-
 
         <Space
             android:layout_width="8dp"
             android:layout_height="wrap_content" />
-
 
         <Button
             android:id="@+id/messageBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/gray"
             android:text="Message" />
-
 
     </LinearLayout>
 
@@ -157,7 +160,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@color/gray"
             android:text="Add Vehicle" />
 
     </LinearLayout>
@@ -166,10 +169,10 @@
         android:id="@+id/userTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/gray"
+        android:background="@color/surface"
+        app:tabIndicatorColor="@color/primary"
         app:tabRippleColor="@color/ripple"
-        app:tabTextColor="@color/gray">
+        app:tabTextColor="@color/text_secondary">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
@@ -196,6 +199,7 @@
             android:gravity="center"
             android:text="No posts"
             android:textAlignment="center"
+            android:textColor="@color/text_secondary"
             android:textSize="24dp" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -221,6 +225,7 @@
             android:gravity="center"
             android:text="No vehicles"
             android:textAlignment="center"
+            android:textColor="@color/text_secondary"
             android:textSize="24dp" />
 
         <androidx.recyclerview.widget.RecyclerView

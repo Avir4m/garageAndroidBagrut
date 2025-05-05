@@ -2,7 +2,8 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <Space
         android:layout_width="wrap_content"
@@ -13,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Sign Up"
+        android:textColor="@color/text_primary"
         android:textSize="48sp"
         android:textStyle="bold" />
 
@@ -26,7 +28,8 @@
         android:layout_gravity="center"
         android:maxWidth="256dp"
         android:text="Welcome back! Dive back into the road and community you love."
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/text_secondary" />
 
     <Space
         android:layout_width="wrap_content"
@@ -42,7 +45,7 @@
         android:inputType="textEmailAddress"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="14sp" />
 
     <Space
@@ -59,7 +62,7 @@
         android:inputType="textEmailAddress"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="14sp" />
 
     <Space
@@ -76,7 +79,7 @@
         android:inputType="textPassword"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="14sp" />
 
     <Space
@@ -93,7 +96,7 @@
         android:inputType="textPassword"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_primary"
         android:textSize="14sp" />
 
     <Space
@@ -113,7 +116,6 @@
         android:layout_width="wrap_content"
         android:layout_height="16dp" />
 
-
     <TextView
         android:id="@+id/login_text"
         android:layout_width="wrap_content"
@@ -123,6 +125,6 @@
         android:focusable="true"
         android:text="Already have an account? Login"
         android:textAlignment="center"
-        android:textColor="@color/gray" />
+        android:textColor="@color/primary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

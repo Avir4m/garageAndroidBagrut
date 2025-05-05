@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     android:padding="32dp">
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="32dp"
         android:text="Create an event"
+        android:textColor="@color/text_primary"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -18,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Event Title" />
+        android:text="Event Title"
+        android:textColor="@color/text_primary" />
 
     <EditText
         android:id="@+id/eventTitle"
@@ -36,7 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Event Location" />
+        android:text="Event Location"
+        android:textColor="@color/text_primary" />
 
     <EditText
         android:id="@+id/eventLocation"
@@ -54,7 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:text="Event Date" />
+        android:text="Event Date"
+        android:textColor="@color/text_primary" />
 
     <TextView
         android:id="@+id/eventDateTime"
@@ -91,7 +96,7 @@
         android:id="@+id/createButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="@color/primary"
         android:text="Create" />
 
 </LinearLayout>

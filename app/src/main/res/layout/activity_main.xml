@@ -5,6 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -12,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@color/surface">
 
         <ImageButton
             android:id="@+id/backBtn"
@@ -32,7 +34,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/text_primary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -63,15 +65,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomNav"
-        android:layout_below="@+id/topBar" />
+        android:layout_below="@+id/topBar"
+        android:background="@color/background" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        style="@style/BottomNavigationViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/surface"
+        app:itemIconTint="@color/gray"
+        app:itemTextColor="@color/gray"
         app:menu="@menu/menu" />
 
 </RelativeLayout>
