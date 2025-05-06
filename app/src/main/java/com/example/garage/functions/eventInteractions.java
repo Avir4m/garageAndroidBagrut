@@ -25,10 +25,10 @@ public class eventInteractions {
 
                 if (joinedUsers != null && joinedUsers.contains(currentUserId)) {
                     eventRef.update("participantsCount", documentSnapshot.getLong("participantsCount") - 1);
-                    eventRef.update("participants", FieldValue.arrayRemove(currentUserId));
+                    eventRef.update("participants", FieldValue.arrayRemove(currentUserId)).addOnSuccessListener(aVoid -> joinBtn.setText("Join Event"));
                 } else {
                     eventRef.update("participantsCount", documentSnapshot.getLong("participantsCount") + 1);
-                    eventRef.update("participants", FieldValue.arrayUnion(currentUserId));
+                    eventRef.update("participants", FieldValue.arrayUnion(currentUserId)).addOnSuccessListener(aVoid -> joinBtn.setText("Participating"));
 
                 }
             }
