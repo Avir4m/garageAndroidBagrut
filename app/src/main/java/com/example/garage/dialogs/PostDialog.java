@@ -48,11 +48,13 @@ public class PostDialog extends BottomSheetDialogFragment {
         aboutThisAccountBtn.setOnClickListener(v -> {
             AboutThisAccountDialog aboutThisAccountDialog = AboutThisAccountDialog.newInstance(postAuthorId);
             aboutThisAccountDialog.show(((FragmentActivity) requireContext()).getSupportFragmentManager(), "AboutThisAccountDialog");
+            dismiss();
         });
 
         Button hidePost = view.findViewById(R.id.hideButton);
         hidePost.setOnClickListener(v -> {
             postInteractions.toggleHidePost(postId);
+            Toast.makeText(getContext(), "Post has been hidden", Toast.LENGTH_SHORT).show();
             dismiss();
         });
 

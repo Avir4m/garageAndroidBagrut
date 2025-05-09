@@ -54,7 +54,6 @@ public class settings extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
         if (view == backBtn) {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.frame, new user());

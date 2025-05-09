@@ -91,14 +91,16 @@
         android:id="@+id/addButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
         android:text="Add" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/gray"
+        android:textColor="@color/white"
         android:text="Cancel" />
 
 </LinearLayout>

@@ -117,6 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/primary"
+            android:textColor="@color/white"
             android:text="Follow" />
 
         <Space
@@ -129,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/gray"
+            android:textColor="@color/white"
             android:text="Message" />
 
     </LinearLayout>
@@ -149,6 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/gray"
+            android:textColor="@color/white"
             android:text="Edit Profile" />
 
         <Space
@@ -161,6 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/gray"
+            android:textColor="@color/white"
             android:text="Add Vehicle" />
 
     </LinearLayout>

@@ -54,6 +54,7 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/gray"
         android:minWidth="192dp"
+        android:textColor="@color/white"
         android:text="Login" />
 
     <Space
@@ -67,6 +68,7 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/primary"
         android:minWidth="192dp"
+        android:textColor="@color/white"
         android:text="Sign Up" />
 
     <Space

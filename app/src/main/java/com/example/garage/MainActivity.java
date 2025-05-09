@@ -5,6 +5,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,6 +17,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Set to follow system theme
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottomNav);
@@ -23,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         activityReplaceFragment(new home());
     }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
