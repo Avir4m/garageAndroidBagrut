@@ -11,11 +11,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.R;
-import com.example.garage.dialogs.EventAuthorDialog;
 import com.example.garage.models.Event;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,10 +45,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.eventDate.setText(event.getDate());
         holder.eventTime.setText(event.getTime());
         holder.eventParticipateButton.setOnClickListener(v -> toggleJoinEvent(event.getId(), holder.eventParticipateButton));
-        holder.manageBtn.setOnClickListener(v -> {
-            EventAuthorDialog eventAuthorDialog = EventAuthorDialog.newInstance(event.getId());
-            eventAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "EventAuthorDialog");
-        });
+        //holder.manageBtn.setOnClickListener(v -> {
+        //EventAuthorDialog eventAuthorDialog = EventAuthorDialog.newInstance(event.getId());
+        //eventAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "EventAuthorDialog");
+        //});
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -92,7 +90,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             eventDate = itemView.findViewById(R.id.eventDate);
             eventTime = itemView.findViewById(R.id.eventTime);
             eventParticipateButton = itemView.findViewById(R.id.eventJoinButton);
-            manageBtn = itemView.findViewById(R.id.manageButton);
+            //manageBtn = itemView.findViewById(R.id.manageButton);
         }
     }
 }
