@@ -50,7 +50,6 @@ public class user extends Fragment {
     private CompactPostAdapter postAdapter;
     private List<Post> postList;
 
-
     public user() {
     }
 

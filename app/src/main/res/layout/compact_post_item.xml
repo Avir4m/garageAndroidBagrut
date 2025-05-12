@@ -35,8 +35,7 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textColor="@color/text_primary"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/postTimestamp"

@@ -37,6 +37,11 @@ public class addPost extends Fragment {
 
     Button pickImageBtn, submitBtn;
     ImageView imagePreview;
+    EditText titleInput;
+    FirebaseAuth auth;
+    TextView screenTitle;
+    ImageButton backBtn, settingsBtn, addBtn;
+
     private final ActivityResultLauncher<Intent> imagePickerLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
@@ -46,10 +51,6 @@ public class addPost extends Fragment {
                     imageSelected = true;
                 }
             });
-    EditText titleInput;
-    FirebaseAuth auth;
-    TextView screenTitle;
-    ImageButton backBtn, settingsBtn, addBtn;
 
     public addPost() {
     }

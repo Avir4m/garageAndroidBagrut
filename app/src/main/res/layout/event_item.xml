@@ -30,8 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
 
             <LinearLayout
@@ -88,7 +87,7 @@
             android:id="@+id/eventJoinButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_margin="8dp"
             android:text="Participating"
             android:textColor="@color/white"
             android:backgroundTint="@color/primary" />
