@@ -1,5 +1,7 @@
 package com.example.garage.models;
 
+import com.google.firebase.Timestamp;
+
 import java.util.List;
 
 public class Event {
@@ -13,11 +15,13 @@ public class Event {
     private int participantsCount;
     private String time;
     private String title;
+    private String imageId;
+    private Timestamp timestamp;
 
     public Event() {
     }
 
-    public Event(String id, String date, String host, String hostId, String location, List<String> participants, int participantsCount, String time, String title) {
+    public Event(String id, String date, String host, String hostId, String location, List<String> participants, int participantsCount, String time, String title, String imageId, Timestamp timestamp) {
         this.id = id;
         this.date = date;
         this.host = host;
@@ -27,6 +31,8 @@ public class Event {
         this.participantsCount = participantsCount;
         this.time = time;
         this.title = title;
+        this.imageId = imageId;
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -99,5 +105,21 @@ public class Event {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }

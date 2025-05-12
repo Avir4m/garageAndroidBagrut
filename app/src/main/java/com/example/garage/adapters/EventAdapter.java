@@ -1,5 +1,6 @@
 package com.example.garage.adapters;
 
+import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
 import static com.example.garage.functions.eventInteractions.toggleJoinEvent;
 
 import android.content.Context;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,17 +47,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.eventDate.setText(event.getDate());
         holder.eventTime.setText(event.getTime());
         holder.eventParticipateButton.setOnClickListener(v -> toggleJoinEvent(event.getId(), holder.eventParticipateButton));
-        //holder.manageBtn.setOnClickListener(v -> {
-        //EventAuthorDialog eventAuthorDialog = EventAuthorDialog.newInstance(event.getId());
-        //eventAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "EventAuthorDialog");
-        //});
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String currentUserId = auth.getCurrentUser().getUid();
 
-        System.out.println(currentUserId);
-        System.out.println(event.getHostId());
         if (!currentUserId.equals(event.getHostId())) {
             holder.manageBtn.setVisibility(View.GONE);
         }
@@ -70,6 +66,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 }
             }
         });
+
+        if (event.getImageId() != null && !event.getImageId().isEmpty()) {
+            loadImageFromFirestore(event.getImageId(), holder.eventPicture);
+        } else {
+            holder.eventPicture.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -81,17 +83,27 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         TextView eventTitle, eventLocation, eventDate, eventTime;
         Button eventParticipateButton;
         ImageButton manageBtn;
+        ImageView eventPicture;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             eventTitle = itemView.findViewById(R.id.eventTitle);
             eventLocation = itemView.findViewById(R.id.eventLocation);
+            eventPicture = itemView.findViewById(R.id.eventImage);
             eventDate = itemView.findViewById(R.id.eventDate);
             eventTime = itemView.findViewById(R.id.eventTime);
             eventParticipateButton = itemView.findViewById(R.id.eventJoinButton);
-            //manageBtn = itemView.findViewById(R.id.manageButton);
         }
+    }
+
+    private void loadImageFromFirestore(String imageId, final ImageView imageView) {
+        getImageFromFirestore(imageId)
+                .addOnSuccessListener(bitmap -> {
+                    if (bitmap != null) {
+                        imageView.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(e -> imageView.setVisibility(View.GONE));
     }
 }
 
