@@ -86,13 +86,20 @@ public class addPost extends Fragment {
     }
 
     private void openSystemImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+        galleryIntent.setType("image/*");
 
-        imagePickerLauncher.launch(intent);
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (cameraIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            Intent chooser = Intent.createChooser(galleryIntent, "Select or take a new picture");
+            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cameraIntent});
+            imagePickerLauncher.launch(chooser);
+        } else {
+            imagePickerLauncher.launch(galleryIntent);
+        }
     }
+
 
     private void addPostToFirestore() {
         String title = titleInput.getText().toString();
