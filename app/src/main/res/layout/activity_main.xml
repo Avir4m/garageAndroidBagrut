@@ -25,7 +25,8 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/arrow"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:tint="@color/icons" />
 
         <TextView
             android:id="@+id/screenTitle"
@@ -46,7 +47,8 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/settings"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:tint="@color/icons" />
 
         <ImageButton
             android:id="@+id/addBtn"
@@ -56,7 +58,8 @@
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/add"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:tint="@color/icons" />
 
     </LinearLayout>
 
@@ -74,8 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/surface"
-        app:itemIconTint="@color/gray"
-        app:itemTextColor="@color/gray"
+        style="@style/BottomNavigationViewStyle"
+        app:itemIconTint="@color/icons"
+        app:itemTextColor="@color/icons"
         app:menu="@menu/menu" />
 
 </RelativeLayout>

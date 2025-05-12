@@ -125,6 +125,6 @@
         android:focusable="true"
         android:text="Already have an account? Login"
         android:textAlignment="center"
-        android:textColor="@color/primary" />
+        android:textColor="@color/gray" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

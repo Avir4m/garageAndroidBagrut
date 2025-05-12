@@ -91,6 +91,6 @@
         android:focusable="true"
         android:text="Don't have an account? Sign Up"
         android:textAlignment="center"
-        android:textColor="@color/primary" />
+        android:textColor="@color/gray" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

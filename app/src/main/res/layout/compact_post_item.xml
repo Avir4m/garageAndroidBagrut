@@ -1,6 +1,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="128dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/surface">
 
@@ -69,7 +70,8 @@
                     android:layout_marginEnd="12dp"
                     android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/heart" />
+                    android:src="@drawable/heart"
+                    app:tint="@color/icons" />
 
                 <ImageButton
                     android:id="@+id/saveBtn"
@@ -77,7 +79,9 @@
                     android:layout_height="20dp"
                     android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/bookmark" />
+                    android:src="@drawable/bookmark"
+                    app:tint="@color/icons" />
+
             </LinearLayout>
         </LinearLayout>
 
