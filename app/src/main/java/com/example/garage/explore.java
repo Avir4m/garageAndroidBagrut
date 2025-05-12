@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-public class search extends Fragment {
+public class explore extends Fragment {
 
     TextView screenTitle;
     ImageButton backBtn, settingsBtn, addBtn;
 
-    public search() {
+    public explore() {
     }
 
 
@@ -33,6 +33,6 @@ public class search extends Fragment {
         screenTitle = getActivity().findViewById(R.id.screenTitle);
         screenTitle.setText("Explore");
 
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_explore, container, false);
     }
 }
