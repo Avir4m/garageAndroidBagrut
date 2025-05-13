@@ -81,9 +81,9 @@ public class PostAuthorDialog extends BottomSheetDialogFragment {
                 docRef.update("archived", !archived)
                         .addOnSuccessListener(aVoid -> {
                             if (archived) {
-                                Toast.makeText(getContext(), "Post archived successfully", Toast.LENGTH_SHORT).show();
-                            } else {
                                 Toast.makeText(getContext(), "Post unarchived successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Post archived successfully", Toast.LENGTH_SHORT).show();
                             }
                             dismiss();
                         }).addOnFailureListener(e -> Toast.makeText(getContext(), "An error has occurred", Toast.LENGTH_SHORT).show());
