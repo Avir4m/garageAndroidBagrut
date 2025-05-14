@@ -62,7 +62,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 if (joinedUsers != null && joinedUsers.contains(currentUserId)) {
                     holder.eventParticipateButton.setText("Participating");
                     holder.eventParticipateButton.setBackgroundTintList(context.getResources().getColorStateList(R.color.secondary));
-                    holder.eventParticipateButton.setTextColor(context.getResources().getColorStateList(R.color.text));
+                    holder.eventParticipateButton.setTextColor(context.getResources().getColorStateList(R.color.white));
                 } else {
                     holder.eventParticipateButton.setText("Join Event");
                     holder.eventParticipateButton.setBackgroundTintList(context.getResources().getColorStateList(R.color.primary));

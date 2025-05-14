@@ -89,8 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="Participating"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/primary" />
+            android:textColor="@color/white"
+            android:backgroundTint="@color/secondary" />
 
     </LinearLayout>
 

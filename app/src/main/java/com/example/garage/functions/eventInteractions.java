@@ -37,7 +37,7 @@ public class eventInteractions {
                     eventRef.update("participants", FieldValue.arrayUnion(currentUserId)).addOnSuccessListener(aVoid -> {
                         joinBtn.setText("Participating");
                         joinBtn.setBackgroundTintList(context.getResources().getColorStateList(R.color.secondary));
-                        joinBtn.setTextColor(context.getResources().getColorStateList(R.color.text));
+                        joinBtn.setTextColor(context.getResources().getColorStateList(R.color.white));
                     });
                 }
             }
