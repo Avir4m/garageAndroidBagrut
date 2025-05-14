@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Editprofile extends Fragment {
+public class editProfile extends Fragment {
 
     String previousProfilePicture = null;
 
@@ -50,7 +50,7 @@ public class Editprofile extends Fragment {
                 }
             });
 
-    public Editprofile() {
+    public editProfile() {
     }
 
     @Override
