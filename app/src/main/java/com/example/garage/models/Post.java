@@ -8,6 +8,7 @@ public class Post {
     private String postId;
     private String title;
     private String authorId;
+    private String author;
     private Timestamp timestamp;
     private List<String> likes;
     private int likeCount;
@@ -17,10 +18,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(String postId, String title, String authorId, Timestamp timestamp, List<String> likes, int likeCount, String imageId, boolean archived) {
+    public Post(String postId, String title, String authorId, String author, Timestamp timestamp, List<String> likes, int likeCount, String imageId, boolean archived) {
         this.postId = postId;
         this.title = title;
         this.authorId = authorId;
+        this.author = author;
         this.timestamp = timestamp;
         this.likes = likes;
         this.likeCount = likeCount;
@@ -50,6 +52,14 @@ public class Post {
 
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public Timestamp getTimestamp() {

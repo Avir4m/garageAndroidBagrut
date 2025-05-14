@@ -24,9 +24,7 @@ import com.example.garage.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private final Context context;
@@ -53,54 +51,57 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.get(position);
-
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String currentUserId = auth.getCurrentUser().getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("users").document(post.getAuthorId()).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        String username = documentSnapshot.getString("username");
-                        holder.postAuthor.setText(username != null ? username : "");
-                    }
-                    if (!documentSnapshot.getString("profilePicture").isEmpty()) {
-                        getImageFromFirestore(documentSnapshot.getString("profilePicture")).addOnSuccessListener(bitmap -> {
-                            holder.userImage.setImageBitmap(bitmap);
-                        });
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    holder.postAuthor.setText("");
-                });
+        if (post.getAuthorId() != null) {
+            db.collection("users").document(post.getAuthorId()).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String username = documentSnapshot.getString("username");
+                            post.setAuthor(username);
+                            holder.postAuthor.setText(username);
+                        }
+                        if (!documentSnapshot.getString("profilePicture").isEmpty()) {
+                            getImageFromFirestore(documentSnapshot.getString("profilePicture"))
+                                    .addOnSuccessListener(bitmap -> holder.userImage.setImageBitmap(bitmap));
+                        }
+                    });
+        } else {
+            holder.postAuthor.setText(post.getAuthor());
+        }
 
         holder.postTitle.setText(post.getTitle());
-        Date timestamp = post.getTimestamp().toDate();
-        holder.timestamp.setText(getTimeAgo(timestamp));
+        holder.timestamp.setText(getTimeAgo(post.getTimestamp().toDate()));
         holder.likeCount.setText(String.valueOf(formatCount(post.getLikeCount())));
 
-        holder.postAuthor.setOnClickListener(v -> listener.onUserClick(post.getAuthorId()));
-        holder.likeButton.setOnClickListener(v -> postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount));
-        holder.saveButton.setOnClickListener(v -> postInteractions.toggleSavePost(post.getPostId(), holder.saveButton));
+        setLikeButtonState(holder, post, currentUserId);
+        setSaveButtonState(holder, post, currentUserId);
 
-        holder.dotsButton.setOnClickListener(v -> {
-            if (Objects.equals(post.getAuthorId(), currentUserId)) {
-                PostAuthorDialog postAuthorDialog = PostAuthorDialog.newInstance(post.getPostId());
-                postAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostAuthorDialog");
-            } else {
-                PostDialog postDialog = PostDialog.newInstance(post.getPostId(), post.getAuthorId());
-                postDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
-            }
-        });
+        holder.dotsButton.setOnClickListener(v -> handleDotsButtonClick(post, currentUserId));
 
+        if (post.getImageId() != null && !post.getImageId().isEmpty()) {
+            loadImageFromFirestore(post.getImageId(), holder.postImage);
+        } else {
+            holder.postImage.setVisibility(View.GONE);
+        }
+    }
 
+    private void setLikeButtonState(PostViewHolder holder, Post post, String currentUserId) {
         if (post.getLikes() != null && post.getLikes().contains(currentUserId)) {
             holder.likeButton.setImageResource(R.drawable.heart_filled);
         } else {
             holder.likeButton.setImageResource(R.drawable.heart);
         }
 
-        db.collection("users").document(currentUserId).get()
+        holder.likeButton.setOnClickListener(v -> {
+            postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount);
+        });
+    }
+
+    private void setSaveButtonState(PostViewHolder holder, Post post, String currentUserId) {
+        FirebaseFirestore.getInstance().collection("users").document(currentUserId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         List<String> savedPosts = (List<String>) documentSnapshot.get("savedPosts");
@@ -111,13 +112,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                         }
                     }
                 });
+    }
 
-        if (post.getImageId() != null && !post.getImageId().isEmpty()) {
-            loadImageFromFirestore(post.getImageId(), holder.postImage);
+    private void handleDotsButtonClick(Post post, String currentUserId) {
+        if (post.getAuthorId().equals(currentUserId)) {
+            PostAuthorDialog postAuthorDialog = PostAuthorDialog.newInstance(post.getPostId());
+            postAuthorDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostAuthorDialog");
         } else {
-            holder.postImage.setVisibility(View.GONE);
+            PostDialog postDialog = PostDialog.newInstance(post.getPostId(), post.getAuthorId());
+            postDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostDialog");
         }
     }
+
 
     @Override
     public int getItemCount() {
