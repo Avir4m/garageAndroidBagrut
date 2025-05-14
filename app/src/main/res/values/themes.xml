@@ -1,23 +1,16 @@
 <resources>
-
     <style name="Base.Theme.MyApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:statusBarColor">@color/background</item>
         <item name="android:windowBackground">@color/background</item>
-        <item name="android:textColorPrimary">@color/text_primary</item>
-        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorSecondary">@color/secondary</item>
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
     </style>
-
     <style name="Theme.MyApp" parent="Base.Theme.MyApp" />
-
     <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="itemIconTint">@color/bottom_nav_color_selector</item>
-        <item name="itemTextColor">@color/bottom_nav_color_selector</item>
-        <item name="itemRippleColor">@color/ripple</item>
+        <item name="itemRippleColor">#33FFFFFF</item>
         <item name="android:padding">4dp</item>
-        <item name="android:background">@color/surface</item>
+        <item name="android:background">@color/background</item>
     </style>
 
 </resources>

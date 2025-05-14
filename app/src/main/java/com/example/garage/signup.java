@@ -73,7 +73,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         };
 
         spannableString.setSpan(clickableSpan, 25, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.blue)), 25, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.primary)), 25, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         loginTextView.setText(spannableString);
         loginTextView.setMovementMethod(LinkMovementMethod.getInstance());

@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/text" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:text="" />
 
     <LinearLayout
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/primary"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:text="Follow" />
 
         <Space
@@ -129,7 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/secondary"
             android:textColor="@color/white"
             android:text="Message" />
 
@@ -150,8 +150,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/gray"
-            android:textColor="@color/white"
+            android:backgroundTint="@color/secondary"
+            android:textColor="@color/text"
             android:text="Edit Profile" />
 
         <Space
@@ -163,8 +163,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/gray"
-            android:textColor="@color/white"
+            android:backgroundTint="@color/secondary"
+            android:textColor="@color/text"
             android:text="Add Vehicle" />
 
     </LinearLayout>
@@ -173,9 +173,9 @@
         android:id="@+id/userTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
+        android:background="@color/background"
         app:tabIndicatorColor="@color/primary"
-        app:tabRippleColor="@color/ripple"
+        app:tabRippleColor="@null"
         app:tabTextColor="@color/text_secondary">
 
         <com.google.android.material.tabs.TabItem

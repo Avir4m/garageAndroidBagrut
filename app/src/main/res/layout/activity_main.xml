@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@color/surface">
+        android:background="@color/background">
 
         <ImageButton
             android:id="@+id/backBtn"
@@ -26,7 +26,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/arrow"
             android:visibility="gone"
-            app:tint="@color/icons" />
+            app:tint="@color/text" />
 
         <TextView
             android:id="@+id/screenTitle"
@@ -35,7 +35,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text=""
-            android:textColor="@color/text_primary"
+            android:textColor="@color/text"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/settings"
             android:visibility="gone"
-            app:tint="@color/icons" />
+            app:tint="@color/text" />
 
         <ImageButton
             android:id="@+id/addBtn"
@@ -59,7 +59,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/add"
             android:visibility="gone"
-            app:tint="@color/icons" />
+            app:tint="@color/text" />
 
     </LinearLayout>
 
@@ -76,10 +76,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/surface"
+        android:background="@color/background"
         style="@style/BottomNavigationViewStyle"
-        app:itemIconTint="@color/icons"
-        app:itemTextColor="@color/icons"
+        app:itemIconTint="@color/text"
+        app:itemTextColor="@color/text"
         app:menu="@menu/menu" />
 
 </RelativeLayout>

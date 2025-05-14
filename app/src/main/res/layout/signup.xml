@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Sign Up"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:textSize="48sp"
         android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
         android:inputType="textEmailAddress"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:textSize="14sp" />
 
     <Space
@@ -62,7 +62,7 @@
         android:inputType="textEmailAddress"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:textSize="14sp" />
 
     <Space
@@ -79,7 +79,7 @@
         android:inputType="textPassword"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:textSize="14sp" />
 
     <Space
@@ -96,7 +96,7 @@
         android:inputType="textPassword"
         android:minWidth="256dp"
         android:padding="10dp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:textSize="14sp" />
 
     <Space
@@ -108,7 +108,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/gray"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/black"
         android:minWidth="192dp"
         android:text="Sign Up" />
 
@@ -125,6 +126,6 @@
         android:focusable="true"
         android:text="Already have an account? Login"
         android:textAlignment="center"
-        android:textColor="@color/gray" />
+        android:textColor="@color/text_secondary" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="32dp"
         android:text="Create an event"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Event Title"
-        android:textColor="@color/text_primary" />
+        android:textColor="@color/text" />
 
     <EditText
         android:id="@+id/eventTitle"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Event Location"
-        android:textColor="@color/text_primary" />
+        android:textColor="@color/text" />
 
     <EditText
         android:id="@+id/eventLocation"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Event Date"
-        android:textColor="@color/text_primary" />
+        android:textColor="@color/text" />
 
     <TextView
         android:id="@+id/eventDateTime"
@@ -80,8 +80,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/gray"
-        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/secondary"
+        android:textColor="@color/white"
+        android:layout_marginBottom="8dp"
         android:text="Add Image" />
 
     <ImageView
@@ -97,6 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primary"
+        android:textColor="@color/black"
         android:text="Create" />
 
 </LinearLayout>

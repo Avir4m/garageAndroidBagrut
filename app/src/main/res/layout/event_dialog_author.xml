@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="@color/white"
-        android:backgroundTint="@color/gray"
+        android:backgroundTint="@color/secondary"
         android:text="Edit" />
 
     <Button

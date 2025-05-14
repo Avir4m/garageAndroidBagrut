@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="32dp"
         android:text="Add your vehicle to your profile"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Vehicle make"
-        android:textColor="@color/text_primary" />
+        android:textColor="@color/text" />
 
     <AutoCompleteTextView
         android:id="@+id/vehicleMake"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Vehicle model "
-        android:textColor="@color/text_primary" />
+        android:textColor="@color/text" />
 
     <AutoCompleteTextView
         android:id="@+id/vehicleModel"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Vehicle year"
-        android:textColor="@color/text_primary" />
+        android:textColor="@color/text" />
 
     <EditText
         android:id="@+id/vehicleYear"
@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:text="Vehicle type"
-        android:textColor="@color/text_primary" />
+        android:textColor="@color/text" />
 
     <Spinner
         android:id="@+id/vehicleTypeSpinner"
@@ -92,14 +92,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/primary"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:text="Add" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="8dp" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
+        android:backgroundTint="@color/secondary"
         android:textColor="@color/white"
         android:text="Cancel" />
 

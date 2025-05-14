@@ -1,35 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary colors -->
-    <color name="primary">#2196F3</color>
-    <color name="primary_dark">#1976D2</color>
-    <color name="primary_light">#BBDEFB</color>
+    <color name="background">#ffffff</color>
+    <color name="primary">#FFEB3B</color>
+    <color name="secondary">#0d0101</color>
+    <color name="text">#0d0101</color>
+    <color name="text_secondary">#474747</color>
+    <color name="border">#A9A9A9</color>
 
-    <!-- Text colors -->
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
-    <color name="text_hint">#9E9E9E</color>
-
-    <!-- Background colors -->
-    <color name="background">#FFFFFF</color>
-    <color name="surface">#FFFFFF</color>
-    <color name="divider">#E0E0E0</color>
-
-    <!-- Action colors -->
-    <color name="accent">#2196F3</color>
-    <color name="error">#212121</color>
-    <color name="success">#212121</color>
-
-    <!-- Legacy colors (keeping for compatibility) -->
-    <color name="icons">#313131</color>
-    <color name="black">#212121</color>
-    <color name="white">#FFFFFF</color>
-    <color name="gray">#313131</color>
-    <color name="border">#E0E0E0</color>
-    <color name="secondary_text">#757575</color>
-    <color name="ripple">#E0E0E0</color>
-    <color name="red">#DB4141</color>
-    <color name="blue">#2196F3</color>
-    <color name="off_white">#F5F5F5</color>
+    <color name="red">#FD4141</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
 </resources>
-

@@ -46,7 +46,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.eventLocation.setText(event.getLocation());
         holder.eventDate.setText(event.getDate());
         holder.eventTime.setText(event.getTime());
-        holder.eventParticipateButton.setOnClickListener(v -> toggleJoinEvent(event.getId(), holder.eventParticipateButton));
+        holder.eventParticipateButton.setOnClickListener(v -> toggleJoinEvent(event.getId(), holder.eventParticipateButton, context));
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -61,8 +61,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 List<String> joinedUsers = (List<String>) documentSnapshot.get("participants");
                 if (joinedUsers != null && joinedUsers.contains(currentUserId)) {
                     holder.eventParticipateButton.setText("Participating");
+                    holder.eventParticipateButton.setBackgroundTintList(context.getResources().getColorStateList(R.color.secondary));
+                    holder.eventParticipateButton.setTextColor(context.getResources().getColorStateList(R.color.text));
                 } else {
                     holder.eventParticipateButton.setText("Join Event");
+                    holder.eventParticipateButton.setBackgroundTintList(context.getResources().getColorStateList(R.color.primary));
+                    holder.eventParticipateButton.setTextColor(context.getResources().getColorStateList(R.color.black));
                 }
             }
         });

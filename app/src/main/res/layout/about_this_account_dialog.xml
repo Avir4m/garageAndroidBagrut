@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:text="About this account" />
 
     <Space
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/text"
         android:text="" />
 
     <Space
@@ -58,7 +58,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/calander"
-            app:tint="@color/icons" />
+            app:tint="@color/text" />
 
         <Space
             android:layout_width="16dp"
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/text"
                 android:textStyle="bold"
                 android:text="Date joined" />
 
@@ -80,7 +80,7 @@
                 android:id="@+id/joinedAt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
+                android:textColor="@color/secondary"
                 android:text="" />
 
         </LinearLayout>
@@ -99,7 +99,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/garage"
-            app:tint="@color/icons" />
+            app:tint="@color/text" />
 
         <Space
             android:layout_width="16dp"
@@ -113,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/text"
                 android:textStyle="bold"
                 android:text="Vehicles" />
 
@@ -121,7 +121,7 @@
                 android:id="@+id/vehicles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
+                android:textColor="@color/secondary"
                 android:text="0" />
 
         </LinearLayout>
