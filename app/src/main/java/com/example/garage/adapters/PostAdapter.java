@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private final Context context;
     private final List<Post> posts;
     private final OnUserClickListener listener;
@@ -37,7 +37,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
         void onUserClick(String userId);
     }
 
-    public HomePostAdapter(Context context, List<Post> posts, OnUserClickListener listener) {
+    public PostAdapter(Context context, List<Post> posts, OnUserClickListener listener) {
         this.context = context;
         this.posts = posts;
         this.listener = listener;

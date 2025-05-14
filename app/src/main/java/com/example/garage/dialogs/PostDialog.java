@@ -13,11 +13,20 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.garage.R;
 import com.example.garage.functions.postInteractions;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.List;
 
 public class PostDialog extends BottomSheetDialogFragment {
 
     private String postId;
     private String postAuthorId;
+
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    Boolean postHidden = false;
 
     public PostDialog() {
     }
@@ -44,6 +53,7 @@ public class PostDialog extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.post_dialog, container, false);
 
+
         Button aboutThisAccountBtn = view.findViewById(R.id.aboutThisAccountButton);
         aboutThisAccountBtn.setOnClickListener(v -> {
             AboutThisAccountDialog aboutThisAccountDialog = AboutThisAccountDialog.newInstance(postAuthorId);
@@ -52,9 +62,25 @@ public class PostDialog extends BottomSheetDialogFragment {
         });
 
         Button hidePost = view.findViewById(R.id.hideButton);
+
+        db.collection("users").document(auth.getUid()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        List<String> hiddenPosts = (List<String>) documentSnapshot.get("hiddenPosts");
+                        if (hiddenPosts != null && hiddenPosts.contains(postId)) {
+                            postHidden = true;
+                            if (postHidden) hidePost.setText("Unhide Post");
+                        }
+                    }
+                });
+
         hidePost.setOnClickListener(v -> {
             postInteractions.toggleHidePost(postId);
-            Toast.makeText(getContext(), "Post has been hidden", Toast.LENGTH_SHORT).show();
+            if (postHidden) {
+                Toast.makeText(getContext(), "Post has been unhidden", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Post has been hidden", Toast.LENGTH_SHORT).show();
+            }
             dismiss();
         });
 

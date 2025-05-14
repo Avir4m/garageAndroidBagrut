@@ -63,7 +63,7 @@ public class user extends Fragment {
         screenTitle = getActivity().findViewById(R.id.screenTitle);
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
         editProfileBtn = view.findViewById(R.id.editProfileBtn);
-        editProfileBtn.setOnClickListener(v -> getParentFragmentManager().beginTransaction().replace(R.id.frame, new fragment_edit_profile()).addToBackStack(null).commit());
+        editProfileBtn.setOnClickListener(v -> getParentFragmentManager().beginTransaction().replace(R.id.frame, new Editprofile()).addToBackStack(null).commit());
         followBtn = view.findViewById(R.id.followBtn);
         messageBtn = view.findViewById(R.id.messageBtn);
         addVehicleBtn = view.findViewById(R.id.addVehicleBtn);

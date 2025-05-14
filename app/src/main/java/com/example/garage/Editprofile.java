@@ -1,6 +1,7 @@
 package com.example.garage;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
 import static com.example.garage.functions.ImageUtils.uploadImageToFirestore;
 
 import android.app.Activity;
@@ -27,7 +28,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class fragment_edit_profile extends Fragment {
+public class Editprofile extends Fragment {
+
+    String previousProfilePicture = null;
 
     ImageButton backBtn, settingsBtn;
     TextView screenTitle;
@@ -47,7 +50,7 @@ public class fragment_edit_profile extends Fragment {
                 }
             });
 
-    public fragment_edit_profile() {
+    public Editprofile() {
     }
 
     @Override
@@ -83,9 +86,13 @@ public class fragment_edit_profile extends Fragment {
 
         FirebaseUser currentUser = auth.getCurrentUser();
 
+
         db.collection("users").document(currentUser.getUid()).get().addOnSuccessListener(documentSnapshot -> {
             editName.setText(documentSnapshot.getString("name"));
             editUsername.setText(documentSnapshot.getString("username"));
+            previousProfilePicture = documentSnapshot.getString("profilePicture");
+            getImageFromFirestore(previousProfilePicture).addOnSuccessListener(bitmap -> imageProfile.setImageBitmap(bitmap));
+
         });
 
         saveBtn = view.findViewById(R.id.saveBtn);
@@ -103,6 +110,9 @@ public class fragment_edit_profile extends Fragment {
                         .update("name", updatedName, "username", updatedUsername, "profilePicture", docId)
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(getContext(), "Profile updated successfully", Toast.LENGTH_SHORT).show();
+                            if (previousProfilePicture != null) {
+                                db.collection("images").document(previousProfilePicture).delete();
+                            }
                             getParentFragmentManager().popBackStack();
                         })
                         .addOnFailureListener(e -> {

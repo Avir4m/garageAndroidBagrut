@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.garage.adapters.HomePostAdapter;
+import com.example.garage.adapters.PostAdapter;
 import com.example.garage.models.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,7 +29,7 @@ public class home extends Fragment {
     BottomNavigationView navbar;
     RecyclerView recyclerView;
 
-    private HomePostAdapter postAdapter;
+    private PostAdapter postAdapter;
     private List<Post> postList = new ArrayList<>();
 
     public home() {
@@ -68,7 +68,7 @@ public class home extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         postList = new ArrayList<>();
-        postAdapter = new HomePostAdapter(getContext(), postList, userId -> navigateToUserProfile(userId));
+        postAdapter = new PostAdapter(getContext(), postList, userId -> navigateToUserProfile(userId));
         recyclerView.setAdapter(postAdapter);
 
         loadPosts();

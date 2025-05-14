@@ -7,29 +7,187 @@
     android:background="@color/background"
     tools:context=".settings">
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="32dp" />
-
-    <TextView
-        android:id="@+id/userEmail"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/settingsView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/text"
-        android:text="" />
+        android:orientation="vertical">
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="32dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
 
-    <Button
-        android:id="@+id/signoutBtn"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/accountBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Account"
+            android:textColor="@color/text"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:padding="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+        <TextView
+            android:id="@+id/savedBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saved"
+            android:textColor="@color/text"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:padding="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+        <TextView
+            android:id="@+id/archivedBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Archived"
+            android:textColor="@color/text"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:padding="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+        <TextView
+            android:id="@+id/hiddenBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hidden"
+            android:textColor="@color/text"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:padding="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+        <TextView
+            android:id="@+id/signoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Out"
+            android:textColor="@color/red"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:padding="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/accountView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/red"
-        android:textColor="@color/white"
-        android:text="Sign Out" />
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your Email:"
+            android:textSize="14dp"
+            android:textColor="@color/text_secondary"
+            android:textAlignment="center"
+            android:paddingTop="16dp" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:paddingBottom="16dp"
+            android:layout_marginTop="4dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Account"
+            android:textColor="@color/red"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:padding="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/savedView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/savedRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/archivedView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/archivedRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hiddenView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hiddenRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
