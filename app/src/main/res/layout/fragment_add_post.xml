@@ -30,10 +30,9 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_edit_text"
         android:hint="Post Title"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:inputType="textEmailAddress"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp" />
+        android:padding="12dp" />
 
     <Space
         android:layout_width="wrap_content"

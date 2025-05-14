@@ -1,6 +1,8 @@
 package com.example.garage;
 
 
+import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +39,7 @@ import java.util.List;
 public class user extends Fragment {
     TextView screenTitle, noVehiclesText, noPostsText, displayName, vehiclesCount, followersCount;
     ImageButton settingsBtn, backBtn, addBtn;
-    ImageView userImage, addUserImageBtn;
+    ImageView userImage;
     BottomNavigationView navbar;
     TabLayout tabLayout;
     LinearLayout postsContainer, garageContainer, ownProfileBtns, profileBtns;
@@ -61,6 +63,7 @@ public class user extends Fragment {
         screenTitle = getActivity().findViewById(R.id.screenTitle);
         settingsBtn = getActivity().findViewById(R.id.settingsBtn);
         editProfileBtn = view.findViewById(R.id.editProfileBtn);
+        editProfileBtn.setOnClickListener(v -> getParentFragmentManager().beginTransaction().replace(R.id.frame, new fragment_edit_profile()).addToBackStack(null).commit());
         followBtn = view.findViewById(R.id.followBtn);
         messageBtn = view.findViewById(R.id.messageBtn);
         addVehicleBtn = view.findViewById(R.id.addVehicleBtn);
@@ -79,7 +82,6 @@ public class user extends Fragment {
         vehiclesCount = view.findViewById(R.id.vehiclesCount);
         followersCount = view.findViewById(R.id.followersCount);
         userImage = view.findViewById(R.id.userImage);
-        addUserImageBtn = view.findViewById(R.id.addUserImageBtn);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -105,9 +107,6 @@ public class user extends Fragment {
         if (userId.equals(auth.getCurrentUser().getUid())) {
             ownProfileBtns.setVisibility(View.VISIBLE);
             profileBtns.setVisibility(View.GONE);
-            addUserImageBtn.setVisibility(View.VISIBLE);
-
-            userImage.setOnClickListener(v -> setProfilePicture());
         } else {
             ownProfileBtns.setVisibility(View.GONE);
             profileBtns.setVisibility(View.VISIBLE);
@@ -118,9 +117,15 @@ public class user extends Fragment {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    String name = document.getString("username");
-                    screenTitle.setText(name);
-                    displayName.setText(name);
+                    screenTitle.setText(document.getString("username"));
+                    displayName.setText(document.getString("name"));
+                    if (!document.getString("profilePicture").isEmpty()) {
+                        getImageFromFirestore(document.getString("profilePicture")).addOnSuccessListener(bitmap -> {
+                            if (bitmap != null) {
+                                userImage.setImageBitmap(bitmap);
+                            }
+                        });
+                    }
                 } else {
                     Toast.makeText(getActivity(), "No such user", Toast.LENGTH_SHORT).show();
                     screenTitle.setText("NoUserDocument");
@@ -185,9 +190,6 @@ public class user extends Fragment {
         });
 
         return view;
-    }
-
-    private void setProfilePicture() {
     }
 
     private void follow(String userId) {

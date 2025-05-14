@@ -52,9 +52,7 @@ public class ImageUtils {
                         taskCompletionSource.setResult(null);
                     }
                 })
-                .addOnFailureListener(e -> {
-                    taskCompletionSource.setException(e);
-                });
+                .addOnFailureListener(e -> taskCompletionSource.setException(e));
 
         return taskCompletionSource.getTask();
     }

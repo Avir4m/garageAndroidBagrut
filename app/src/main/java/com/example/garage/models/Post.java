@@ -7,7 +7,6 @@ import java.util.List;
 public class Post {
     private String postId;
     private String title;
-    private String author;
     private String authorId;
     private Timestamp timestamp;
     private List<String> likes;
@@ -18,10 +17,9 @@ public class Post {
     public Post() {
     }
 
-    public Post(String postId, String title, String author, String authorId, Timestamp timestamp, List<String> likes, int likeCount, String imageId, boolean archived) {
+    public Post(String postId, String title, String authorId, Timestamp timestamp, List<String> likes, int likeCount, String imageId, boolean archived) {
         this.postId = postId;
         this.title = title;
-        this.author = author;
         this.authorId = authorId;
         this.timestamp = timestamp;
         this.likes = likes;
@@ -44,14 +42,6 @@ public class Post {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getAuthorId() {

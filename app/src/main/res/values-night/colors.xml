@@ -2,7 +2,7 @@
     <color name="background">#000000</color>
     <color name="primary">#FFEB3B</color>
     <color name="secondary">#1D1D1D</color>
-    <color name="text">#ffffff</color>
+    <color name="text">#DCDCDC</color>
     <color name="text_secondary">#8A8A8A</color>
     <color name="border">#313131</color>
 

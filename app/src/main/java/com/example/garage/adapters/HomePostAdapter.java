@@ -58,11 +58,26 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
         String currentUserId = auth.getCurrentUser().getUid();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        db.collection("users").document(post.getAuthorId()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String username = documentSnapshot.getString("username");
+                        holder.postAuthor.setText(username != null ? username : "");
+                    }
+                    if (!documentSnapshot.getString("profilePicture").isEmpty()) {
+                        getImageFromFirestore(documentSnapshot.getString("profilePicture")).addOnSuccessListener(bitmap -> {
+                            holder.userImage.setImageBitmap(bitmap);
+                        });
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    holder.postAuthor.setText("");
+                });
+
         holder.postTitle.setText(post.getTitle());
         Date timestamp = post.getTimestamp().toDate();
         holder.timestamp.setText(getTimeAgo(timestamp));
         holder.likeCount.setText(String.valueOf(formatCount(post.getLikeCount())));
-        holder.postAuthor.setText(post.getAuthor());
 
         holder.postAuthor.setOnClickListener(v -> listener.onUserClick(post.getAuthorId()));
         holder.likeButton.setOnClickListener(v -> postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount));
@@ -122,7 +137,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView postTitle, postAuthor, timestamp, likeCount;
-        ImageView postImage;
+        ImageView postImage, userImage;
         ImageButton likeButton, saveButton, dotsButton;
 
         public PostViewHolder(View itemView) {
@@ -135,6 +150,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.PostVi
             likeButton = itemView.findViewById(R.id.likeBtn);
             saveButton = itemView.findViewById(R.id.saveBtn);
             dotsButton = itemView.findViewById(R.id.dotsButton);
+            userImage = itemView.findViewById(R.id.userImage);
         }
     }
 }

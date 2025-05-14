@@ -131,7 +131,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                                                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                                                         Map<String, Object> userData = new HashMap<>();
                                                         userData.put("username", username);
-                                                        userData.put("profilePicture", null);
+                                                        userData.put("profilePicture", "");
                                                         userData.put("joined", Timestamp.now());
                                                         userData.put("likedPosts", new ArrayList<>());
                                                         userData.put("savedPosts", new ArrayList<>());

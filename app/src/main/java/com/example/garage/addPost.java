@@ -116,7 +116,6 @@ public class addPost extends Fragment {
         FirebaseUser currentUser = auth.getCurrentUser();
 
         Map<String, Object> post = new HashMap<>();
-        post.put("author", currentUser.getDisplayName());
         post.put("authorId", currentUser.getUid());
         post.put("likeCount", 0);
         post.put("likes", new ArrayList<>());
