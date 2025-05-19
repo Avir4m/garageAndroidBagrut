@@ -45,7 +45,7 @@ public class addEvent extends Fragment {
     Button createButton, pickImageBtn;
     ImageButton addBtn, backBtn;
     EditText eventTitle, eventLocation;
-    TextView eventDateTime;
+    TextView eventDateTime, screenTitle;
     ImageView imagePreview;
 
     private final ActivityResultLauncher<Intent> imagePickerLauncher =
@@ -64,6 +64,9 @@ public class addEvent extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_event, container, false);
+
+        screenTitle = getActivity().findViewById(R.id.screenTitle);
+        screenTitle.setText("Add Event");
 
         addBtn = getActivity().findViewById(R.id.addBtn);
         addBtn.setVisibility(View.GONE);

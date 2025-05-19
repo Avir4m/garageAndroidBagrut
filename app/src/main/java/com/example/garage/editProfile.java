@@ -91,8 +91,9 @@ public class editProfile extends Fragment {
             editName.setText(documentSnapshot.getString("name"));
             editUsername.setText(documentSnapshot.getString("username"));
             previousProfilePicture = documentSnapshot.getString("profilePicture");
-            getImageFromFirestore(previousProfilePicture).addOnSuccessListener(bitmap -> imageProfile.setImageBitmap(bitmap));
-
+            if (previousProfilePicture != null && !previousProfilePicture.isEmpty()) {
+                getImageFromFirestore(previousProfilePicture).addOnSuccessListener(bitmap -> imageProfile.setImageBitmap(bitmap));
+            }
         });
 
         saveBtn = view.findViewById(R.id.saveBtn);

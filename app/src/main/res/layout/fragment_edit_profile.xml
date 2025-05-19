@@ -87,13 +87,6 @@
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_edit_text" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Email"
-            android:textColor="@color/text" />
-
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="match_parent"

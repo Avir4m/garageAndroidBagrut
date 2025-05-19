@@ -52,10 +52,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String currentUserId = auth.getCurrentUser().getUid();
 
-        if (!currentUserId.equals(event.getHostId())) {
-            holder.manageBtn.setVisibility(View.GONE);
-        }
-
         db.collection("events").document(event.getId()).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 List<String> joinedUsers = (List<String>) documentSnapshot.get("participants");

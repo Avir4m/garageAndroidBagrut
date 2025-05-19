@@ -119,8 +119,9 @@ public class user extends Fragment {
                 if (document.exists()) {
                     screenTitle.setText(document.getString("username"));
                     displayName.setText(document.getString("name"));
-                    if (!document.getString("profilePicture").isEmpty()) {
-                        getImageFromFirestore(document.getString("profilePicture")).addOnSuccessListener(bitmap -> {
+                    String profilePicture = document.getString("profilePicture");
+                    if (profilePicture != null && !profilePicture.isEmpty()) {
+                        getImageFromFirestore(profilePicture).addOnSuccessListener(bitmap -> {
                             if (bitmap != null) {
                                 userImage.setImageBitmap(bitmap);
                             }

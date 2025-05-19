@@ -60,7 +60,7 @@ public class addPost extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_post, container, false);
 
         screenTitle = getActivity().findViewById(R.id.screenTitle);
-        screenTitle.setText("Add");
+        screenTitle.setText("Add Post");
 
         addBtn = getActivity().findViewById(R.id.addBtn);
         addBtn.setVisibility(View.GONE);
