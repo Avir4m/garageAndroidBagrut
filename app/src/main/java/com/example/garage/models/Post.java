@@ -14,11 +14,12 @@ public class Post {
     private int likeCount;
     private String imageId;
     private boolean archived;
+    private boolean edited;
 
     public Post() {
     }
 
-    public Post(String postId, String title, String authorId, String author, Timestamp timestamp, List<String> likes, int likeCount, String imageId, boolean archived) {
+    public Post(String postId, String title, String authorId, String author, Timestamp timestamp, List<String> likes, int likeCount, String imageId, boolean archived, boolean edited) {
         this.postId = postId;
         this.title = title;
         this.authorId = authorId;
@@ -28,6 +29,7 @@ public class Post {
         this.likeCount = likeCount;
         this.imageId = imageId;
         this.archived = archived;
+        this.edited = edited;
     }
 
     public String getPostId() {
@@ -100,5 +102,13 @@ public class Post {
 
     public void setArchived(boolean archived) {
         this.archived = archived;
+    }
+
+    public boolean getEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 }

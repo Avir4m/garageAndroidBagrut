@@ -76,6 +76,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.timestamp.setText(getTimeAgo(post.getTimestamp().toDate()));
         holder.likeCount.setText(String.valueOf(formatCount(post.getLikeCount())));
 
+        holder.postAuthor.setOnClickListener(v -> {
+            if (post.getAuthorId() != null) {
+                listener.onUserClick(post.getAuthorId());
+            }
+        });
+
+        holder.userImage.setOnClickListener(v -> {
+            if (post.getAuthorId() != null) {
+                listener.onUserClick(post.getAuthorId());
+            }
+        });
+
+        if (post.getEdited()) {
+            holder.editedLabel.setVisibility(View.VISIBLE);
+        }
+
         setLikeButtonState(holder, post, currentUserId);
         setSaveButtonState(holder, post, currentUserId);
 
@@ -112,6 +128,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                         }
                     }
                 });
+
+        holder.saveButton.setOnClickListener(v -> postInteractions.toggleSavePost(post.getPostId(), holder.saveButton));
     }
 
     private void handleDotsButtonClick(Post post, String currentUserId) {
@@ -142,7 +160,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
-        TextView postTitle, postAuthor, timestamp, likeCount;
+        TextView postTitle, postAuthor, timestamp, likeCount, editedLabel;
         ImageView postImage, userImage;
         ImageButton likeButton, saveButton, dotsButton;
 
@@ -157,6 +175,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             saveButton = itemView.findViewById(R.id.saveBtn);
             dotsButton = itemView.findViewById(R.id.dotsButton);
             userImage = itemView.findViewById(R.id.userImage);
+            editedLabel = itemView.findViewById(R.id.editedLabel);
         }
     }
 }

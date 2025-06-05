@@ -134,7 +134,7 @@ public class settings extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view == backBtn) {
             if (settingsView.getVisibility() == View.VISIBLE) {
-                getParentFragmentManager().beginTransaction().replace(R.id.frame, new user()).addToBackStack(null).commit();
+                getParentFragmentManager().popBackStack();
             } else {
                 screenTitle.setText("Settings");
                 settingsView.setVisibility(View.VISIBLE);

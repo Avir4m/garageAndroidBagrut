@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.garage.R;
+import com.example.garage.editPost;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -69,8 +70,20 @@ public class PostAuthorDialog extends BottomSheetDialogFragment {
     }
 
     public void editBtn() {
-        Toast.makeText(getContext(), "This feature is currently under development", Toast.LENGTH_SHORT).show(); // Needs to be added
+        if (getActivity() != null) {
+            editPost editFragment = editPost.newInstance(postId);
+
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame, editFragment)
+                    .addToBackStack(null)
+                    .commit();
+
+            dismiss();
+        }
     }
+
+
 
     public void archiveBtn() {
         DocumentReference docRef = db.collection("posts").document(postId);
