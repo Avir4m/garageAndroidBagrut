@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class user extends Fragment {
-    TextView screenTitle, noVehiclesText, noPostsText, displayName, vehiclesCount, followersCount;
+    TextView screenTitle, noVehiclesText, noPostsText, displayName, vehiclesCount, postsCount;
     ImageButton settingsBtn, backBtn, addBtn;
     ImageView userImage;
     BottomNavigationView navbar;
@@ -80,7 +80,7 @@ public class user extends Fragment {
         addBtn.setVisibility(View.GONE);
         displayName = view.findViewById(R.id.displayName);
         vehiclesCount = view.findViewById(R.id.vehiclesCount);
-        followersCount = view.findViewById(R.id.followersCount);
+        postsCount = view.findViewById(R.id.postsCount);
         userImage = view.findViewById(R.id.userImage);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -235,6 +235,7 @@ public class user extends Fragment {
 
                     if (!queryDocumentSnapshots.isEmpty()) {
                         noPostsText.setVisibility(View.GONE);
+                        postsCount.setText(Integer.toString(queryDocumentSnapshots.size()));
                     }
 
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {

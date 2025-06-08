@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.garage.R;
 import com.example.garage.dialogs.PostAuthorDialog;
 import com.example.garage.dialogs.PostDialog;
-import com.example.garage.functions.postInteractions;
+import com.example.garage.functions.postUtils;
 import com.example.garage.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -112,7 +112,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
 
         holder.likeButton.setOnClickListener(v -> {
-            postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount);
+            postUtils.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount);
         });
     }
 
@@ -129,7 +129,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                     }
                 });
 
-        holder.saveButton.setOnClickListener(v -> postInteractions.toggleSavePost(post.getPostId(), holder.saveButton));
+        holder.saveButton.setOnClickListener(v -> postUtils.toggleSavePost(post.getPostId(), holder.saveButton));
     }
 
     private void handleDotsButtonClick(Post post, String currentUserId) {

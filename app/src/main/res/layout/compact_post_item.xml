@@ -76,9 +76,20 @@
                     android:id="@+id/saveBtn"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@null"
                     android:scaleType="fitCenter"
                     android:src="@drawable/bookmark"
+                    app:tint="@color/text" />
+
+                <ImageButton
+                    android:visibility="gone"
+                    android:id="@+id/dotsBtn"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/dots"
                     app:tint="@color/text" />
 
             </LinearLayout>

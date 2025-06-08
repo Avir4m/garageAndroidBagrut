@@ -1,7 +1,7 @@
 package com.example.garage.adapters;
 
 import static com.example.garage.functions.ImageUtils.getImageFromFirestore;
-import static com.example.garage.functions.eventInteractions.toggleJoinEvent;
+import static com.example.garage.functions.eventUtils.toggleJoinEvent;
 
 import android.content.Context;
 import android.view.LayoutInflater;

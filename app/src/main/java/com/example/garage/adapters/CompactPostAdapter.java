@@ -13,10 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.R;
-import com.example.garage.functions.postInteractions;
+import com.example.garage.dialogs.PostAuthorDialog;
+import com.example.garage.functions.postUtils;
 import com.example.garage.models.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -54,8 +56,17 @@ public class CompactPostAdapter extends RecyclerView.Adapter<CompactPostAdapter.
         holder.likeCount.setText(String.valueOf(formatCount(post.getLikeCount())));
         holder.timestamp.setText(timeAgo);
 
-        holder.likeButton.setOnClickListener(v -> postInteractions.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount));
-        holder.saveButton.setOnClickListener(v -> postInteractions.toggleSavePost(post.getPostId(), holder.saveButton));
+        if (currentUserId.equals(post.getAuthorId())) {
+            holder.dotsButton.setVisibility(View.VISIBLE);
+            holder.dotsButton.setOnClickListener(v -> {
+                PostAuthorDialog dialog = PostAuthorDialog.newInstance(post.getPostId());
+                dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "PostAuthorDialog");
+            });
+
+        }
+
+        holder.likeButton.setOnClickListener(v -> postUtils.toggleLikePost(post.getPostId(), holder.likeButton, holder.likeCount));
+        holder.saveButton.setOnClickListener(v -> postUtils.toggleSavePost(post.getPostId(), holder.saveButton));
 
         if (post.getLikes() != null && post.getLikes().contains(currentUserId)) {
             holder.likeButton.setImageResource(R.drawable.heart_filled);
@@ -102,7 +113,7 @@ public class CompactPostAdapter extends RecyclerView.Adapter<CompactPostAdapter.
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView postTitle, timestamp, likeCount;
         ImageView postImage;
-        ImageButton likeButton, saveButton;
+        ImageButton likeButton, saveButton, dotsButton;
 
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -112,6 +123,7 @@ public class CompactPostAdapter extends RecyclerView.Adapter<CompactPostAdapter.
             postImage = itemView.findViewById(R.id.postImage);
             likeButton = itemView.findViewById(R.id.likeBtn);
             saveButton = itemView.findViewById(R.id.saveBtn);
+            dotsButton = itemView.findViewById(R.id.dotsBtn);
         }
     }
 }

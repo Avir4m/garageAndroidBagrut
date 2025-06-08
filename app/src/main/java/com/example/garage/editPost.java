@@ -87,6 +87,7 @@ public class editPost extends Fragment {
                     .update("title", updatedTitle, "edited", true)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(getContext(), "Post updated successfully.", Toast.LENGTH_SHORT).show();
+                        getParentFragmentManager().popBackStack();
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(getContext(), "Failed to update post, try again later.", Toast.LENGTH_SHORT).show();

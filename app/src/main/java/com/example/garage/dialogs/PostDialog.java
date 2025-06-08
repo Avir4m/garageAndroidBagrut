@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.garage.R;
-import com.example.garage.functions.postInteractions;
+import com.example.garage.functions.postUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -75,7 +75,7 @@ public class PostDialog extends BottomSheetDialogFragment {
                 });
 
         hidePost.setOnClickListener(v -> {
-            postInteractions.toggleHidePost(postId);
+            postUtils.toggleHidePost(postId);
             if (postHidden) {
                 Toast.makeText(getContext(), "Post has been unhidden", Toast.LENGTH_SHORT).show();
             } else {

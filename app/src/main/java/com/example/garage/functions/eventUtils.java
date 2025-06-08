@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-public class eventInteractions {
+public class eventUtils {
 
     public static void toggleJoinEvent(String eventId, Button joinBtn, Context context) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

@@ -8,19 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.garage.adapters.PostAdapter;
+import com.example.garage.functions.postUtils;
 import com.example.garage.models.Post;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +84,8 @@ public class settings extends Fragment implements View.OnClickListener {
             screenTitle.setText("Saved");
             settingsView.setVisibility(View.GONE);
             savedView.setVisibility(View.VISIBLE);
-            loadSavedPosts();
+            postUtils.loadSavedPosts(getContext(), savedPostList, savedPostAdapter, () -> {
+            });
         });
 
         archivedBtn = view.findViewById(R.id.archivedBtn);
@@ -95,7 +93,8 @@ public class settings extends Fragment implements View.OnClickListener {
             screenTitle.setText("Archived");
             settingsView.setVisibility(View.GONE);
             archivedView.setVisibility(View.VISIBLE);
-            loadArchivedPosts();
+            postUtils.loadArchivedPosts(getContext(), archivedPostList, archivedPostAdapter, () -> {
+            });
         });
 
         hiddenBtn = view.findViewById(R.id.hiddenBtn);
@@ -103,7 +102,8 @@ public class settings extends Fragment implements View.OnClickListener {
             screenTitle.setText("Hidden");
             settingsView.setVisibility(View.GONE);
             hiddenView.setVisibility(View.VISIBLE);
-            loadHiddenPosts();
+            postUtils.loadHiddenPosts(getContext(), hiddenPostList, hiddenPostAdapter, () -> {
+            });
         });
 
         savedRecyclerView = view.findViewById(R.id.savedRecyclerView);
@@ -149,107 +149,6 @@ public class settings extends Fragment implements View.OnClickListener {
             startActivity(intent);
             getActivity().finish();
         }
-    }
-
-    private void loadSavedPosts() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String currentUserId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        db.collection("users").document(currentUserId).get()
-                .addOnSuccessListener(userSnapshot -> {
-                    List<String> savedPosts = (List<String>) userSnapshot.get("savedPosts");
-
-                    if (savedPosts != null && !savedPosts.isEmpty()) {
-                        savedPostList.clear();
-                        for (String postId : savedPosts) {
-                            db.collection("posts").document(postId).get()
-                                    .addOnSuccessListener(postSnapshot -> {
-                                        if (postSnapshot.exists()) {
-                                            Post post = postSnapshot.toObject(Post.class);
-                                            post.setPostId(postSnapshot.getId());
-                                            if (!post.getArchived()) {
-                                                savedPostList.add(post);
-                                            }
-                                        }
-                                        savedPostAdapter.notifyDataSetChanged();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(getContext(), "Failed to load post: " + postId, Toast.LENGTH_SHORT).show();
-                                        System.out.println(e);
-                                    });
-                        }
-                    } else {
-                        Toast.makeText(getContext(), "No saved posts found", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed to load user data", Toast.LENGTH_SHORT).show();
-                    System.out.println(e);
-                });
-    }
-
-    private void loadArchivedPosts() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String currentUserId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        db.collection("posts")
-                .whereEqualTo("authorId", currentUserId)
-                .whereEqualTo("archived", true)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    archivedPostList.clear();
-
-                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                        String postId = doc.getId();
-                        Post post = doc.toObject(Post.class);
-                        post.setPostId(postId);
-                        archivedPostList.add(post);
-                    }
-
-                    archivedPostAdapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed to load archived posts", Toast.LENGTH_SHORT).show();
-                    System.out.println(e);
-                });
-    }
-
-    private void loadHiddenPosts() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String currentUserId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        db.collection("users").document(currentUserId).get()
-                .addOnSuccessListener(userSnapshot -> {
-                    List<String> savedPosts = (List<String>) userSnapshot.get("hiddenPosts");
-
-                    if (savedPosts != null && !savedPosts.isEmpty()) {
-                        hiddenPostList.clear();
-                        for (String postId : savedPosts) {
-                            db.collection("posts").document(postId).get()
-                                    .addOnSuccessListener(postSnapshot -> {
-                                        if (postSnapshot.exists()) {
-                                            Post post = postSnapshot.toObject(Post.class);
-                                            post.setPostId(postSnapshot.getId());
-                                            if (!post.getArchived()) {
-                                                hiddenPostList.add(post);
-                                            }
-                                        }
-                                        hiddenPostAdapter.notifyDataSetChanged();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(getContext(), "Failed to load post: " + postId, Toast.LENGTH_SHORT).show();
-                                        System.out.println(e);
-                                    });
-                        }
-                    } else {
-                        Toast.makeText(getContext(), "No hidden posts found", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed to load user data", Toast.LENGTH_SHORT).show();
-                    System.out.println(e);
-                });
     }
 
     private void navigateToUserProfile(String userId) {
