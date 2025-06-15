@@ -43,7 +43,7 @@ public class user extends Fragment {
     BottomNavigationView navbar;
     TabLayout tabLayout;
     LinearLayout postsContainer, garageContainer, ownProfileBtns, profileBtns;
-    Button editProfileBtn, followBtn, addVehicleBtn, messageBtn;
+    Button editProfileBtn, followBtn, addVehicleBtn;
 
     private String userId;
 
@@ -65,7 +65,6 @@ public class user extends Fragment {
         editProfileBtn = view.findViewById(R.id.editProfileBtn);
         editProfileBtn.setOnClickListener(v -> getParentFragmentManager().beginTransaction().replace(R.id.frame, new editProfile()).addToBackStack(null).commit());
         followBtn = view.findViewById(R.id.followBtn);
-        messageBtn = view.findViewById(R.id.messageBtn);
         addVehicleBtn = view.findViewById(R.id.addVehicleBtn);
         addVehicleBtn.setOnClickListener(v -> {
             AddVehicleDialog addVehicleDialog = new AddVehicleDialog();
