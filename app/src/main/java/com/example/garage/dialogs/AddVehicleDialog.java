@@ -126,14 +126,38 @@ public class AddVehicleDialog extends DialogFragment {
         cancelButton.setOnClickListener(v -> dismiss());
 
         saveButton.setOnClickListener(v -> {
+            String yearStr = yearInput.getText().toString().trim();
+
+            if (yearStr.isEmpty()) {
+                Toast.makeText(v.getContext(), "Please enter the vehicle year.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+            int maxAllowedYear = currentYear + 1;
+
+            int vehicleYear;
+            try {
+                vehicleYear = Integer.parseInt(yearStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(v.getContext(), "Invalid year format.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (vehicleYear < 1886 || vehicleYear > maxAllowedYear) {
+                Toast.makeText(v.getContext(), "Please enter a year between 1886 and " + maxAllowedYear + ".", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             CollectionReference garageCollection = db.collection("vehicles");
             Map<String, Object> vehicleData = new HashMap<>();
             vehicleData.put("make", vehicleMakeAutoComplete.getText().toString());
             vehicleData.put("model", vehicleModelAutoComplete.getText().toString());
-            vehicleData.put("year", yearInput.getText().toString());
+            vehicleData.put("year", String.valueOf(vehicleYear));
             vehicleData.put("type", vehicleTypeSpinner.getSelectedItem().toString());
             vehicleData.put("ownerId", auth.getCurrentUser().getUid());
+
             garageCollection.add(vehicleData)
                     .addOnSuccessListener(documentReference -> {
                         Toast.makeText(v.getContext(), "Vehicle added successfully!", Toast.LENGTH_SHORT).show();
@@ -143,6 +167,7 @@ public class AddVehicleDialog extends DialogFragment {
                         Toast.makeText(v.getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         });
+
 
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 

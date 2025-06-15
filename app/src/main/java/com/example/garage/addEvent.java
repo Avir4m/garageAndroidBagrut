@@ -106,8 +106,11 @@ public class addEvent extends Fragment {
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
         );
+
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
+
 
     private void showTimePicker() {
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
