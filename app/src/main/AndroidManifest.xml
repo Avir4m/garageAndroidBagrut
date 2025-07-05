@@ -38,12 +38,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-
-        <receiver
-            android:name=".Receiver"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity
             android:name=".explore"
             android:exported="false"
